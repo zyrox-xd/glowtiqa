@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glowtiqa Paris | Advance Care Whitening Cream</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fffef8;
+            color: #222;
+            line-height: 1.6;
+        }
+        header {
+            background: #f6eecf;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        header h1 {
+            font-size: 1.8rem;
+            color: #c29835;
+        }
+        nav a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+        }
+        .hero {
+            background: #fff6d8;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 2rem;
+            color: #c29835;
+        }
+        .hero p {
+            max-width: 600px;
+            margin: 1rem auto;
+        }
+        .product-section {
+            max-width: 1100px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 2rem;
+            padding: 1rem;
+            flex-wrap: wrap;
+        }
+        .product-section img {
+            max-width: 400px;
+            border-radius: 10px;
+        }
+        .product-details {
+            flex: 1;
+        }
+        .product-details h3 {
+            color: #c29835;
+            margin-bottom: 1rem;
+        }
+        ul {
+            padding-left: 1.2rem;
+        }
+        .about-section {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fffaf0;
+            border-left: 5px solid #c29835;
+        }
+        .about-section h2 {
+            color: #c29835;
+            margin-bottom: 1rem;
+        }
+        footer {
+            background: #f6eecf;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fffef8;
+            color: #222;
+            line-height: 1.6;
+        }
+        header {
+            background: #f6eecf;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        header h1 {
+            font-size: 1.8rem;
+            color: #c29835;
+        }
+        nav a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: #222;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #c29835;
+            text-decoration: underline;
+        }
+        .hero {
+            background: #fff6d8;
+            padding: 4rem 2rem 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+        .hero h2 {
+            font-size: 2rem;
+            color: #c29835;
+        }
+        .hero p {
+            max-width: 600px;
+            margin: 1rem auto 2rem auto;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: #c29835;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(194,152,53,0.08);
+            transition: background 0.2s, transform 0.2s;
+        }
+        .cta-btn:hover {
+            background: #a07a2a;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .product-section {
+            max-width: 1100px;
+            margin: 2rem auto;
+            display: flex;
+            gap: 2rem;
+            padding: 1rem;
+            flex-wrap: wrap;
+        }
+        .product-section img {
+            max-width: 400px;
+            border-radius: 10px;
+            width: 100%;
+            object-fit: cover;
+        }
+        .product-details {
+            flex: 1;
+            min-width: 260px;
+        }
+        .product-details h3 {
+            color: #c29835;
+            margin-bottom: 1rem;
+        }
+        ul {
+            padding-left: 1.2rem;
+        }
+        .about-section {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fffaf0;
+            border-left: 5px solid #c29835;
+        }
+        .about-section h2 {
+            color: #c29835;
+            margin-bottom: 1rem;
+        }
+        footer {
+            background: #f6eecf;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .footer-social {
+            margin-top: 1rem;
+        }
+        .footer-social a {
+            display: inline-block;
+            margin: 0 0.5rem;
+            color: #c29835;
+            font-size: 1.3rem;
+            transition: color 0.2s;
+        }
+        .footer-social a:hover {
+            color: #a07a2a;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 900px) {
+            .product-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            .product-section img {
+                max-width: 90vw;
+            }
+        }
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            nav {
+                margin-top: 0.5rem;
+            }
+            .hero {
+                padding: 2.5rem 1rem 2rem 1rem;
+            }
+            .about-section {
+                padding: 1rem;
+            }
+        }
+        .floating-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+}
+
+.float-btn {
+  background-color: #f6eecf;
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.float-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  filter: brightness(0); /* Makes the logo black */
+}
+.description-section {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fffdf4;
+  border-left: 6px solid #c29835;
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.description-section h2 {
+  font-size: 1.6rem;
+  color: #c29835;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.description-section p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Glowtiqa Paris</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#about">About</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Advance Care Whitening Cream</h2>
+        <p>Glowtiqa Paris presents a premium whitening cream that strengthens and protects your skin, removes dark spots and freckles, and enhances your natural glow. Dermatologist tested and designed for both men and women.</p>
+    </section>
+
+    <section class="product-section">
+        <img src="glowtiqa.webp" alt="Glowtiqa Cream" />
+        <div class="product-details">
+            <h3>Product Information</h3>
+            <p><strong>Brand:</strong> Glowtiqa Paris</p>
+            <p><strong>Form:</strong> Cream</p>
+            <p><strong>Packaging:</strong> Plastic Jar (30 GMS)</p>
+            <p><strong>Gender:</strong> Unisex (Men & Women)</p>
+            <p><strong>Fragrance:</strong> Yes</p>
+            <p><strong>Medicated:</strong> Yes</p>
+            <p><strong>Dermatologist Tested:</strong> Yes</p>
+            <p><strong>Professional Care:</strong> Yes</p>
+            <p><strong>Shelf Life:</strong> 36 Months</p>
+
+            <h3 style="margin-top: 1.5rem;">Key Benefits</h3>
+            <ul>
+                <li>Removes freckles and dark spots</li>
+                <li>Strengthens and protects skin</li>
+                <li>Brightens skin tone and texture</li>
+                <li>Boosts natural radiance</li>
+            </ul>
+
+            <h3 style="margin-top: 1.5rem;">How to Use</h3>
+            <p>Apply gently on clean, dry skin. Massage evenly on face and neck every night before bed for best results.</p>
+
+            <h3 style="margin-top: 1.5rem;">Tagline</h3>
+            <p><em>Feel Your Own Greatness</em></p>
+        </div>
+    </section>
+    <section class="description-section">
+  <h2>Product Description</h2>
+  <p>
+    Glowtiqa Advance White Cream is a dermatologist-tested formula designed to brighten the skin and give it a youthful, healthy glow. It works by targeting common skin concerns such as dark spots, uneven tone, scars, and fine lines. With the power of TA stem cells and active skin-renewing ingredients, this cream supports deep nourishment while promoting skin regeneration.
+  </p>
+  <p>
+    Regular use can visibly reduce dark circles, acne marks, wrinkles, and pigmentation. It also softens the skin and enhances its natural brightness, making it appear fresher, smoother, and more radiant. Suitable for all skin types, Glowtiqa helps achieve noticeable results within a few days.
+  </p>
+  <p>
+    To use, start by washing the target area with clean water and a gentle face wash or soap. Apply a small amount of the cream and massage it into the skin in a circular motion. It can also be used on areas like the armpits, knees, and elbows. For best results, apply it at night.
+  </p>
+  <p>
+    <strong>Note:</strong> Avoid contact with eyes. In case of irritation, rinse thoroughly with water. If the irritation persists, consult a doctor immediately.
+  </p>
+</section>
+
+
+    <section class="about-section" id="about">
+        <h2>About Us</h2>
+        <p>Glowtiqa Paris is committed to providing premium skincare solutions that empower individuals to reveal their natural beauty. Our flagship product, the Advance Care Whitening Cream, is designed with a powerful formula that targets pigmentation, uneven skin tone, and dark spots while nourishing and protecting your skin.</p>
+        <p>With a heritage rooted in advanced dermatological research and a passion for healthy skin, Glowtiqa Paris continues to innovate with quality products that deliver visible results. Our mission is to help every individual feel confident, radiant, and naturally beautiful.</p>
+    </section>
+<!-- Floating WhatsApp and Call Us Buttons -->
+<div class="floating-buttons">
+  <a href="https://wa.me/9620030014" class="float-btn whatsapp-btn" target="_blank">
+    <img src="whatsapp.png" alt="WhatsApp" class="icon">
+    WhatsApp
+  </a>
+  <a href="tel:9620030014" class="float-btn call-btn">
+    <img src="call.png" alt="Call" class="icon">
+    Call Us
+  </a>
+</div>
+    <footer>
+        &copy; 2025 Glowtiqa Paris. All rights reserved.
+    </footer>
+</body>
+</html>
