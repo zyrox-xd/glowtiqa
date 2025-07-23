@@ -123,6 +123,97 @@
             color: var(--primary);
         }
         
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(249, 245, 235, 0.98);
+            z-index: 2000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(-100%);
+            transition: all 0.4s ease;
+        }
+        
+        .mobile-nav.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-nav a {
+            display: block;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.4rem;
+            padding: 1rem;
+            text-align: center;
+            width: 100%;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .mobile-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-nav a:hover::after {
+            width: 80px;
+        }
+        
+        .mobile-verify-btn {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .mobile-verify-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 2rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-menu:hover {
+            transform: rotate(90deg);
+        }
+        
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(255, 246, 216, 0.9), rgba(255, 246, 216, 0.95)), 
@@ -747,8 +838,12 @@
                 font-size: 2.3rem;
             }
             
-            .verify-btn {
+            .desktop-verify {
                 display: none;
+            }
+            
+            .mobile-verify {
+                display: block;
             }
         }
         
@@ -772,6 +867,16 @@
             .product-details, .description-section, .about-section {
                 padding: 1.5rem;
             }
+            
+            .mobile-verify-btn {
+                display: flex;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none !important;
+            }
         }
         
         @media (max-width: 480px) {
@@ -793,6 +898,16 @@
             .float-btn span {
                 display: none;
             }
+            
+            .mobile-nav a {
+                font-size: 1.2rem;
+                padding: 0.8rem;
+            }
+            
+            .mobile-verify-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -804,7 +919,7 @@
             <h1>Glowtiqa</h1>
         </div>
         
-        <a href="#verify" class="verify-btn">
+        <a href="#verify" class="verify-btn desktop-verify">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
         
@@ -814,16 +929,32 @@
             <a href="#soap">Cleansing Soap</a>
             <a href="#about">About</a>
         </nav>
+        
         <div class="mobile-menu">
             <i class="fas fa-bars"></i>
         </div>
     </header>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <i class="fas fa-times close-menu" id="closeMenu"></i>
+        <a href="#">Home</a>
+        <a href="#product">Whitening Cream</a>
+        <a href="#soap">Cleansing Soap</a>
+        <a href="#about">About Us</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+        <a href="#verify" class="mobile-verify-btn">
+            <i class="fas fa-shield-alt"></i> Verify Product
+        </a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h2>Premium Skincare Solutions</h2>
             <p>Glowtiqa Paris presents premium skincare products that strengthen and protect your skin, remove dark spots and freckles, and enhance your natural glow. Dermatologist tested and designed for both men and women.</p>
+            <a href="#product" class="cta-btn">Discover Products <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
 
@@ -891,12 +1022,10 @@
 
     <!-- Cleansing Soap Section -->
     <section class="soap-section" id="soap">
-        
-            <div class="soap-image-container">
-                <img src="image.png" alt="Glowtiqa Soap" class="soap-image">
-            </div>
-        </div>
         <div class="soap-container">
+            <div class="soap-image-container">
+                <img src="soap.png" alt="Glowtiqa Soap" class="soap-image">
+            </div>
             <div class="soap-details">
                 <h3>Premium Cleansing Soap</h3>
                 <div class="product-info">
@@ -941,7 +1070,7 @@
                     <p><em>Pure Cleansing for Radiant Skin</em></p>
                 </div>
             </div>
-            
+        </div>
     </section>
 
     <!-- Description Section -->
@@ -1119,7 +1248,31 @@
     </footer>
 
     <script>
-        // Simple animation for scrolling
+        // Mobile navigation toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close menu when clicking on links
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1136,16 +1289,6 @@
                 }
             });
         });
-        
-        // Mobile menu toggle
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const nav = document.querySelector('nav');
-        
-        if(mobileMenu) {
-            mobileMenu.addEventListener('click', () => {
-                nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-            });
-        }
         
         // Add animation to elements when they come into view
         const observer = new IntersectionObserver((entries) => {
