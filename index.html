@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glowtiqa Paris | Premium Skincare Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23d4b483%22>G</text></svg>">
     <style>
         :root {
             --primary: #b68d40;
@@ -123,7 +124,7 @@
             color: var(--primary);
         }
         
-        /* Mobile Navigation */
+        /* Mobile Navigation - Fixed */
         .mobile-nav {
             display: none;
             position: fixed;
@@ -909,6 +910,22 @@
                 font-size: 1rem;
             }
         }
+        
+        /* Animation for sections */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
     </style>
 </head>
 <body>
@@ -935,7 +952,7 @@
         </div>
     </header>
     
-    <!-- Mobile Navigation -->
+    <!-- Mobile Navigation - Fixed -->
     <div class="mobile-nav" id="mobileNav">
         <i class="fas fa-times close-menu" id="closeMenu"></i>
         <a href="#">Home</a>
@@ -961,7 +978,7 @@
     <!-- Whitening Cream Section -->
     <section class="product-section" id="product">
         <div class="product-image-container">
-            <img src="giqa.jpg" alt="Glowtiqa Cream" class="product-image">
+            <img src="gtiqa.jpg" alt="Glowtiqa Cream" class="product-image">
         </div>
         <div class="product-details">
             <h3>Advance Care Whitening Cream</h3>
@@ -1231,7 +1248,7 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone-alt contact-icon"></i>
-                        <span>+91 9916726373</span>
+                        <span>+966508054355</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope contact-icon"></i>
