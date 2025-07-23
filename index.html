@@ -963,7 +963,124 @@
     background: none;
     border: none;
 }
-
+    /* Updated Mobile Navigation Styles */
+    .mobile-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 100%;
+        background: rgba(249, 245, 235, 0.98);
+        backdrop-filter: blur(10px);
+        z-index: 2000;
+        flex-direction: column;
+        padding: 80px 25px 40px;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        box-shadow: -5px 0 25px rgba(0,0,0,0.08);
+        overflow-y: auto;
+    }
+    
+    .mobile-nav.active {
+        transform: translateX(0);
+    }
+    
+    .mobile-nav a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 14px 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(182, 141, 64, 0.15);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .mobile-nav a::before {
+        content: "•";
+        color: var(--primary);
+        font-size: 1.5rem;
+    }
+    
+    .mobile-nav a:hover {
+        color: var(--primary);
+        transform: translateX(5px);
+    }
+    
+    .mobile-nav a:last-child {
+        border-bottom: none;
+    }
+    
+    .mobile-verify-btn {
+        background: var(--primary);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 30px;
+        font-weight: 600;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: var(--transition);
+        margin-top: 1.5rem;
+        font-size: 1.1rem;
+        box-shadow: var(--shadow);
+        width: 100%;
+    }
+    
+    .mobile-verify-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-3px);
+    }
+    
+    #closeMenu {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        font-size: 1.8rem;
+        color: var(--primary);
+        cursor: pointer;
+        background: none;
+        border: none;
+        transition: var(--transition);
+        z-index: 2001;
+    }
+    
+    #closeMenu:hover {
+        transform: rotate(90deg);
+    }
+    
+    /* Overlay for background dimming */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1500;
+    }
+    
+    .nav-overlay.active {
+        display: block;
+    }
+      /* Added new styles for footer links */
+        .contact-item a {
+            color: #555;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-item a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -973,7 +1090,7 @@
     <img src="logo.png" alt="Glowtiqa Logo" style="height: 60px;" /></a>
 </div>
 
-        <a href="#verify" class="verify-btn desktop-verify">
+        <a href="verify.html" class="verify-btn desktop-verify">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
         
@@ -993,13 +1110,13 @@
     <div class="mobile-nav" id="mobileNav">
                   <div id="closeMenu">✖</div> 
 
-        <a href="#">Home</a>
+        <a href="#hero">Home</a>
         <a href="#product">Whitening Cream</a>
         <a href="#soap">Cleansing Soap</a>
         <a href="#about">About Us</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#contact">Contact</a>
-        <a href="#verify" class="mobile-verify-btn">
+        <a href="verify.html" class="mobile-verify-btn">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
     </div>
@@ -1257,9 +1374,8 @@
             <span>Call Us Now</span>
         </a>
     </div>
-
     <!-- Footer -->
-    <footer id="contact">
+      <footer id="contact">
         <div class="footer-content">
             <div class="footer-col">
                 <h3>Glowtiqa Paris</h3>
@@ -1269,7 +1385,7 @@
             <div class="footer-col">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="#hero">Home</a></li>
                     <li><a href="#product">Whitening Cream</a></li>
                     <li><a href="#soap">Cleansing Soap</a></li>
                     <li><a href="#about">About Us</a></li>
@@ -1286,11 +1402,11 @@
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone-alt contact-icon"></i>
-                        <span>+966508054355</span>
+                        <a href="tel:+966508054355">+966508054355</a>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope contact-icon"></i>
-                        <span>glowtiqa@gmail.com</span>
+                        <a href="mailto:glowtiqa@gmail.com">glowtiqa@gmail.com</a>
                     </div>
                 </div>
             </div>
@@ -1301,77 +1417,82 @@
             &copy; 2025 Glowtiqa Paris. All rights reserved.
         </div>
     </footer>
-
-    <script>
-        // Mobile navigation toggle
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const closeMenu = document.getElementById('closeMenu');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        mobileMenu.addEventListener('click', () => {
-            mobileNav.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        closeMenu.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Close menu when clicking on links
-        const mobileLinks = document.querySelectorAll('.mobile-nav a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-        });
-        
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') {
-    mobileNav.classList.remove('active');
-    document.body.style.overflow = 'auto';
-    return;
-}
-
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Add animation to elements when they come into view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        document.querySelectorAll('.product-section, .description-section, .about-section, .testimonial-card, .soap-container').forEach(el => {
-            observer.observe(el);
-        });
-        window.addEventListener('click', (e) => {
-    if (mobileNav.classList.contains('active') && !mobileNav.contains(e.target) && !mobileMenu.contains(e.target)) {
+<script>
+    // Mobile navigation toggle with overlay
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const closeMenu = document.getElementById('closeMenu');
+    const mobileNav = document.getElementById('mobileNav');
+    
+    // Create overlay element
+    const navOverlay = document.createElement('div');
+    navOverlay.className = 'nav-overlay';
+    document.body.appendChild(navOverlay);
+    
+    mobileMenu.addEventListener('click', () => {
+        mobileNav.classList.add('active');
+        navOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeMenu.addEventListener('click', () => {
+        closeMobileMenu();
+    });
+    
+    navOverlay.addEventListener('click', () => {
+        closeMobileMenu();
+    });
+    
+    function closeMobileMenu() {
         mobileNav.classList.remove('active');
+        navOverlay.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
-});
-
-    </script>
+    
+    // Close menu when clicking on links
+    const mobileLinks = document.querySelectorAll('.mobile-nav a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+    });
+    
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') {
+                closeMobileMenu();
+                return;
+            }
+            
+            const targetElement = document.querySelector(targetId);
+            if(targetElement) {
+                closeMobileMenu();
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
+    // Add animation to elements when they come into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    document.querySelectorAll('.product-section, .description-section, .about-section, .testimonial-card, .soap-container').forEach(el => {
+        observer.observe(el);
+    });
+</script>
     
 </body>
 </html>

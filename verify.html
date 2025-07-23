@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLowtiqa | Product Verification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --gold: #D4AF37;
+            --light-gold: #E6C96C;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --cool-gray: #888888;
+            --transition: all 0.3s ease-in-out;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--black);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: linear-gradient(to bottom, rgba(245, 245, 245, 0.9), rgba(245, 245, 245, 0.9)), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%23D4AF37" stroke-width="0.5" stroke-dasharray="5,5"/></svg>');
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--black);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--cool-gray);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .verification-section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .verification-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--black), var(--gold));
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .code-input {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .code-input input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 1px solid rgba(136, 136, 136, 0.3);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            letter-spacing: 8px;
+            text-align: center;
+            font-weight: 500;
+            background: rgba(245, 245, 245, 0.5);
+            transition: var(--transition);
+            outline: none;
+            font-family: 'Poppins', monospace;
+            color: var(--black);
+        }
+        
+        .code-input input:focus {
+            border-color: var(--light-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+        
+        .code-input:after {
+            content: 'XXXXXX';
+            position: absolute;
+            top: 18px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: rgba(136, 136, 136, 0.3);
+            pointer-events: none;
+            letter-spacing: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .btn-verify {
+            background: var(--black);
+            color: var(--gold);
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: block;
+            margin: 20px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-verify:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            transition: var(--transition);
+        }
+        
+        .btn-verify:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-verify:hover:before {
+            left: 100%;
+        }
+        
+        .steps-section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
+        }
+        
+        .step-card {
+            background: rgba(245, 245, 245, 0.5);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 3rem;
+            font-family: 'Cinzel', serif;
+            color: rgba(212, 175, 55, 0.1);
+            font-weight: 700;
+        }
+        
+        .step-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step-title:before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+        
+        .step-content {
+            color: var(--cool-gray);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        .step-content strong {
+            color: var(--black);
+            font-weight: 500;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--cool-gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .verification-section, .steps-section {
+                padding: 30px 20px;
+            }
+            
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .gold-accent {
+            color: var(--gold);
+        }
+        .warning-box {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 20px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.return-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.return-btn:hover {
+  background-color: #444;
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <a href="index.html" class="return-btn">← Return to Main Page</a>
+
+        <header>
+            <h1>Verify Your Product</h1>
+            <p class="subtitle">Ensure the authenticity of your Vitaglow purchase by verifying your unique product code</p>
+        </header>
+        
+        <section class="verification-section">
+            <h2>Enter Your Verification Code</h2>
+            <div class="input-group">
+                <div class="code-input">
+                    <input type="text" maxlength="19" id="verificationCode">
+                </div>
+                <button class="btn-verify">Verify Authenticity</button>
+            </div>
+            <div class="warning-box">
+  <strong>⚠️ Beware of Fake Products</strong><br />
+  To ensure your safety and best results, please verify your product code above.
+  Glowtiqa is not responsible for purchases made through unauthorized sellers.
+</div>
+
+        </section>
+        
+        <section class="steps-section">
+            <h2>How to Verify Your Product</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Locate Your Security Features</h3>
+                    <p class="step-content">Your Glowtiqa product should have a <strong>security seal</strong> and a unique <strong>verification code</strong> located on the packaging.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Visit Our Verification Portal</h3>
+                    <p class="step-content">Go to our official website <strong>www.glowtiqa.com</strong> and click on the <strong class="gold-accent">Verify Your Product</strong> button.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Enter Your Unique Code</h3>
+                    <p class="step-content">Carefully enter your <strong>verification code</strong> in the provided field and click the <strong class="gold-accent">Verify</strong> button to authenticate.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Confirmation</h3>
+                    <p class="step-content">Congratulations! Your product is <strong>genuine</strong> and has been successfully verified. Thank you for choosing Vitaglow.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Glowtiqa &copy; 2025 | Premium Skincare Solutions</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const verificationInput = document.getElementById('verificationCode');
+            
+            // Format input as XXXXXX
+            verificationInput.addEventListener('input', function(e) {
+    const input = e.target.value.replace(/[^a-zA-Z0-9]/g, '').substring(0, 6); // Accept only alphanumerics
+    e.target.value = input;
+});
+            // Button animation
+            const verifyButton = document.querySelector('.btn-verify');
+            verifyButton.addEventListener('click', function() {
+                this.textContent = 'Verifying...';
+                this.style.pointerEvents = 'none';
+                
+                setTimeout(() => {
+                    this.textContent = 'Verified!';
+                    this.style.backgroundColor = 'var(--gold)';
+                    this.style.color = 'var(--black)';
+                    
+                    setTimeout(() => {
+                        this.textContent = 'Verify Another Product';
+                        this.style.backgroundColor = 'var(--black)';
+                        this.style.color = 'var(--gold)';
+                        this.style.pointerEvents = 'auto';
+                        verificationInput.value = '';
+                    }, 1500);
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
