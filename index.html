@@ -933,23 +933,52 @@
 .mobile-nav.active {
     transform: translateX(0);
 }
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav.active {
+  display: block;
+}
+#closeMenu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 1001;
+    color:#b68d40;/* or change based on your theme */
+    background: none;
+    border: none;
+}
 
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="logo">
-            <i class="fas fa-leaf logo-icon"></i>
-            <h1>Glowtiqa</h1>
-        </div>
-        
+       <div class="logo"><a href="#hero">
+    <img src="logo.png" alt="Glowtiqa Logo" style="height: 60px;" /></a>
+</div>
+
         <a href="#verify" class="verify-btn desktop-verify">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
         
         <nav>
-            <a href="#">Home</a>
+            <a href="#hero">Home</a>
             <a href="#product">Whitening Cream</a>
             <a href="#soap">Cleansing Soap</a>
             <a href="#about">About</a>
@@ -962,7 +991,7 @@
     
     <!-- Mobile Navigation - Fixed -->
     <div class="mobile-nav" id="mobileNav">
-                 <span id="closeMenu" class="close-icon">×</span>
+                  <div id="closeMenu">✖</div> 
 
         <a href="#">Home</a>
         <a href="#product">Whitening Cream</a>
@@ -976,7 +1005,7 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="hero-content">
             <h2>Premium Skincare Solutions</h2>
             <p>Glowtiqa Paris presents premium skincare products that strengthen and protect your skin, remove dark spots and freckles, and enhance your natural glow. Dermatologist tested and designed for both men and women.</p>
@@ -1343,5 +1372,6 @@
 });
 
     </script>
+    
 </body>
 </html>
