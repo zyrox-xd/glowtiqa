@@ -1081,6 +1081,38 @@
             color: var(--primary);
             text-decoration: underline;
         }
+         /* Add new styles for developer credit */
+        .developer-credit {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(182, 141, 64, 0.2);
+        }
+        
+        .developer-credit a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .developer-credit a:hover {
+            text-decoration: underline;
+            color: var(--primary-dark);
+        }
+        
+        .developer-credit .zomaxa-logo {
+            display: inline-block;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
     </style>
 </head>
 <body>
@@ -1115,7 +1147,6 @@
         <a href="#soap">Cleansing Soap</a>
         <a href="#about">About Us</a>
         <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
         <a href="verify.html" class="mobile-verify-btn">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
@@ -1375,7 +1406,8 @@
         </a>
     </div>
     <!-- Footer -->
-      <footer id="contact">
+      <!-- Footer -->
+    <footer id="contact">
         <div class="footer-content">
             <div class="footer-col">
                 <h3>Glowtiqa Paris</h3>
@@ -1415,6 +1447,15 @@
         
         <div class="copyright">
             &copy; 2025 Glowtiqa Paris. All rights reserved.
+            
+            <!-- Developer credit added here -->
+            <div class="developer-credit">
+                Crafted with <i class="fas fa-heart" style="color: #c5a880;"></i> by 
+                <a href="https://zomaxa.co" target="_blank">
+                    <span class="zomaxa-logo">zomaxa.co</span>
+                    <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i>
+                </a>
+            </div>
         </div>
     </footer>
 <script>
