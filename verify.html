@@ -141,20 +141,6 @@
             box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
         }
         
-        .code-input:after {
-            content: 'XXXXXX';
-            position: absolute;
-            top: 18px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            color: rgba(136, 136, 136, 0.3);
-            pointer-events: none;
-            letter-spacing: 8px;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-        
         .btn-verify {
             background: var(--black);
             color: var(--gold);
@@ -270,6 +256,56 @@
             font-size: 0.9rem;
         }
         
+        .verification-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            max-width: 500px;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 20px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        
+        .return-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .return-btn:hover {
+            background-color: #444;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 gap: 20px;
@@ -295,37 +331,9 @@
         .gold-accent {
             color: var(--gold);
         }
-        .warning-box {
-  background-color: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
-  padding: 15px;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 20px 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-.return-btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #000;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-}
-
-.return-btn:hover {
-  background-color: #444;
-}
-
     </style>
 </head>
 <body>
-    
     <div class="container">
         <a href="index.html" class="return-btn">← Return to Main Page</a>
 
@@ -338,25 +346,27 @@
             <h2>Enter Your Verification Code</h2>
             <div class="input-group">
                 <div class="code-input">
-                    <input type="text" maxlength="19" id="verificationCode">
+                    <input type="text" maxlength="6" id="verificationCode" placeholder="Enter 6-digit code">
                 </div>
                 <button class="btn-verify">Verify Authenticity</button>
+                <div class="verification-message success">✓ Genuine Product! This is an authentic Glowtiqa item.</div>
+                <div class="verification-message error">⚠️ Fake Product! This code does not match our records.</div>
             </div>
             <div class="warning-box">
-  <strong>⚠️ Beware of Fake Products</strong><br />
-  To ensure your safety and best results, please verify your product code above.
-  Glowtiqa is not responsible for purchases made through unauthorized sellers.
-</div>
-
+                <strong>⚠️ Beware of Fake Products</strong><br />
+                To ensure your safety and best results, please verify your product code above.
+                Glowtiqa is not responsible for purchases made through unauthorized sellers.
+            </div>
         </section>
         
         <section class="steps-section">
             <h2>How to Verify Your Product</h2>
             <div class="steps-grid">
+                <!-- Added Step 1 -->
                 <div class="step-card">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Locate Your Security Features</h3>
-                    <p class="step-content">Your Glowtiqa product should have a <strong>security seal</strong> and a unique <strong>verification code</strong> located on the packaging.</p>
+                    <h3 class="step-title">Locate Your Verification Code</h3>
+                    <p class="step-content">Find the unique <strong>verification code</strong> printed on the label of your Glowtiqa product packaging.</p>
                 </div>
                 
                 <div class="step-card">
@@ -374,7 +384,7 @@
                 <div class="step-card">
                     <div class="step-number">4</div>
                     <h3 class="step-title">Confirmation</h3>
-                    <p class="step-content">Congratulations! Your product is <strong>genuine</strong> and has been successfully verified. Thank you for choosing Vitaglow.</p>
+                    <p class="step-content">Congratulations! Your product is <strong>genuine</strong> and has been successfully verified. Thank you for choosing Glowtiqa.</p>
                 </div>
             </div>
         </section>
@@ -385,34 +395,187 @@
     </div>
 
     <script>
+        // List of valid verification codes from the Excel file
+        const validCodes = [
+            "YSJFXU", "dmKvgb", "ASaJRs", "PPCzj3", "rt1RH2", "S06hze", "HHXtnZ", "phhmUD", "ZtNiX2", "fBWR4t",
+            "LK7w8d", "FMmdxu", "bYlVt1", "BCfelc", "MuVASD", "aFvjGv", "gPDiGA", "hhQVbM", "wqr95n", "ZnelWI",
+            "2H9oxS", "cmWCFg", "2VKFY5", "LXkzHA", "5ejUCG", "qa0NwT", "okKHba", "ZTqbXq", "YljFkh", "NyA9QH",
+            "TuEnfR", "WEUNry", "fP45Wq", "8438Fz", "mHOW8O", "POPAbC", "0tjdBO", "m0saVQ", "yAMxu2", "0cK4KA",
+            "83e22b", "Sie7Kg", "xkDEbA", "IrwsHa", "0iQcPI", "To8luv", "kd2gR4", "WjjwhE", "wexwQR", "SY9QrC",
+            "Nyedhs", "ynQH06", "YqzcOw", "w52Wnh", "yBdVMs", "7Feoc7", "6QAtHt", "ML2xAC", "V9HsWS", "oIYZji",
+            "1geSKi", "N5VlfW", "buHGB8", "Kfbz6i", "p3NFGv", "xrzb1Q", "vE0pQh", "WEBhpp", "1KUCQ3", "WFm3Uo",
+            "FLfWIb", "VQlyw5", "3YlUKH", "2gzhow", "VupHQI", "U6nuTi", "t5Jn5v", "1WPfdI", "SfHeGK", "pR7OYf",
+            "TcB9Xe", "6i3zJR", "Ar22Pf", "YcpEbs", "qzpu79", "ZRFk7k", "dnmnVt", "JIwb0f", "oYXzzi", "Wuy2xq",
+            "yWe0dN", "gm6qEX", "TwBxJw", "7hQ06y", "PQLzhX", "rrsQZC", "zLo9JR", "Pw2zI6", "Ujjy5X", "ptFRJd",
+            "v5mjh8", "v9qtD0", "y0MWVp", "4xvvT6", "WcRo5s", "IApTmI", "Xjsra6", "eGgoKv", "pV3Gqx", "HAsWBf",
+            "Ndu8vG", "6Xohur", "2QmMqh", "Pquoo1", "OrdRSS", "5HP2NV", "YpcETb", "a4wwiQ", "9ueyiy", "d1fuFV",
+            "r5ONaU", "34sQhI", "jIxOhD", "swpMHt", "jBYuHv", "HeRb7n", "XtIMNh", "zEGOiY", "0NaKWD", "83LTlZ",
+            "tc3inW", "K0Qo7l", "LCUhUc", "18rpGz", "KitK3H", "gbaCxJ", "sA7JqS", "soxAim", "Au32vp", "KgomZM",
+            "hDhwVb", "RnuoA8", "1oXDzq", "qKDOqN", "SGoy6h", "XMho3k", "wdz5JP", "zILBol", "Nt2Y9B", "ozJQOq",
+            "Iq1BcL", "TFfuz5", "9YoA2Z", "glYqA8", "FQtBZH", "rGZprM", "U1zMYO", "YeSnth", "ki1NLk", "2AeMbB",
+            "wSBZzk", "nYmTkl", "z5oWFV", "gMp8qo", "4uj1yI", "JYdNfl", "XXyRmu", "GfiK47", "fIa3vS", "FOPBdS",
+            "fCYvRa", "tYNUVO", "8ySwGE", "m0YVa1", "DGZMXz", "iwpORR", "ScpBme", "07UafX", "UwmPsV", "Owrhc7",
+            "ywhc83", "GBDhl5", "D1haE0", "M0DurJ", "62bk4n", "hGhfuN", "4HiRsB", "Buejhn", "3kFi0W", "yZhYIn",
+            "rdzxuS", "17FLj9", "IS8xrt", "XpKQVS", "oczrms", "nsPdU3", "20X6vC", "V08aCl", "vdAp9m", "Gx6LL8",
+            "UjK2DS", "4bch18", "2xaRVJ", "GHTMlp", "cMqivy", "QIvMgj", "5cz75M", "cMiWr8", "TuegN6", "6Rh2jD",
+            "WThMj0", "QZwCL3", "Hp0wMv", "PuN2EA", "EPtD7v", "BHV7PO", "D7yzsz", "yWeBVK", "EPYPOL", "Si1ux0",
+            "oQwiJg", "PdqriH", "i4ns0A", "wXPxAx", "tGoAdT", "h1hXLm", "SAdi3D", "HmY8QS", "jiT45s", "y1vyV6",
+            "Xr07Vs", "4ncC5S", "oINuXr", "6W1Y6M", "PwFDZ5", "Rdbfxd", "DEjJVi", "VGzegD", "GQbuKc", "v4lFDf",
+            "AOBoZY", "eoVI3N", "ddYbZn", "iEfUKU", "UvRTHg", "RmMaU3", "dB7keF", "4f8czs", "YhoY4I", "FKRw57",
+            "I3y84Z", "UsfTt3", "ofhPZ4", "YR1EBB", "MXwp5w", "1VI911", "F3xjKB", "OnRl1Z", "urDk6n", "6RbOHz",
+            "bTq9ew", "6uE3na", "ujW0lr", "gAojB2", "Pz2uxT", "yg6hya", "mna2K6", "Eun6tg", "NalEu0", "QQ1M0c",
+            "v5MzWZ", "nk6cu1", "BaNB3t", "PHk0BD", "FCMDc2", "xid1Hn", "XiQqVv", "wnjACX", "CC0Xks", "nYbI9M",
+            "34ZMVa", "tHXiV2", "11gbJK", "nlLlyt", "tZpKCo", "Rk93Hr", "u4aqbO", "bG9sXh", "veSJUv", "fyHG04",
+            "4gBm7a", "2UOZk0", "9tndd8", "fNTSXI", "VsK85g", "ngAbt3", "uXpIz2", "ZrtHaB", "TqNSj9", "xtKXJZ",
+            "z0pwRF", "U0XZu5", "kA7TZc", "b2NRRo", "mHBQLl", "dMphd9", "YOWWHU", "iOQXGs", "bOY7TP", "9WAvtt",
+            "g4rqTj", "uGafeq", "KebJIk", "I7RVuO", "JAJFGR", "iing0E", "4b65iC", "r6fmBP", "w3bpR8", "fnnGR5",
+            "HiZLYs", "w05r17", "CLdjT3", "bhsEFE", "3tVbbn", "J7VWlo", "fEpleS", "5kDpMx", "Rgi7Py", "92lMh8",
+            "SdEfky", "VLXijj", "klV0qa", "n3ZH8A", "AyHk5q", "D0WcHi", "WcWBLD", "usoVH8", "e23Lab", "GtqPI5",
+            "qV2cu5", "nj7shF", "X0L3nu", "h7OTeF", "a1ye38", "32Qg9P", "ua5ETb", "DJFbhM", "bNguDQ", "tp3HKg",
+            "nubHCk", "qWKWwh", "zhYGX2", "ru9yz5", "iT6MXb", "FbOgeO", "epcVUG", "c8Bq6r", "7Ge62Y", "OZDfFa",
+            "LkYez0", "pdqZm9", "WCY61i", "P9kwVM", "UeKco4", "m9vDAb", "KPxygL", "jIzwaN", "PpCuFF", "3dK1nz",
+            "JXSnY3", "i6pT60", "ipucFn", "1WOeGh", "KfkB9v", "sOLsAk", "2OdEJT", "lqZBhC", "kCRFRc", "65PSVt",
+            "V7cjJj", "mnxtdr", "bdUqPB", "4NtIUs", "EH798o", "OmYU2U", "yUG8Kc", "6EJBfM", "fjl6Jl", "9vR0Ix",
+            "l4l4jw", "gMB3OH", "EEISA5", "wXrWxg", "K3EgSQ", "gGLTqH", "OJFRT4", "oSCKCb", "Cr4HIe", "SD618m",
+            "0gU0oq", "kyvtYf", "e4K3Mj", "tlYIKr", "e26HNH", "mBMgvY", "v5q9mh", "zEZv5n", "MsnRw4", "xbk0AK",
+            "czTEDC", "KbA3cX", "mL46ka", "H3byGk", "EzusLk", "PvBqnP", "7qQxMG", "XDDaVU", "kvjLiJ", "KJ677h",
+            "q1MnhT", "gQAXOS", "YZlFDq", "P86hBA", "WEq0wn", "qXljiB", "xJJpR5", "gTAuhR", "EtK6jL", "oXjcp2",
+            "CqOb6c", "aGJR8a", "mAeN25", "lDAkLI", "inCjLn", "Il1l2o", "vVXwlr", "Wjersz", "owZOBK", "dYug9A",
+            "DzrYaG", "cm15Na", "tEPIwR", "eEoBl0", "jdYnKQ", "eMGF4V", "Aqlsqa", "24Pnwk", "OFGwfb", "7xpmgr",
+            "e95VM7", "tqmdxB", "feO43S", "uSQUgL", "c5V8mF", "IHgHvq", "lbIc8F", "w52YOf", "E3e25J", "VEFlHz",
+            "yxxof1", "y3iBfR", "Cunwqo", "G7MJGJ", "lm4MFG", "LfQkjj", "x1qhSd", "cq3wzA", "NH6JyI", "rVeCnX",
+            "sn0Job", "PM1BOn", "Ud9b3O", "eBVoW9", "ygKChn", "mtYIe9", "7JWwOB", "akoN0I", "luFcEZ", "a8gzAf",
+            "iQkjUf", "qSkjoj", "eT8ASF", "BDqlRk", "Pm9g6h", "R2PPiD", "7Ze3cS", "ZLV0Kv", "70rckB", "FZRIZ6",
+            "cg8ziu", "0L1bV4", "78ssKC", "3vTrHD", "XOUz74", "O0p6FL", "KBGfhJ", "21ihDC", "MrKTCM", "oA0mQj",
+            "YWIAsw", "z4BIle", "gHilDh", "EqCI7E", "cb3iZU", "OZJfZO", "S3uxvv", "xldPyj", "SDAT4U", "7ldgSb",
+            "E4no7q", "G19xX2", "Ghn44w", "CzdeV9", "OxjzCu", "kVOh24", "KWgDwD", "tNyHy5", "8VARl7", "TZVXb2",
+            "rs54df", "MGFw7C", "81OQZy", "w3Rope", "CEYVzW", "BJ2KxX", "eMZV0L", "nChTN5", "4d7hmZ", "QtHhz8",
+            "HVBsv2", "iWLBRG", "579WRU", "T7rqTB", "Scsxi2", "spRDb0", "bs8zAm", "vgP9el", "TpHri5", "dn78d3",
+            "djdVFZ", "kcoRWy", "1xn0Ut", "nlvuFQ", "noAbWT", "S0tm3K", "siXkvX", "iwHoH4", "YD0NSb", "mrrkgV",
+            "oVXtOO", "PniNzl", "tPLTcr", "FcVC9C", "YhRr1T", "gHTO3A", "cEUOPA", "LjDAak", "5YvJDN", "1GsUcF",
+            "Jo0uaG", "uOeNxy", "VVUfZ8", "BzULdz", "36vyrg", "EnCw55", "SJ9hkN", "sd72Pn", "sXdH6H", "D7J1JE",
+            "KbldqV", "ZcqPgb", "P9MmsI", "QBZSAs", "XJZEYG", "pLXMyJ", "Mozl6Y", "qF3yYa", "k7IpUo", "woj0Ur",
+            "e9TI7a", "AoociN", "SdHeIL", "uY0AY9", "91dlGD", "V77oUx", "Q1yhOG", "052P9V", "1GGa18", "9Urhvw",
+            "OYJUIe", "ZYkOQ5", "xk7WKV", "5j3qZc", "0W8WM6", "Rhg5aW", "EQJqEl", "2imdKp", "zmnBio", "qybRod",
+            "xrdNXo", "GEWSj0", "faC6N8", "lMpojp", "WJGCYy", "aIIppF", "V9Ra7P", "g8WsvM", "YGhsSi", "s8N05K",
+            "fEMhaI", "BVXCPr", "39m8UB", "ZiHJnf", "Aw3rNG", "gjG9eN", "Vvlf8Z", "20y8Dl", "1FBHBN", "Oy9pOK",
+            "CPiKvT", "0M0GOA", "Ep4tbD", "5Ry8aY", "ciSNJl", "P6yt8U", "NH5hv9", "jkI2Hd", "EjlzQ7", "wX9oOS",
+            "nnRLYc", "uISgQO", "Vo0qUM", "8JMYGp", "oINpJs", "D39xH2", "HpTKrc", "C14RBM", "pHp1lO", "VUv7t9",
+            "9VTYEp", "lpGEG2", "Z7vOQm", "hGmgoR", "Z1XLBi", "hK0hGU", "FoOicV", "9LzSo4", "j2QqPN", "dzo6Vc",
+            "EWqYbA", "Gqfkek", "nG0Cf1", "vynV0U", "TLPF4Y", "rJLs9u", "qONQvn", "CCA6Dg", "JZkuop", "iYoolM",
+            "183tdT", "2Ptz92", "Sver5V", "cZwHUs", "f4gnxp", "aTxJXX", "xmOltR", "NBVKoI", "aqJGGP", "REeEbc",
+            "xF8kZW", "hhJEt9", "4YatCs", "Fhb7Fn", "13Ezzb", "zSthNL", "bGGfPI", "EfIZhR", "GJhIJW", "rfMeZR",
+            "NvYdUj", "9kR4Tz", "GSgnLH", "AbDRoV", "Y02nU6", "w5vg37", "3jRbAE", "sgNeJZ", "Qxz7UK", "oAejzk",
+            "h0HVxo", "aL2YrT", "Du58xh", "VAtGD3", "dpNnWa", "dfcSC7", "8AHaOf", "rId7jY", "qnaNeC", "UMghkc",
+            "GC2YXA", "GGgJnI", "t7qguJ", "cAwD2U", "V7Mkie", "DyAxft", "KvTZUp", "JoIF7g", "AYh2qz", "RnWa23",
+            "TPLGzo", "AWC87b", "PSTSiy", "UJa73o", "o56f6D", "oPU3wv", "U2i249", "LI5e7w", "KenrRt", "aNF2qY",
+            "IxMdXF", "W6UD8y", "nSLKzv", "QUJWlb", "qU7826", "KZIZNj", "sOpm08", "lgoGp2", "pnT09c", "25BIpM",
+            "a080Ki", "EnFtk3", "uFQdjm", "c5ZRJO", "NunwAz", "pLogwC", "Kr1Ugs", "NM8jWN", "PuQPsX", "cO9VOj",
+            "i0qjoA", "S8ceRJ", "uiqazJ", "Cfdm1R", "KA3uJX", "Uj8Gsk", "olTJgv", "sNY9WC", "ioPmNv", "PwyWhX",
+            "Zx1Pn1", "J4Wdo7", "azJfx9", "F9Ue1J", "ht6QuV", "vAHGh6", "5FH4Ll", "5MAypY", "qoOCOI", "hNNLLs",
+            "QEWOcn", "vhkr7m", "43rKhI", "GP9kGQ", "cT3fvZ", "sYOAbT", "Szs0zL", "5bC4SR", "j7UMhy", "f9WciQ",
+            "O9TPYt", "kr1caa", "7n4g2k", "Tfsr7T", "Lnh79K", "QReT2R", "qviuRI", "yklxEv", "uUQB9D", "xrTPTO",
+            "hEFavd", "vknkly", "ILHyjb", "qoUPt2", "xpBeSD", "SP55aA", "9dDDxH", "1VnXNs", "u6Rhr0", "nk1Ja7",
+            "dm0R9b", "rhSGwr", "Hz6OsX", "ZIuy3T", "CpOZBa", "gHHSdn", "K2rdWy", "AAphXB", "5xujOF", "r167Or",
+            "GLEgVF", "o7S9hB", "37RBN2", "E2wrex", "UfuKGY", "t3bm2k", "i0Ei2e", "dYoZqS", "sa9EvQ", "jSM1UV",
+            "PqR8OE", "dp8BKO", "zdgXQw", "SAiSi0", "r0xUqs", "xNV0Lv", "XP5hdz", "XAPqq5", "D47u1j", "3XZ2sX",
+            "ZvUcdz", "8XD2Jo", "DQvN5a", "MlFm77", "RYvpUW", "RDA1sA", "aG37UH", "KIU7iz", "2zKYbP", "MFSGID",
+            "XhAJaS", "BU3QUO", "rNHGu6", "t6G8Eq", "881ucR", "228zW2", "7axnti", "uClLqZ", "IVIhVM", "WrTKfZ",
+            "9EhI40", "igjoxx", "b53HpT", "7pDB1v", "eOXUJZ", "8nRYNW", "76PG0f", "M9ed0I", "IfLMrL", "L7SZSH",
+            "5EsvRK", "w0iJum", "axtKeR", "ubcuE3", "WuK3Fw", "cQmiUG", "Pd2E72", "2zbfzD", "LZa12q", "e38EfY",
+            "oS00yO", "c7RQIQ", "HcnEew", "ePm7Ji", "Tw1aYI", "bsIgWi", "JUXT8m", "LLhDpr", "kSnjQ6", "AzkAEW",
+            "qTFoej", "gJCy3A", "zFg7os", "0Wiba9", "Aj8RFA", "I8ZWzh", "2C9Iqs", "glFk35", "A0aUYD", "vEu4iD",
+            "Kgu6zC", "hIXgtZ", "n8z0Uq", "Tth7Cx", "o834nS", "jCpvho", "bqX3Fe", "zUNabK", "rVhnp8", "mldeQM",
+            "VDIBTH", "VcQFBv", "DCcGTa", "5P0yoA", "xtjVUE", "irYSGF", "DuOWYc", "nDWMJT", "jA7EBY", "2et74L",
+            "WHRmzo", "7MC1Fs", "LMKEew", "Ptx5qX", "sOAKGI", "aGKx3M", "CD4xY0", "ISLbWu", "qCfWpK", "sp1kpL",
+            "fwcqce", "0RYtNt", "LxVRsW", "asJ377", "mKi1JP", "M8DT1Y", "AweaaO", "DbkpBt", "RxHmaS", "bm2fTL",
+            "SLDYGO", "rHyLnU", "Oftc8C", "r2UvvS", "GWyLZz", "8GzgUY", "zctUb5", "yRATZx", "QNNKQZ", "0QYzg4",
+            "cdponJ", "lxOMgW", "9tGuIo", "OPLHkI", "B0vXwo", "LS23ba", "nAKZ34", "gaxgaX", "VXBxjl", "h5wjio",
+            "8QtcJi", "uXxpNi", "2eiL1W", "IH2IJ9", "vi85Zi", "8DoWN9", "ygkFOD", "4r7jZ6", "5dr08p", "XBBjat",
+            "8UsQuD", "Weg38n", "Wx8K1C", "v0PXGW", "oAbV1h", "EDpYsX", "57RUuC", "r6mTzm", "l1dV7F", "VNriVU",
+            "g50eCc", "ZU9H7j", "GRcSYw", "gG60g3", "U6yq5E", "aWOmS4", "zKxOyw", "lqpujo", "mXxRa4", "HyR6mO",
+            "yN1rBz", "LQy1y8", "KaYN2v", "XrisiM", "X0jdB7", "oYrYdh", "9u1S9v", "vQ4WuH", "eGMWa5", "6eseNr",
+            "q375rt", "6k6Ikl", "OVmP2M", "hFCPql", "doqEfT", "IMMkjt", "nuQzB5", "izsxc5", "RpeFhO", "83mmBH",
+            "oUqJTc", "9jqUKb", "CJ7WE9", "YR7VNC", "zLbySo", "nVMl4M", "109Vdq", "Teo5zJ", "TF9g78", "ijA59z",
+            "GXK7Rx", "pmFC5v", "NTaaPz", "DgnV0r", "AIz0si", "TBTTml", "oy7Wur", "F8Zz0B", "Wha5ou", "zqooqW",
+            "iutg5Q", "31M6HY", "glGuIp", "yzIHiN", "kCrnrg", "FmE3cX", "gAsMhC", "wCCIQ0", "EGIyRt", "3FMt75",
+            "QNIDqY", "DCy34e", "1WTxIa", "kedTFw", "07LmDd", "5lpfn8", "MzGOx4", "fkACFJ", "OTPdlM", "1tBPqo",
+            "8N6vvm", "sojUEh", "CMcxf8", "tw8JyP", "huY88T", "Tg4CzT", "6yBbwJ", "2F2YFa", "XkSUBb", "oIUZKx",
+            "JvF3xV", "5MkLtf", "9FrQiq", "u751e6", "Ucv5YZ", "4cqsDO", "E8Wy1U", "7EsFlZ", "iCYUfV", "ZpTMf1",
+            "d2flTS", "D6bm8P", "nXaacc", "1xzp5M", "fpvVXg", "WFwBRA", "pHiBmV", "CDXFpO", "hfeDEC", "nLyaid",
+            "MkoE4M", "8nRHJU", "VtkecU", "sGeyvL", "c8AsIz", "zeSEUi", "xVRCYO", "kvjr0a", "NQa63s", "BfL7da",
+            "NPP57K", "Ldgj7Z"
+        ];
+
         document.addEventListener('DOMContentLoaded', function() {
             const verificationInput = document.getElementById('verificationCode');
-            
-            // Format input as XXXXXX
-            verificationInput.addEventListener('input', function(e) {
-    const input = e.target.value.replace(/[^a-zA-Z0-9]/g, '').substring(0, 6); // Accept only alphanumerics
-    e.target.value = input;
-});
-            // Button animation
             const verifyButton = document.querySelector('.btn-verify');
-            verifyButton.addEventListener('click', function() {
-                this.textContent = 'Verifying...';
-                this.style.pointerEvents = 'none';
-                
-                setTimeout(() => {
-                    this.textContent = 'Verified!';
-                    this.style.backgroundColor = 'var(--gold)';
-                    this.style.color = 'var(--black)';
-                    
-                    setTimeout(() => {
-                        this.textContent = 'Verify Another Product';
-                        this.style.backgroundColor = 'var(--black)';
-                        this.style.color = 'var(--gold)';
-                        this.style.pointerEvents = 'auto';
-                        verificationInput.value = '';
-                    }, 1500);
-                }, 1500);
+            const successMessage = document.querySelector('.verification-message.success');
+            const errorMessage = document.querySelector('.verification-message.error');
+            
+            // Create uppercase version of valid codes for case-insensitive comparison
+            const validCodesUpper = validCodes.map(code => code.toUpperCase());
+            
+            // Format input to 6 uppercase characters
+            verificationInput.addEventListener('input', function(e) {
+                let input = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+                input = input.substring(0, 6);
+                e.target.value = input;
             });
+            
+            // Verification function
+            verifyButton.addEventListener('click', function() {
+                const code = verificationInput.value.trim();
+                const originalText = this.textContent;
+                const originalBg = this.style.backgroundColor;
+                const originalColor = this.style.color;
+                
+                // Hide previous messages
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+                
+                // Check if code is valid
+                if (code.length !== 6) {
+                    showError("Please enter a 6-digit code");
+                    return;
+                }
+                
+                // Button state while verifying
+                this.textContent = 'Verifying...';
+                this.disabled = true;
+                
+                // Simulate verification delay
+                setTimeout(() => {
+                    if (validCodesUpper.includes(code.toUpperCase())) {
+                        showSuccess();
+                        this.textContent = 'Verified!';
+                        this.style.backgroundColor = '#28a745';
+                        this.style.color = 'white';
+                    } else {
+                        showError("This code does not match our records");
+                        this.textContent = 'Fake Product!';
+                        this.style.backgroundColor = '#dc3545';
+                        this.style.color = 'white';
+                    }
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.backgroundColor = originalBg;
+                        this.style.color = originalColor;
+                        this.disabled = false;
+                    }, 3000);
+                }, 1000);
+            });
+            
+            function showSuccess() {
+                successMessage.style.display = 'block';
+            }
+            
+            function showError(message) {
+                errorMessage.textContent = `⚠️ ${message}`;
+                errorMessage.style.display = 'block';
+            }
         });
     </script>
 </body>
