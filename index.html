@@ -926,6 +926,14 @@
         .animate {
             animation: fadeInUp 0.8s ease forwards;
         }
+        .mobile-nav {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+}
+.mobile-nav.active {
+    transform: translateX(0);
+}
+
     </style>
 </head>
 <body>
@@ -954,7 +962,8 @@
     
     <!-- Mobile Navigation - Fixed -->
     <div class="mobile-nav" id="mobileNav">
-        <i class="fas fa-times close-menu" id="closeMenu"></i>
+                 <span id="closeMenu" class="close-icon">×</span>
+
         <a href="#">Home</a>
         <a href="#product">Whitening Cream</a>
         <a href="#soap">Cleansing Soap</a>
@@ -1210,11 +1219,11 @@
 
     <!-- Floating Buttons -->
     <div class="floating-buttons">
-        <a href="https://wa.me/+919916726373" class="float-btn">
+        <a href="https://wa.me/+966508054355" class="float-btn">
             <i class="fab fa-whatsapp icon"></i>
             <span>Chat on WhatsApp</span>
         </a>
-        <a href="tel:9916726373" class="float-btn">
+        <a href="tel:+966508054355" class="float-btn">
             <i class="fas fa-phone-alt icon"></i>
             <span>Call Us Now</span>
         </a>
@@ -1295,7 +1304,12 @@
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
+                if (targetId === '#') {
+    mobileNav.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    return;
+}
+
                 
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
@@ -1321,6 +1335,13 @@
         document.querySelectorAll('.product-section, .description-section, .about-section, .testimonial-card, .soap-container').forEach(el => {
             observer.observe(el);
         });
+        window.addEventListener('click', (e) => {
+    if (mobileNav.classList.contains('active') && !mobileNav.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+});
+
     </script>
 </body>
 </html>
