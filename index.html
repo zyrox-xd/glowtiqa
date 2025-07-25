@@ -1113,13 +1113,30 @@
             background-clip: text;
             color: transparent;
         }
+                /* Add new styles for colored buttons */
+        .float-btn.whatsapp {
+            background: #25D366; /* WhatsApp green */
+        }
+        
+        .float-btn.whatsapp:hover {
+            background: #128C7E; /* Darker green on hover */
+        }
+        
+        .float-btn.call {
+            background: #E53935; /* Red color */
+        }
+        
+        .float-btn.call:hover {
+            background: #C62828; /* Darker red on hover */
+        }
+
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
        <div class="logo"><a href="#hero">
-    <img src="logo.png" alt="Glowtiqa Logo" style="height: 60px;" /></a>
+    <img src="logo.png" alt="Glowtiqa Logo" style="height: 80px;" /></a>
 </div>
 
         <a href="verify.html" class="verify-btn desktop-verify">
@@ -1128,8 +1145,8 @@
         
         <nav>
             <a href="#hero">Home</a>
-            <a href="#product">Whitening Cream</a>
-            <a href="#soap">Cleansing Soap</a>
+            <a href="#product">Products</a>
+            <a href="#testimonials">Testimonials</a>
             <a href="#about">About</a>
         </nav>
         
@@ -1143,8 +1160,7 @@
                   <div id="closeMenu">✖</div> 
 
         <a href="#hero">Home</a>
-        <a href="#product">Whitening Cream</a>
-        <a href="#soap">Cleansing Soap</a>
+        <a href="#product">Products</a>
         <a href="#about">About Us</a>
         <a href="#testimonials">Testimonials</a>
         <a href="verify.html" class="mobile-verify-btn">
@@ -1167,7 +1183,7 @@
             <img src="gtiqa.jpg" alt="Glowtiqa Cream" class="product-image">
         </div>
         <div class="product-details">
-            <h3>Advance Care Whitening Cream</h3>
+            <h3>Glowtiqa Advance Whitening Cream</h3>
             <div class="product-info">
                 <div class="info-row">
                     <div class="info-label">Brand:</div>
@@ -1179,7 +1195,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-label">Packaging:</div>
-                    <div class="info-value">Plastic Jar (30 GMS)</div>
+                    <div class="info-value"> Acrylic Jar (30 GMS)</div>
                 </div>
                 <div class="info-row">
                     <div class="info-label">Gender:</div>
@@ -1230,7 +1246,7 @@
                 <img src="soap.png" alt="Glowtiqa Soap" class="soap-image">
             </div>
             <div class="soap-details">
-                <h3>Premium Cleansing Soap</h3>
+                <h3>Glowtiqa Skin whitening Soap</h3>
                 <div class="product-info">
                     <div class="info-row">
                         <div class="info-label">Brand:</div>
@@ -1242,7 +1258,7 @@
                     </div>
                     <div class="info-row">
                         <div class="info-label">Weight:</div>
-                        <div class="info-value">130 GMS</div>
+                        <div class="info-value">135 GMS</div>
                     </div>
                     <div class="info-row">
                         <div class="info-label">Skin Type:</div>
@@ -1254,7 +1270,7 @@
                     </div>
                     <div class="info-row">
                         <div class="info-label">Shelf Life:</div>
-                        <div class="info-value">24 Months</div>
+                        <div class="info-value">36 Months</div>
                     </div>
                 </div>
                 
@@ -1320,7 +1336,7 @@
                     <li>Innovative skincare solutions based on scientific research</li>
                     <li>Commitment to natural, safe ingredients</li>
                     <li>Ethical and sustainable production practices</li>
-                    <li>Customer satisfaction as our top priority</li>
+                    <li>Customer satisfaction is our top priority</li>
                     <li>Empowering confidence through radiant skin</li>
                     <li>Continuous improvement and innovation</li>
                 </ul>
@@ -1395,12 +1411,12 @@
     </section>
 
     <!-- Floating Buttons -->
-    <div class="floating-buttons">
-        <a href="https://wa.me/+966508054355" class="float-btn">
+      <div class="floating-buttons">
+        <a href="https://wa.me/+966508054355" class="float-btn whatsapp">
             <i class="fab fa-whatsapp icon"></i>
             <span>Chat on WhatsApp</span>
         </a>
-        <a href="tel:+966508054355" class="float-btn">
+        <a href="tel:+966508054355" class="float-btn call">
             <i class="fas fa-phone-alt icon"></i>
             <span>Call Us Now</span>
         </a>
@@ -1411,7 +1427,7 @@
         <div class="footer-content">
             <div class="footer-col">
                 <h3>Glowtiqa Paris</h3>
-                <p>Premium skincare solutions designed to reveal your natural radiance and empower your confidence.</p>
+                <p>Glowtiqa offers premium skincare solutions, meticulously formulated to unveil your skin's natural radiance, restore youthful glow, and empower your confidence from the inside out.</p>
             </div>
             
             <div class="footer-col">
@@ -1432,9 +1448,12 @@
                         <i class="fas fa-map-marker-alt contact-icon"></i>
                         <span>Paris, France</span>
                     </div>
+                     Middle East enquiries 
+                        <br>
                     <div class="contact-item">
                         <i class="fas fa-phone-alt contact-icon"></i>
-                        <a href="tel:+966508054355">+966508054355</a>
+                            <a href="tel:+966508054355">+966508054355</a></p>
+                        
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope contact-icon"></i>
@@ -1450,7 +1469,7 @@
             
             <!-- Developer credit added here -->
             <div class="developer-credit">
-                Crafted with <i class="fas fa-heart" style="color: #c5a880;"></i> by 
+                Developed <i class="fas fa-heart" style="color: #c5a880;"></i> by 
                 <a href="https://zomaxa.co" target="_blank">
                     <span class="zomaxa-logo">zomaxa.co</span>
                     <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i>
