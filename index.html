@@ -34,6 +34,33 @@
             overflow-x: hidden;
         }
         
+        /* Top Contact Bar */
+        .top-contact-bar {
+            background: var(--primary-dark);
+            color: white;
+            padding: 0.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        
+        .contact-numbers {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .contact-numbers a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .contact-numbers a:hover {
+            color: var(--secondary);
+        }
+        
         /* Header Styles */
         header {
             background: linear-gradient(135deg, var(--secondary), #f6eecf);
@@ -124,76 +151,75 @@
             color: var(--primary);
         }
         
-        /* Mobile Navigation - Fixed */
+        /* Fixed Mobile Navigation */
         .mobile-nav {
             display: none;
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
+            right: 0;
+            width: 280px;
             height: 100%;
             background: rgba(249, 245, 235, 0.98);
+            backdrop-filter: blur(10px);
             z-index: 2000;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transform: translateY(-100%);
-            transition: all 0.4s ease;
+            padding: 80px 25px 40px;
+            transform: translateX(100%);
+            transition: transform 0.4s ease;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.08);
+            overflow-y: auto;
         }
         
         .mobile-nav.active {
-            opacity: 1;
-            transform: translateY(0);
+            display: flex;
+            transform: translateX(0);
         }
         
         .mobile-nav a {
-            display: block;
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
-            font-size: 1.4rem;
-            padding: 1rem;
-            text-align: center;
+            font-size: 1.1rem;
+            padding: 14px 0;
             width: 100%;
+            border-bottom: 1px solid rgba(182, 141, 64, 0.15);
             transition: var(--transition);
-            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .mobile-nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
+        .mobile-nav a::before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
         }
         
         .mobile-nav a:hover {
             color: var(--primary);
+            transform: translateX(5px);
         }
         
-        .mobile-nav a:hover::after {
-            width: 80px;
+        .mobile-nav a:last-child {
+            border-bottom: none;
         }
         
         .mobile-verify-btn {
             background: var(--primary);
             color: white;
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             border-radius: 30px;
             font-weight: 600;
             text-decoration: none;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             transition: var(--transition);
-            margin-top: 2rem;
-            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
             box-shadow: var(--shadow);
+            width: 100%;
         }
         
         .mobile-verify-btn:hover {
@@ -201,18 +227,37 @@
             transform: translateY(-3px);
         }
         
-        .close-menu {
+        #closeMenu {
             position: absolute;
             top: 25px;
             right: 25px;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--primary);
             cursor: pointer;
+            background: none;
+            border: none;
             transition: var(--transition);
+            z-index: 2001;
         }
         
-        .close-menu:hover {
+        #closeMenu:hover {
             transform: rotate(90deg);
+        }
+        
+        /* Overlay for background dimming */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+        }
+        
+        .nav-overlay.active {
+            display: block;
         }
         
         /* Hero Section */
@@ -872,6 +917,16 @@
             .mobile-verify-btn {
                 display: flex;
             }
+            
+            .top-contact-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .contact-numbers {
+                justify-content: center;
+            }
         }
         
         @media (min-width: 769px) {
@@ -909,6 +964,11 @@
                 padding: 0.8rem 1.5rem;
                 font-size: 1rem;
             }
+            
+            .contact-numbers {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
         
         /* Animation for sections */
@@ -926,162 +986,91 @@
         .animate {
             animation: fadeInUp 0.8s ease forwards;
         }
-        .mobile-nav {
-    transition: transform 0.3s ease-in-out;
-    transform: translateX(100%);
-}
-.mobile-nav.active {
-    transform: translateX(0);
-}
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.mobile-nav {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-.mobile-nav.active {
-  display: block;
-}
-#closeMenu {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 28px;
-    cursor: pointer;
-    z-index: 1001;
-    color:#b68d40;/* or change based on your theme */
-    background: none;
-    border: none;
-}
-    /* Updated Mobile Navigation Styles */
-    .mobile-nav {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 280px;
-        height: 100%;
-        background: rgba(249, 245, 235, 0.98);
-        backdrop-filter: blur(10px);
-        z-index: 2000;
-        flex-direction: column;
-        padding: 80px 25px 40px;
-        transform: translateX(100%);
-        transition: transform 0.4s ease;
-        box-shadow: -5px 0 25px rgba(0,0,0,0.08);
-        overflow-y: auto;
-    }
-    
-    .mobile-nav.active {
-        transform: translateX(0);
-    }
-    
-    .mobile-nav a {
-        text-decoration: none;
-        color: var(--dark);
-        font-weight: 600;
-        font-size: 1.1rem;
-        padding: 14px 0;
-        width: 100%;
-        border-bottom: 1px solid rgba(182, 141, 64, 0.15);
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .mobile-nav a::before {
-        content: "•";
-        color: var(--primary);
-        font-size: 1.5rem;
-    }
-    
-    .mobile-nav a:hover {
-        color: var(--primary);
-        transform: translateX(5px);
-    }
-    
-    .mobile-nav a:last-child {
-        border-bottom: none;
-    }
-    
-    .mobile-verify-btn {
-        background: var(--primary);
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 30px;
-        font-weight: 600;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        transition: var(--transition);
-        margin-top: 1.5rem;
-        font-size: 1.1rem;
-        box-shadow: var(--shadow);
-        width: 100%;
-    }
-    
-    .mobile-verify-btn:hover {
-        background: var(--primary-dark);
-        transform: translateY(-3px);
-    }
-    
-    #closeMenu {
-        position: absolute;
-        top: 25px;
-        right: 25px;
-        font-size: 1.8rem;
-        color: var(--primary);
-        cursor: pointer;
-        background: none;
-        border: none;
-        transition: var(--transition);
-        z-index: 2001;
-    }
-    
-    #closeMenu:hover {
-        transform: rotate(90deg);
-    }
-    
-    /* Overlay for background dimming */
-    .nav-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1500;
-    }
-    
-    .nav-overlay.active {
-        display: block;
-    }
-      /* Added new styles for footer links */
-        .contact-item a {
-            color: #555;
+        
+        /* NEW STYLES FOR BUY BUTTON */
+        .buy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #4CAF50; /* Green color for buy button */
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-decoration: none;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
             transition: var(--transition);
+            margin-top: 1.5rem;
+            text-align: center;
+            justify-content: center;
+            width: 100%;
         }
         
-        .contact-item a:hover {
-            color: var(--primary);
-            text-decoration: underline;
+        .buy-btn:hover {
+            background: #388E3C; /* Darker green on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
         }
-         /* Add new styles for developer credit */
+        
+        .buy-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0 0.5rem;
+            text-align: center;
+        }
+        
+        .price-note {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 1rem;
+        }
+        
+        .bundle-offer {
+            background: linear-gradient(135deg, #fff9e6, #fff0cc);
+            border-left: 4px solid var(--primary);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        
+        .bundle-offer h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .bundle-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4CAF50;
+            margin: 0.5rem 0;
+        }
+        
+        /* Colored buttons for WhatsApp and Call */
+        .float-btn.whatsapp {
+            background: #25D366; /* WhatsApp green */
+        }
+        
+        .float-btn.whatsapp:hover {
+            background: #128C7E; /* Darker green on hover */
+        }
+        
+        .float-btn.call {
+            background: #E53935; /* Red color */
+        }
+        
+        .float-btn.call:hover {
+            background: #C62828; /* Darker red on hover */
+        }
+        
+        /* Developer credit */
         .developer-credit {
             margin-top: 15px;
             text-align: center;
@@ -1113,31 +1102,40 @@
             background-clip: text;
             color: transparent;
         }
-                /* Add new styles for colored buttons */
-        .float-btn.whatsapp {
-            background: #25D366; /* WhatsApp green */
+        
+        /* Contact item links */
+        .contact-item a {
+            color: #555;
+            text-decoration: none;
+            transition: var(--transition);
         }
         
-        .float-btn.whatsapp:hover {
-            background: #128C7E; /* Darker green on hover */
+        .contact-item a:hover {
+            color: var(--primary);
+            text-decoration: underline;
         }
-        
-        .float-btn.call {
-            background: #E53935; /* Red color */
-        }
-        
-        .float-btn.call:hover {
-            background: #C62828; /* Darker red on hover */
-        }
-
     </style>
 </head>
 <body>
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div class="contact-numbers">
+            <a href="tel:+919916726373">
+                <i class="fas fa-user-tie"></i> Wholesaler: +91 99167 26373
+            </a>
+            <a href="tel:+917899999475">
+                <i class="fas fa-store"></i> Retailer: +91 78999 99475
+            </a>
+        </div>
+    </div>
+    
     <!-- Header -->
     <header>
-       <div class="logo"><a href="#hero">
-    <img src="logo_v2.png" alt="Glowtiqa Logo" style="height: 50px;" /></a>
-</div>
+       <div class="logo">
+           <a href="#hero">
+            <img src="logo_v2.png" alt="Glowtiqa Logo" style="height:40px;">
+           </a>
+       </div>
 
         <a href="verify.html" class="verify-btn desktop-verify">
             <i class="fas fa-shield-alt"></i> Verify Product
@@ -1155,9 +1153,9 @@
         </div>
     </header>
     
-    <!-- Mobile Navigation - Fixed -->
+    <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
-                  <div id="closeMenu">✖</div> 
+        <button id="closeMenu">✖</button>
 
         <a href="#hero">Home</a>
         <a href="#product">Products</a>
@@ -1233,6 +1231,12 @@
                 </div>
             </div>
             
+            <!-- BUY BUTTON FOR CREAM -->
+            <div class="price">₹2,499</div>
+            <a href="https://wa.me/917899999475?text=Hi,%20I%20would%20like%20to%20buy%20Glowtiqa%20Advance%20Whitening%20Cream%20for%20₹2,499" class="buy-btn">
+                <i class="fas fa-shopping-cart"></i> Buy Now
+            </a>
+            
             <div class="tagline">
                 <p><em>Feel Your Own Greatness</em></p>
             </div>
@@ -1246,7 +1250,7 @@
                 <img src="soap.jpg" alt="Glowtiqa Soap" class="soap-image">
             </div>
             <div class="soap-details">
-                <h3>Glowtiqa Skin whitening Soap</h3>
+                <h3>Glowtiqa Skin Whitening Soap</h3>
                 <div class="product-info">
                     <div class="info-row">
                         <div class="info-label">Brand:</div>
@@ -1285,6 +1289,12 @@
                     </ul>
                 </div>
                 
+                <!-- BUY BUTTON FOR SOAP -->
+                <div class="price">₹600</div>
+                <a href="https://wa.me/917899999475?text=Hi,%20I%20would%20like%20to%20buy%20Glowtiqa%20Skin%20Whitening%20Soap%20for%20₹600" class="buy-btn">
+                    <i class="fas fa-shopping-cart"></i> Buy Now
+                </a>
+                
                 <div class="tagline">
                     <p><em>Pure Cleansing for Radiant Skin</em></p>
                 </div>
@@ -1292,8 +1302,8 @@
         </div>
     </section>
 
-    <!-- Description Section -->
-    <section class="description-section" id="description">
+    <!-- Bundle Offer Section -->
+    <section class="description-section" id="bundle">
         <h2>Complete Skincare System</h2>
         <div class="description-content">
             <div class="description-text">
@@ -1302,6 +1312,16 @@
                 <p>Our Whitening Cream is a dermatologist-tested formula designed to brighten the skin and give it a youthful, healthy glow. It works by targeting common skin concerns such as dark spots, uneven tone, scars, and fine lines.</p>
                 
                 <p>With the power of TA stem cells and active skin-renewing ingredients, this cream supports deep nourishment while promoting skin regeneration. Regular use can visibly reduce dark circles, acne marks, wrinkles, and pigmentation.</p>
+                
+                <div class="bundle-offer">
+                    <h4>Special Bundle Offer</h4>
+                    <p>Get the complete skincare system at a discounted price</p>
+                    <div class="bundle-price">₹2,599</div>
+                    <p>Save ₹300 when you buy both products together</p>
+                    <a href="https://wa.me/917899999475?text=Hi,%20I%20would%20like%20to%20buy%20the%20Glowtiqa%20Complete%20Skincare%20Bundle%20for%20₹2,799" class="buy-btn" style="margin-top: 1rem;">
+                        <i class="fas fa-gift"></i> Buy Complete Bundle
+                    </a>
+                </div>
                 
                 <p><strong>Note:</strong> Avoid contact with eyes. In case of irritation, rinse thoroughly with water. If the irritation persists, consult a doctor immediately.</p>
             </div>
@@ -1411,8 +1431,8 @@
     </section>
 
     <!-- Floating Buttons -->
-      <div class="floating-buttons">
-        <a href="https://wa.me/+919916726373" class="float-btn whatsapp">
+    <div class="floating-buttons">
+        <a href="https://wa.me/919916726373" class="float-btn whatsapp">
             <i class="fab fa-whatsapp icon"></i>
             <span>Chat on WhatsApp</span>
         </a>
@@ -1421,8 +1441,8 @@
             <span>Call Us Now</span>
         </a>
     </div>
+    
     <!-- Footer -->
-      <!-- Footer -->
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-col">
@@ -1436,6 +1456,7 @@
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#product">Whitening Cream</a></li>
                     <li><a href="#soap">Cleansing Soap</a></li>
+                    <li><a href="#bundle">Bundle Offer</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                 </ul>
@@ -1448,12 +1469,13 @@
                         <i class="fas fa-map-marker-alt contact-icon"></i>
                         <span>Paris, France</span>
                     </div>
-                     Middle East enquiries 
-                        <br>
                     <div class="contact-item">
                         <i class="fas fa-phone-alt contact-icon"></i>
-                            <a href="tel:+919916726373">+91 99167 26373</a></p>
-                        
+                        <a href="tel:+917899999475">+91 78999 99475 (Retail)</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt contact-icon"></i>
+                        <a href="tel:+919916726373">+91 99167 26373 (Wholesale)</a>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope contact-icon"></i>
@@ -1461,13 +1483,12 @@
                     </div>
                 </div>
             </div>
-            
         </div>
         
         <div class="copyright">
             &copy; 2025 Glowtiqa Paris. All rights reserved.
             
-            <!-- Developer credit added here -->
+            <!-- Developer credit -->
             <div class="developer-credit">
                 Developed <i class="fas fa-heart" style="color: #c5a880;"></i> by 
                 <a href="https://zomaxa.co" target="_blank">
@@ -1477,82 +1498,82 @@
             </div>
         </div>
     </footer>
-<script>
-    // Mobile navigation toggle with overlay
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const closeMenu = document.getElementById('closeMenu');
-    const mobileNav = document.getElementById('mobileNav');
-    
-    // Create overlay element
-    const navOverlay = document.createElement('div');
-    navOverlay.className = 'nav-overlay';
-    document.body.appendChild(navOverlay);
-    
-    mobileMenu.addEventListener('click', () => {
-        mobileNav.classList.add('active');
-        navOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-    
-    closeMenu.addEventListener('click', () => {
-        closeMobileMenu();
-    });
-    
-    navOverlay.addEventListener('click', () => {
-        closeMobileMenu();
-    });
-    
-    function closeMobileMenu() {
-        mobileNav.classList.remove('active');
-        navOverlay.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-    
-    // Close menu when clicking on links
-    const mobileLinks = document.querySelectorAll('.mobile-nav a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
+
+    <script>
+        // Mobile navigation toggle with overlay
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        // Create overlay element
+        const navOverlay = document.createElement('div');
+        navOverlay.className = 'nav-overlay';
+        document.body.appendChild(navOverlay);
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            navOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
             closeMobileMenu();
         });
-    });
-    
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') {
-                closeMobileMenu();
-                return;
-            }
-            
-            const targetElement = document.querySelector(targetId);
-            if(targetElement) {
-                closeMobileMenu();
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
+        
+        navOverlay.addEventListener('click', () => {
+            closeMobileMenu();
         });
-    });
-    
-    // Add animation to elements when they come into view
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('animate');
-            }
+        
+        function closeMobileMenu() {
+            mobileNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close menu when clicking on links
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
         });
-    }, {
-        threshold: 0.1
-    });
-    
-    document.querySelectorAll('.product-section, .description-section, .about-section, .testimonial-card, .soap-container').forEach(el => {
-        observer.observe(el);
-    });
-</script>
-    
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') {
+                    closeMobileMenu();
+                    return;
+                }
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    closeMobileMenu();
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation to elements when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.product-section, .description-section, .about-section, .testimonial-card, .soap-container').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
