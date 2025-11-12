@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ---------------- CONFIGURATION ---------------- //
-    // IMPORTANT: Replace with your actual Razorpay Test Key ID from Razorpay Dashboard
     const RAZORPAY_KEY_ID = "rzp_live_RelYBJxzCUWKj3"; 
+    const EMAILJS_SERVICE_ID = "service_h64g36k";  
+    const EMAILJS_TEMPLATE_ID = "template_df8ic0r"; 
     // ----------------------------------------------- //
 
     // Product Data
@@ -249,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ---------------------------------------------------------
-    // RAZORPAY CHECKOUT LOGIC (REPLACED WHATSAPP)
+    // RAZORPAY + EMAILJS INTEGRATION LOGIC
     // ---------------------------------------------------------
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', () => {
@@ -257,45 +258,93 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Your cart is empty!'); 
                 return;
             }
-            
-            // Calculate total amount in Paise (Razorpay expects amount in currency subunits)
-            // INR 1 = 100 paise
+
+            // 1. GET USER INPUTS
+            const custName = document.getElementById('custName').value;
+            const custPhone = document.getElementById('custPhone').value;
+            const custAddress = document.getElementById('custAddress').value;
+
+            // 2. VALIDATE INPUTS
+            if (!custName || !custPhone || !custAddress) {
+                alert("Please fill in your Name, Phone Number, and Shipping Address before paying.");
+                return; // Stop here if empty
+            }
+
+            // 3. PREPARE ORDER DATA
             const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            
-            // Check if Key is replaced
-            if(RAZORPAY_KEY_ID === "YOUR_RAZORPAY_TEST_KEY") {
-                alert("Developer: Please replace 'YOUR_RAZORPAY_TEST_KEY' in script.js with your actual Key ID.");
+            // Create a readable list of items
+            const itemsDescription = cart.map(item => `• ${item.name} (Qty: ${item.quantity})`).join('\n');
+
+            // Check if Razorpay Key is set
+            if(!RAZORPAY_KEY_ID || RAZORPAY_KEY_ID === "YOUR_RAZORPAY_KEY_ID") {
+                alert("Developer Error: Please set your RAZORPAY_KEY_ID in script.js");
                 return;
             }
 
+            // 4. RAZORPAY OPTIONS
             var options = {
                 "key": RAZORPAY_KEY_ID, 
-                "amount": totalAmount * 100, 
+                "amount": totalAmount * 100, // Amount in paise
                 "currency": "INR",
                 "name": "Glowtiqa Paris",
-                "description": "Skincare Purchase",
-                "image": "logo_v2.png", // Using your logo
-                "handler": function (response){
-                    // Success Handler
-                    alert("Payment Successful!\nPayment ID: " + response.razorpay_payment_id);
-                    
-                    // Clear Cart
-                    cart = [];
-                    localStorage.setItem('glowtiqaCart', JSON.stringify(cart));
-                    updateCartCount();
-                    updateCartDisplay();
-                    
-                    // Close Sidebar
-                    if (cartSidebar) cartSidebar.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                },
+                "description": "Skincare Order",
+                "image": "logo_v2.png", 
                 "prefill": {
-                    "name": "Customer Name", // You could add an input field for this
-                    "email": "customer@example.com",
-                    "contact": "9999999999"
+                    "name": custName,
+                    "contact": custPhone
                 },
-                "theme": {
-                    "color": "#b68d40" // Matching your brand color
+                "theme": { "color": "#b68d40" },
+                
+                // 5. SUCCESS HANDLER
+                "handler": function (response){
+                    
+                    // Change button text to show processing
+                    checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Order...';
+                    checkoutBtn.disabled = true;
+
+                    // Prepare data for EmailJS Template
+                    // KEYS MUST MATCH EMAILJS TEMPLATE VARIABLES
+                    var templateParams = {
+                        customer_name: custName,
+                        customer_phone: custPhone,
+                        shipping_address: custAddress,
+                        order_items: itemsDescription,
+                        total_amount: totalAmount,
+                        payment_id: response.razorpay_payment_id
+                    };
+
+                    // Send Email
+                    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                        .then(function() {
+                            // SUCCESS!
+                            alert("Order Successful! We have received your order details.");
+                            
+                            // Clear Cart
+                            cart = [];
+                            localStorage.setItem('glowtiqaCart', JSON.stringify(cart));
+                            updateCartCount();
+                            updateCartDisplay();
+                            
+                            // Reset UI
+                            checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
+                            checkoutBtn.disabled = false;
+                            if (cartSidebar) cartSidebar.classList.remove('active');
+                            document.body.style.overflow = 'auto';
+                            
+                            // Clear form fields
+                            document.getElementById('custName').value = '';
+                            document.getElementById('custPhone').value = '';
+                            document.getElementById('custAddress').value = '';
+                            
+                            // Reload page
+                            window.location.href = "#hero";
+
+                        }, function(error) {
+                            // FAILED TO SEND EMAIL
+                            console.error('EmailJS Error:', error);
+                            alert("Payment received (ID: " + response.razorpay_payment_id + "), but there was an error sending your order details. Please take a screenshot and contact us on WhatsApp!");
+                            checkoutBtn.disabled = false;
+                        });
                 }
             };
             
@@ -401,7 +450,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     email: "sarah@example.com",
                     rating: 5,
                     text: "I've been using both Glowtiqa products for 3 months and the results are amazing! My dark spots have faded significantly and my skin has never looked brighter. Highly recommend!",
-                    date: "March 15, 2023"
+                    date: "March 15, 2024"
                 },
                 {
                     id: 2,
@@ -409,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     email: "michael@example.com",
                     rating: 4,
                     text: "The cleansing soap is incredible! It leaves my skin feeling fresh without any dryness. Combined with the whitening cream, it's the perfect skincare routine. Only wish the cream came in a larger size.",
-                    date: "February 28, 2023"
+                    date: "February 18, 2025"
                 },
                 {
                     id: 3,
@@ -534,4 +583,4 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
     updateCartDisplay();
 
-}); // End of DOMContentLoaded
+});
