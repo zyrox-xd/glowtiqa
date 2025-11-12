@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         soap: {
             id: 2,
             name: "Glowtiqa Skin Whitening Soap",
-            price: 1,
+            price: 600,
             originalPrice: 999,
             image: "soap.jpg"
         },
