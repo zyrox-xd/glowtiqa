@@ -316,8 +316,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Send Email
                     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
                         .then(function() {
-                            // SUCCESS!
-                            alert("Order Successful! We have received your order details.");
                             
                             // Clear Cart
                             cart = [];
