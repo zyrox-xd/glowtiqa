@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ---------------- CONFIGURATION ---------------- //
     const RAZORPAY_KEY_ID = "rzp_live_RelYBJxzCUWKj3"; 
     const EMAILJS_SERVICE_ID = "service_h64g36k";  
-    const EMAILJS_TEMPLATE_ID = "template_df8ic0r"; 
+    const EMAILJS_TEMPLATE_ID = "template_df8ic0r";  
     // ----------------------------------------------- //
 
     // Product Data
@@ -337,7 +337,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             document.getElementById('custAddress').value = '';
                             
                             // Reload page
-                            window.location.href = "#hero";
+                            // Redirect to Thank You page
+                            window.location.href = "thank-you.html";
 
                         }, function(error) {
                             // FAILED TO SEND EMAIL
