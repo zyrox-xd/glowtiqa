@@ -3,1121 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glowtiqa Paris | Premium Skincare Solutions</title>
+    <title>Glowtiqa Paris | Premium Skincare E-commerce</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23d4b483%22>G</text></svg>">
-    <style>
-        :root {
-            --primary: #b68d40;
-            --primary-light: #d4b483;
-            --primary-dark: #8a6c2f;
-            --secondary: #f9f5eb;
-            --light: #fffaf0;
-            --dark: #333;
-            --gray: #777;
-            --accent: #c5a880;
-            --shadow: 0 4px 12px rgba(0,0,0,0.08);
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        /* Top Contact Bar */
-        .top-contact-bar {
-            background: var(--primary-dark);
-            color: white;
-            padding: 0.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-        }
-        
-        .contact-numbers {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .contact-numbers a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .contact-numbers a:hover {
-            color: var(--secondary);
-        }
-        
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, var(--secondary), #f6eecf);
-            padding: 0.8rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-icon {
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-        
-        .logo h1 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            font-weight: 700;
-        }
-        
-        nav {
-            display: flex;
-            gap: 1.8rem;
-        }
-        
-        nav a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            font-size: 1.05rem;
-            position: relative;
-            padding: 0.4rem 0;
-            transition: var(--transition);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-        
-        nav a:hover {
-            color: var(--primary);
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .verify-btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-        }
-        
-        .verify-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary);
-        }
-        
-        /* Fixed Mobile Navigation */
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 280px;
-            height: 100%;
-            background: rgba(249, 245, 235, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            flex-direction: column;
-            padding: 80px 25px 40px;
-            transform: translateX(100%);
-            transition: transform 0.4s ease;
-            box-shadow: -5px 0 25px rgba(0,0,0,0.08);
-            overflow-y: auto;
-        }
-        
-        .mobile-nav.active {
-            display: flex;
-            transform: translateX(0);
-        }
-        
-        .mobile-nav a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 14px 0;
-            width: 100%;
-            border-bottom: 1px solid rgba(182, 141, 64, 0.15);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .mobile-nav a::before {
-            content: "•";
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-        
-        .mobile-nav a:hover {
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-        
-        .mobile-nav a:last-child {
-            border-bottom: none;
-        }
-        
-        .mobile-verify-btn {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: var(--transition);
-            margin-top: 1.5rem;
-            font-size: 1.1rem;
-            box-shadow: var(--shadow);
-            width: 100%;
-        }
-        
-        .mobile-verify-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-        }
-        
-        #closeMenu {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            font-size: 1.8rem;
-            color: var(--primary);
-            cursor: pointer;
-            background: none;
-            border: none;
-            transition: var(--transition);
-            z-index: 2001;
-        }
-        
-        #closeMenu:hover {
-            transform: rotate(90deg);
-        }
-        
-        /* Overlay for background dimming */
-        .nav-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1500;
-        }
-        
-        .nav-overlay.active {
-            display: block;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(255, 246, 216, 0.9), rgba(255, 246, 216, 0.95)), 
-                        url('https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
-            background-size: cover;
-            background-position: center;
-            padding: 5rem 5% 4rem;
-            text-align: center;
-            position: relative;
-        }
-        
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .hero h2 {
-            font-size: 2.8rem;
-            color: var(--primary);
-            margin-bottom: 1.2rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .hero p {
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-            font-size: 1.2rem;
-            color: #444;
-        }
-        
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--primary);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            animation: pulse 2s infinite;
-        }
-        
-        .cta-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(194, 152, 53, 0.2);
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(194, 152, 53, 0.4); }
-            70% { box-shadow: 0 0 0 12px rgba(194, 152, 53, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(194, 152, 53, 0); }
-        }
-        
-        /* Product Section */
-        .product-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 2rem;
-            display: flex;
-            gap: 3rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        
-        .product-image-container {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-            perspective: 1000px;
-        }
-        
-        .product-image {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            transform: rotateY(-5deg);
-            transition: var(--transition);
-            border: 8px solid white;
-        }
-        
-        .product-image-container:hover .product-image {
-            transform: rotateY(0deg);
-        }
-        
-        .product-details {
-            flex: 1;
-            min-width: 300px;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-        }
-        
-        .product-details h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            position: relative;
-            padding-bottom: 0.8rem;
-        }
-        
-        .product-details h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-        }
-        
-        .product-info {
-            margin-bottom: 1.5rem;
-        }
-        
-        .info-row {
-            display: flex;
-            margin-bottom: 0.8rem;
-        }
-        
-        .info-label {
-            font-weight: 600;
-            min-width: 160px;
-            color: #555;
-        }
-        
-        .info-value {
-            color: var(--dark);
-        }
-        
-        .key-benefits {
-            margin: 2rem 0;
-        }
-        
-        .key-benefits h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.2rem;
-        }
-        
-        .benefit-card {
-            background: var(--secondary);
-            padding: 1.2rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: var(--transition);
-        }
-        
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-        }
-        
-        .benefit-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-        }
-        
-        /* Description Section */
-        .description-section {
-            max-width: 1000px;
-            margin: 4rem auto;
-            padding: 3rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .description-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 8px;
-            height: 100%;
-            background: var(--primary);
-        }
-        
-        .description-section h2 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        
-        .description-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .description-text {
-            font-size: 1.1rem;
-            color: #444;
-            line-height: 1.8;
-        }
-        
-        .description-text p {
-            margin-bottom: 1.2rem;
-        }
-        
-        .how-to-use {
-            background: var(--secondary);
-            padding: 1.8rem;
-            border-radius: 10px;
-        }
-        
-        .how-to-use h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-        
-        .steps {
-            list-style: none;
-            counter-reset: step-counter;
-        }
-        
-        .steps li {
-            margin-bottom: 1.2rem;
-            padding-left: 2.5rem;
-            position: relative;
-        }
-        
-        .steps li::before {
-            content: counter(step-counter);
-            counter-increment: step-counter;
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: var(--primary);
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-        
-        /* About Section */
-        .about-section {
-            max-width: 1000px;
-            margin: 4rem auto;
-            padding: 3rem;
-            background: linear-gradient(135deg, var(--secondary), #f6eecf);
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-        
-        .about-section h2 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-size: 1.8rem;
-        }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            align-items: center;
-        }
-        
-        .about-text p {
-            margin-bottom: 1.2rem;
-            font-size: 1.1rem;
-            color: #444;
-            line-height: 1.8;
-        }
-        
-        .mission-values {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 1.8rem;
-            border-radius: 10px;
-        }
-        
-        .mission-values h3 {
-            color: var(--primary);
-            margin-bottom: 1.2rem;
-            font-size: 1.4rem;
-        }
-        
-        .values-list {
-            list-style: none;
-        }
-        
-        .values-list li {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
-            position: relative;
-        }
-        
-        .values-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 2rem;
-        }
-        
-        .testimonials h2 {
-            text-align: center;
-            color: var(--primary);
-            margin-bottom: 2.5rem;
-            font-size: 1.8rem;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .testimonial-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-        
-        .testimonial-card::before {
-            content: "“";
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-size: 5rem;
-            color: var(--accent);
-            opacity: 0.2;
-            font-family: serif;
-        }
-        
-        .testimonial-content {
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            color: #555;
-            line-height: 1.7;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .author-info h4 {
-            color: var(--dark);
-            margin-bottom: 0.2rem;
-        }
-        
-        .author-info p {
-            color: #777;
-            font-size: 0.9rem;
-        }
-        
-        .stars {
-            color: #FFC107;
-            margin-top: 0.5rem;
-        }
-        
-        /* Soap Section */
-        .soap-section {
-            background: linear-gradient(135deg, var(--secondary), #f6eecf);
-            padding: 4rem 5%;
-            margin: 4rem 0;
-        }
-        
-        .soap-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            gap: 3rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        
-        .soap-image-container {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-        
-        .soap-image {
-            max-width: 100%;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            border: 8px solid white;
-            max-height: 400px;
-            object-fit: cover;
-        }
-        
-        .soap-details {
-            flex: 1;
-            min-width: 300px;
-            padding: 2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-        }
-        
-        .soap-details h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            position: relative;
-            padding-bottom: 0.8rem;
-        }
-        
-        .soap-details h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-        }
-        
-        .soap-benefits {
-            margin: 1.5rem 0;
-        }
-        
-        .soap-benefits h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-        
-        /* Floating Buttons */
-        .floating-buttons {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 9999;
-        }
-        
-        .float-btn {
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 14px 20px;
-            border-radius: 50px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition);
-            min-width: 180px;
-        }
-        
-        .float-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            background: var(--primary-dark);
-        }
-        
-        .icon {
-            font-size: 1.3rem;
-        }
-        
-        /* Footer */
-        footer {
-            background: linear-gradient(135deg, var(--secondary), #f6eecf);
-            padding: 4rem 5% 2rem;
-            color: #555;
-            font-size: 0.95rem;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.5rem;
-        }
-        
-        .footer-col h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-        
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--primary);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-links a {
-            text-decoration: none;
-            color: #555;
-            transition: var(--transition);
-            display: block;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-        
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .contact-item {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-        
-        .contact-icon {
-            color: var(--primary);
-            font-size: 1.1rem;
-            margin-top: 3px;
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 15px;
-            margin-top: 1.5rem;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: white;
-            color: var(--primary);
-            transition: var(--transition);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .social-link:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-5px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(194, 152, 53, 0.2);
-            max-width: 1200px;
-            margin: 2rem auto 0;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 900px) {
-            .product-section {
-                flex-direction: column;
-            }
-            
-            .soap-container {
-                flex-direction: column;
-            }
-            
-            .hero h2 {
-                font-size: 2.3rem;
-            }
-            
-            .desktop-verify {
-                display: none;
-            }
-            
-            .mobile-verify {
-                display: block;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            nav {
-                display: none;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .hero {
-                padding: 3rem 5%;
-            }
-            
-            .hero h2 {
-                font-size: 2rem;
-            }
-            
-            .product-details, .description-section, .about-section {
-                padding: 1.5rem;
-            }
-            
-            .mobile-verify-btn {
-                display: flex;
-            }
-            
-            .top-contact-bar {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .contact-numbers {
-                justify-content: center;
-            }
-        }
-        
-        @media (min-width: 769px) {
-            .mobile-nav {
-                display: none !important;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-            
-            .cta-btn {
-                padding: 0.9rem 1.8rem;
-                font-size: 1rem;
-            }
-            
-            .float-btn {
-                min-width: auto;
-                padding: 12px 16px;
-                font-size: 0.9rem;
-            }
-            
-            .float-btn span {
-                display: none;
-            }
-            
-            .mobile-nav a {
-                font-size: 1.2rem;
-                padding: 0.8rem;
-            }
-            
-            .mobile-verify-btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-            }
-            
-            .contact-numbers {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-        
-        /* Animation for sections */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .animate {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        
-        /* NEW STYLES FOR BUY BUTTON */
-        .buy-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #4CAF50; /* Green color for buy button */
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-            transition: var(--transition);
-            margin-top: 1.5rem;
-            text-align: center;
-            justify-content: center;
-            width: 100%;
-        }
-        
-        .buy-btn:hover {
-            background: #388E3C; /* Darker green on hover */
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-        }
-        
-        .buy-btn i {
-            font-size: 1.2rem;
-        }
-        
-        .price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 1rem 0 0.5rem;
-            text-align: center;
-        }
-        
-        .price-note {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #777;
-            margin-bottom: 1rem;
-        }
-        
-        .bundle-offer {
-            background: linear-gradient(135deg, #fff9e6, #fff0cc);
-            border-left: 4px solid var(--primary);
-            padding: 1.2rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-        
-        .bundle-offer h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .bundle-price {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #4CAF50;
-            margin: 0.5rem 0;
-        }
-        
-        /* Colored buttons for WhatsApp and Call */
-        .float-btn.whatsapp {
-            background: #25D366; /* WhatsApp green */
-        }
-        
-        .float-btn.whatsapp:hover {
-            background: #128C7E; /* Darker green on hover */
-        }
-        
-        .float-btn.call {
-            background: #E53935; /* Red color */
-        }
-        
-        .float-btn.call:hover {
-            background: #C62828; /* Darker red on hover */
-        }
-        
-        /* Developer credit */
-        .developer-credit {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #888;
-            padding-top: 15px;
-            border-top: 1px dashed rgba(182, 141, 64, 0.2);
-        }
-        
-        .developer-credit a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .developer-credit a:hover {
-            text-decoration: underline;
-            color: var(--primary-dark);
-        }
-        
-        .developer-credit .zomaxa-logo {
-            display: inline-block;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        /* Contact item links */
-        .contact-item a {
-            color: #555;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .contact-item a:hover {
-            color: var(--primary);
-            text-decoration: underline;
-        }
-    </style>
 </head>
 <body>
-    <!-- Top Contact Bar -->
+
     <div class="top-contact-bar">
         <div class="contact-numbers">
             <a href="tel:+919916726373">
@@ -1129,23 +22,28 @@
         </div>
     </div>
     
-    <!-- Header -->
     <header>
        <div class="logo">
            <a href="#hero">
-            <img src="logo_v2.png" alt="Glowtiqa Logo" style="height:40px;">
+            <div class="logo-icon">
+                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-crown\' style=\'font-size:1.8rem; color:#b68d40\'></i>'">
+            </div>
            </a>
+           <a href="#hero" style="text-decoration: none;"><h1>Glowtiqa</h1></a>
        </div>
 
-        <a href="verify.html" class="verify-btn desktop-verify">
-            <i class="fas fa-shield-alt"></i> Verify Product
-        </a>
-        
         <nav>
             <a href="#hero">Home</a>
             <a href="#product">Products</a>
-            <a href="#testimonials">Testimonials</a>
+            <a href="#reviews">Reviews</a>
             <a href="#about">About</a>
+            <a href="verify.html" class="verify-btn desktop-verify">
+                <i class="fas fa-shield-alt"></i> Verify Product
+            </a>
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
         </nav>
         
         <div class="mobile-menu">
@@ -1153,20 +51,49 @@
         </div>
     </header>
     
-    <!-- Mobile Navigation -->
     <div class="mobile-nav" id="mobileNav">
         <button id="closeMenu">✖</button>
 
         <a href="#hero">Home</a>
         <a href="#product">Products</a>
+        <a href="#reviews">Reviews</a>
         <a href="#about">About Us</a>
-        <a href="#testimonials">Testimonials</a>
         <a href="verify.html" class="mobile-verify-btn">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
     </div>
+    
+    <div class="nav-overlay" id="navOverlay"></div>
+    
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">₹0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn">
+                <i class="fas fa-credit-card"></i> Pay Now (Razorpay)
+            </button>
+        </div>
+    </div>
+    
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        <span>Action Successful!</span>
+    </div>
 
-    <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-content">
             <h2>Premium Skincare Solutions</h2>
@@ -1175,10 +102,9 @@
         </div>
     </section>
 
-    <!-- Whitening Cream Section -->
     <section class="product-section" id="product">
         <div class="product-image-container">
-            <img src="gtiqa.jpg" alt="Glowtiqa Cream" class="product-image">
+            <img src="gtiqa.jpg" alt="Glowtiqa Cream" class="product-image" onerror="this.src='https://placehold.co/500x500/f9f5eb/b68d40?text=Glowtiqa+Cream'">
         </div>
         <div class="product-details">
             <h3>Glowtiqa Advance Whitening Cream</h3>
@@ -1209,6 +135,26 @@
                 </div>
             </div>
             
+            <div class="price-section">
+                <div class="price">₹2000 <span class="original-price">₹2999</span> <span class="discount">(33% OFF)</span></div>
+            </div>
+            
+            <div class="quantity-selector">
+                <label for="creamQuantity">Quantity:</label>
+                <div class="quantity-controls">
+                    <button class="quantity-btn" id="decreaseCream">-</button>
+                    <input type="number" id="creamQuantity" class="quantity-input" value="1" min="1" max="10">
+                    <button class="quantity-btn" id="increaseCream">+</button>
+                </div>
+            </div>
+            
+            <button class="add-to-cart-btn" id="addCreamToCart">
+                <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+            <button class="buy-now-btn" onclick="document.getElementById('addCreamToCart').click(); setTimeout(() => {document.getElementById('cartIcon').click()}, 500);">
+                <i class="fas fa-bolt"></i> Buy Now
+            </button>
+            
             <div class="key-benefits">
                 <h4>Key Benefits</h4>
                 <div class="benefits-grid">
@@ -1231,22 +177,16 @@
                 </div>
             </div>
             
-            <!-- BUY BUTTON FOR CREAM -->
-            <a href="https://wa.me/919916404202?text=Hi,%20I%20would%20like%20to%20buy%20Glowtiqa%20Advance%20Whitening%20Cream" class="buy-btn">
-                <i class="fas fa-shopping-cart"></i> Buy Now
-            </a>
-            
             <div class="tagline">
                 <p><em>Feel Your Own Greatness</em></p>
             </div>
         </div>
     </section>
 
-    <!-- Cleansing Soap Section -->
     <section class="soap-section" id="soap">
         <div class="soap-container">
             <div class="soap-image-container">
-                <img src="soap.jpg" alt="Glowtiqa Soap" class="soap-image">
+                <img src="soap.jpg" alt="Glowtiqa Soap" class="soap-image" onerror="this.src='https://placehold.co/500x400/f9f5eb/b68d40?text=Glowtiqa+Soap'">
             </div>
             <div class="soap-details">
                 <h3>Glowtiqa Skin Whitening Soap</h3>
@@ -1277,6 +217,26 @@
                     </div>
                 </div>
                 
+                <div class="price-section">
+                    <div class="price">₹599 <span class="original-price">₹999</span> <span class="discount">(30% OFF)</span></div>
+                </div>
+                
+                <div class="quantity-selector">
+                    <label for="soapQuantity">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" id="decreaseSoap">-</button>
+                        <input type="number" id="soapQuantity" class="quantity-input" value="1" min="1" max="10">
+                        <button class="quantity-btn" id="increaseSoap">+</button>
+                    </div>
+                </div>
+                
+                <button class="add-to-cart-btn" id="addSoapToCart">
+                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                </button>
+                <button class="buy-now-btn" onclick="document.getElementById('addSoapToCart').click(); setTimeout(() => {document.getElementById('cartIcon').click()}, 500);">
+                    <i class="fas fa-bolt"></i> Buy Now
+                </button>
+                
                 <div class="soap-benefits">
                     <h4>Key Benefits</h4>
                     <ul style="padding-left: 1.2rem;">
@@ -1288,12 +248,6 @@
                     </ul>
                 </div>
                 
-                <!-- BUY BUTTON FOR SOAP -->
-                 
-                <a href="https://wa.me/919916404202?text=Hi,%20I%20would%20like%20to%20buy%20Glowtiqa%20Skin%20Whitening%20Soap" class="buy-btn">
-                    <i class="fas fa-shopping-cart"></i> Buy Now
-                </a>
-                
                 <div class="tagline">
                     <p><em>Pure Cleansing for Radiant Skin</em></p>
                 </div>
@@ -1301,7 +255,6 @@
         </div>
     </section>
 
-    <!-- Bundle Offer Section -->
     <section class="description-section" id="bundle">
         <h2>Complete Skincare System</h2>
         <div class="description-content">
@@ -1311,8 +264,6 @@
                 <p>Our Whitening Cream is a dermatologist-tested formula designed to brighten the skin and give it a youthful, healthy glow. It works by targeting common skin concerns such as dark spots, uneven tone, scars, and fine lines.</p>
                 
                 <p>With the power of TA stem cells and active skin-renewing ingredients, this cream supports deep nourishment while promoting skin regeneration. Regular use can visibly reduce dark circles, acne marks, wrinkles, and pigmentation.</p>
-                
-                
                 
                 <p><strong>Note:</strong> Avoid contact with eyes. In case of irritation, rinse thoroughly with water. If the irritation persists, consult a doctor immediately.</p>
             </div>
@@ -1331,9 +282,60 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="section-header">
+            <h2>Customer Reviews</h2>
+            <p>See what our customers are saying about Glowtiqa products</p>
+        </div>
+        
+        <div class="reviews-container">
+            <div class="review-form">
+                <h3>Share Your Experience</h3>
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewerName">Your Name</label>
+                        <input type="text" id="reviewerName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewerEmail">Your Email</label>
+                        <input type="email" id="reviewerEmail" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div class="rating-input">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1" required> <label for="star1">★</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewText">Your Review</label>
+                        <textarea id="reviewText" class="form-control" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Review</button>
+                </form>
+            </div>
+            
+            <div class="reviews-list" id="reviewsList">
+                </div>
+        </div>
+    </section>
+
     <section class="about-section" id="about">
-        <h2>About Us</h2>
+        <div class="section-header">
+            <h2>About Us</h2>
+            <p>Discover the story behind Glowtiqa Paris</p>
+        </div>
         <div class="about-content">
             <div class="about-text">
                 <p>Glowtiqa Paris is committed to providing premium skincare solutions that empower individuals to reveal their natural beauty. Our products are designed with powerful formulas that target pigmentation, uneven skin tone, and dark spots while nourishing and protecting your skin.</p>
@@ -1355,9 +357,11 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="testimonials" id="testimonials">
-        <h2>Customer Testimonials</h2>
+        <div class="section-header">
+            <h2>Customer Testimonials</h2>
+            <p>Hear what our satisfied customers have to say</p>
+        </div>
         <div class="testimonial-grid">
             <div class="testimonial-card">
                 <div class="testimonial-content">
@@ -1369,11 +373,7 @@
                         <h4>Sarah Johnson</h4>
                         <p>Marketing Executive</p>
                         <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                     </div>
                 </div>
@@ -1389,11 +389,7 @@
                         <h4>Michael Tan</h4>
                         <p>Software Engineer</p>
                         <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                         </div>
                     </div>
                 </div>
@@ -1409,11 +405,7 @@
                         <h4>Priya Sharma</h4>
                         <p>Fashion Designer</p>
                         <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                     </div>
                 </div>
@@ -1421,7 +413,6 @@
         </div>
     </section>
 
-    <!-- Floating Buttons -->
     <div class="floating-buttons">
         <a href="https://wa.me/919916726373" class="float-btn whatsapp">
             <i class="fab fa-whatsapp icon"></i>
@@ -1433,7 +424,6 @@
         </a>
     </div>
     
-    <!-- Footer -->
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-col">
@@ -1447,7 +437,7 @@
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#product">Whitening Cream</a></li>
                     <li><a href="#soap">Cleansing Soap</a></li>
-                    <li><a href="#bundle">Bundle Offer</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                 </ul>
@@ -1479,7 +469,6 @@
         <div class="copyright">
             &copy; 2025 Glowtiqa Paris. All rights reserved.
             
-            <!-- Developer credit -->
             <div class="developer-credit">
                 Developed <i class="fas fa-heart" style="color: #c5a880;"></i> by 
                 <a href="https://zomaxa.co" target="_blank">
@@ -1490,81 +479,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile navigation toggle with overlay
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const closeMenu = document.getElementById('closeMenu');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        // Create overlay element
-        const navOverlay = document.createElement('div');
-        navOverlay.className = 'nav-overlay';
-        document.body.appendChild(navOverlay);
-        
-        mobileMenu.addEventListener('click', () => {
-            mobileNav.classList.add('active');
-            navOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        closeMenu.addEventListener('click', () => {
-            closeMobileMenu();
-        });
-        
-        navOverlay.addEventListener('click', () => {
-            closeMobileMenu();
-        });
-        
-        function closeMobileMenu() {
-            mobileNav.classList.remove('active');
-            navOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Close menu when clicking on links
-        const mobileLinks = document.querySelectorAll('.mobile-nav a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                closeMobileMenu();
-            });
-        });
-        
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') {
-                    closeMobileMenu();
-                    return;
-                }
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    closeMobileMenu();
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Add animation to elements when they come into view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        document.querySelectorAll('.product-section, .description-section, .about-section, .testimonial-card, .soap-container').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
