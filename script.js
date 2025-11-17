@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ---------------- CONFIGURATION ---------------- //
-    const RAZORPAY_KEY_ID = "rzp_live_RelYBJxzCUWKj3"; 
-    const EMAILJS_SERVICE_ID = "service_h64g36k";  
-    const EMAILJS_TEMPLATE_ID = "template_df8ic0r";  
+    const RAZORPAY_KEY_ID = "rzp_live_Rgl2NCpQcyFajX"; 
     // ----------------------------------------------- //
 
     // Product Data
@@ -12,14 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 1,
             name: "Glowtiqa Advance Whitening Cream",
             price: 2000,
-            originalPrice: 2999,
             image: "gtiqa.jpg"
         },
         soap: {
             id: 2,
             name: "Glowtiqa Skin Whitening Soap",
-            price: 600,
-            originalPrice: 999,
+            price: 599,
             image: "soap.jpg"
         },
     };
@@ -27,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Cart functionality
     let cart = JSON.parse(localStorage.getItem('glowtiqaCart')) || [];
     
-    // --- Element Selectors ---
+    // Element Selectors
     const cartIcon = document.getElementById('cartIcon');
     const cartSidebar = document.getElementById('cartSidebar');
     const closeCart = document.getElementById('closeCart');
@@ -40,39 +36,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeMenu = document.getElementById('closeMenu');
     const mobileNav = document.getElementById('mobileNav');
     const navOverlay = document.getElementById('navOverlay');
-    const mobileLinks = document.querySelectorAll('.mobile-nav a');
     
     const reviewForm = document.getElementById('reviewForm');
     const reviewsList = document.getElementById('reviewsList');
-    
-    // Product 1 (Cream) Elements
-    const increaseCream = document.getElementById('increaseCream');
-    const decreaseCream = document.getElementById('decreaseCream');
-    const creamQuantity = document.getElementById('creamQuantity');
-    const addCreamToCart = document.getElementById('addCreamToCart');
-    
-    // Product 2 (Soap) Elements
-    const increaseSoap = document.getElementById('increaseSoap');
-    const decreaseSoap = document.getElementById('decreaseSoap');
-    const soapQuantity = document.getElementById('soapQuantity');
-    const addSoapToCart = document.getElementById('addSoapToCart');
-    
     const checkoutBtn = document.getElementById('checkoutBtn');
-    const allLinks = document.querySelectorAll('a[href^="#"]');
-    
-    // Update cart count
+
+    // --- Cart Logic ---
     function updateCartCount() {
         if (!cartCount) return;
         const count = cart.reduce((total, item) => total + item.quantity, 0);
         cartCount.textContent = count;
     }
     
-    // Update cart display
     function updateCartDisplay() {
         if (!cartItems || !cartTotal) return;
         
         if (cart.length === 0) {
-            cartItems.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>';
+            cartItems.innerHTML = '<div class="empty-cart" style="text-align:center; padding:20px; color:#777;"><i class="fas fa-shopping-cart" style="font-size:2rem; margin-bottom:10px;"></i><p>Your cart is empty</p></div>';
             cartTotal.textContent = '₹0.00';
             return;
         }
@@ -104,23 +84,18 @@ document.addEventListener('DOMContentLoaded', function() {
         cartItems.innerHTML = itemsHTML;
         cartTotal.textContent = `₹${total.toFixed(2)}`;
         
-        // Add event listeners to NEW cart items
-        addCartItemListeners();
-    }
-
-    // Helper to add listeners to dynamic cart items
-    function addCartItemListeners() {
+        // Re-attach listeners to new buttons
         document.querySelectorAll('.decrease-quantity').forEach(btn => {
             btn.addEventListener('click', function() {
                 const itemId = parseInt(this.closest('.cart-item').dataset.id);
-                decreaseQuantity(itemId);
+                modifyQuantity(itemId, -1);
             });
         });
         
         document.querySelectorAll('.increase-quantity').forEach(btn => {
             btn.addEventListener('click', function() {
                 const itemId = parseInt(this.closest('.cart-item').dataset.id);
-                increaseQuantity(itemId);
+                modifyQuantity(itemId, 1);
             });
         });
         
@@ -131,94 +106,58 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
-    // Add to cart
+
     function addToCart(product, quantity = 1) {
         const existingItem = cart.find(item => item.id === product.id);
-        
         if (existingItem) {
             existingItem.quantity += quantity;
         } else {
-            cart.push({
-                id: product.id,
-                name: product.name,
-                price: product.price,
-                image: product.image,
-                quantity: quantity
-            });
+            cart.push({ ...product, quantity: quantity });
         }
-        
-        localStorage.setItem('glowtiqaCart', JSON.stringify(cart));
-        updateCartCount();
-        updateCartDisplay();
-        
-        // Show success message
-        showSuccessMessage();
-        
-        // Open Cart Sidebar automatically
+        saveCart();
+        showSuccessMessage("Added to Cart!");
         if (cartSidebar) cartSidebar.classList.add('active');
     }
     
-    // Remove from cart
     function removeFromCart(productId) {
         cart = cart.filter(item => item.id !== productId);
+        saveCart();
+    }
+    
+    function modifyQuantity(productId, change) {
+        const item = cart.find(item => item.id === productId);
+        if (item) {
+            item.quantity += change;
+            if (item.quantity < 1) {
+                removeFromCart(productId);
+            } else {
+                saveCart();
+            }
+        }
+    }
+    
+    function saveCart() {
         localStorage.setItem('glowtiqaCart', JSON.stringify(cart));
         updateCartCount();
         updateCartDisplay();
     }
     
-    // Increase quantity
-    function increaseQuantity(productId) {
-        const item = cart.find(item => item.id === productId);
-        if (item) {
-            item.quantity += 1;
-            localStorage.setItem('glowtiqaCart', JSON.stringify(cart));
-            updateCartCount();
-            updateCartDisplay();
-        }
-    }
-    
-    // Decrease quantity
-    function decreaseQuantity(productId) {
-        const item = cart.find(item => item.id === productId);
-        if (item) {
-            if (item.quantity > 1) {
-                item.quantity -= 1;
-            } else {
-                removeFromCart(productId);
-                return;
-            }
-            localStorage.setItem('glowtiqaCart', JSON.stringify(cart));
-            updateCartCount();
-            updateCartDisplay();
-        }
-    }
-    
-    // Show success message
-    function showSuccessMessage() {
+    function showSuccessMessage(msg = "Action Successful!") {
         if (!successMessage) return;
+        successMessage.querySelector('span').textContent = msg;
         successMessage.classList.add('show');
-        
-        setTimeout(() => {
-            successMessage.classList.remove('show');
-        }, 3000);
+        setTimeout(() => { successMessage.classList.remove('show'); }, 3000);
     }
+
+    // --- Event Listeners ---
     
-    // Mobile navigation toggle with overlay
+    // Menu
     if (mobileMenu) {
         mobileMenu.addEventListener('click', () => {
-            if (mobileNav) mobileNav.classList.add('active');
-            if (navOverlay) navOverlay.classList.add('active');
+            mobileNav.classList.add('active');
+            navOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         });
-    }
-    
-    if (closeMenu) {
-        closeMenu.addEventListener('click', closeMobileMenu);
-    }
-    
-    if (navOverlay) {
-        navOverlay.addEventListener('click', closeMobileMenu);
     }
     
     function closeMobileMenu() {
@@ -227,359 +166,176 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = 'auto';
     }
     
-    // Close menu when clicking on links
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            closeMobileMenu();
-        });
-    });
+    if (closeMenu) closeMenu.addEventListener('click', closeMobileMenu);
+    if (navOverlay) navOverlay.addEventListener('click', closeMobileMenu);
+    document.querySelectorAll('.mobile-nav a').forEach(l => l.addEventListener('click', closeMobileMenu));
     
-    // Cart sidebar functionality
+    // Cart Sidebar
     if (cartIcon) {
         cartIcon.addEventListener('click', () => {
-            if (cartSidebar) cartSidebar.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            cartSidebar.classList.add('active');
         });
     }
-    
     if (closeCart) {
         closeCart.addEventListener('click', () => {
-            if (cartSidebar) cartSidebar.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            cartSidebar.classList.remove('active');
+        });
+    }
+
+    // Product Buttons
+    const addCreamBtn = document.getElementById('addCreamToCart');
+    if (addCreamBtn) {
+        addCreamBtn.addEventListener('click', () => {
+            const qty = parseInt(document.getElementById('creamQuantity').value) || 1;
+            addToCart(products.cream, qty);
+        });
+    }
+
+    const addSoapBtn = document.getElementById('addSoapToCart');
+    if (addSoapBtn) {
+        addSoapBtn.addEventListener('click', () => {
+            const qty = parseInt(document.getElementById('soapQuantity').value) || 1;
+            addToCart(products.soap, qty);
         });
     }
     
-    // ---------------------------------------------------------
-    // RAZORPAY + EMAILJS INTEGRATION LOGIC
-    // ---------------------------------------------------------
+    // Quantity Inputs (+/- buttons)
+    ['Cream', 'Soap'].forEach(type => {
+        const inc = document.getElementById(`increase${type}`);
+        const dec = document.getElementById(`decrease${type}`);
+        const input = document.getElementById(`${type.toLowerCase()}Quantity`);
+        
+        if(inc && input) inc.addEventListener('click', () => input.value = parseInt(input.value) + 1);
+        if(dec && input) dec.addEventListener('click', () => {
+            if(parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
+        });
+    });
+
+    // --- 🚀 RAZORPAY (NEW SECURE BACKEND FLOW) 🚀 ---
     if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', () => {
+        checkoutBtn.addEventListener('click', async () => {
             if (cart.length === 0) {
                 alert('Your cart is empty!'); 
                 return;
             }
 
-            // 1. GET USER INPUTS
-            const custName = document.getElementById('custName').value;
-            const custPhone = document.getElementById('custPhone').value;
-            const custAddress = document.getElementById('custAddress').value;
-
-            // 2. VALIDATE INPUTS
-            if (!custName || !custPhone || !custAddress) {
-                alert("Please fill in your Name, Phone Number, and Shipping Address before paying.");
-                return; // Stop here if empty
-            }
-
-            // 3. PREPARE ORDER DATA
-            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            // Create a readable list of items
-            const itemsDescription = cart.map(item => `• ${item.name} (Qty: ${item.quantity})`).join('\n');
-
-            // Check if Razorpay Key is set
-            if(!RAZORPAY_KEY_ID || RAZORPAY_KEY_ID === "YOUR_RAZORPAY_KEY_ID") {
-                alert("Developer Error: Please set your RAZORPAY_KEY_ID in script.js");
+            if(RAZORPAY_KEY_ID === "YOUR_RAZORPAY_KEY_ID_HERE") {
+                alert("Developer: Please set your RAZORPAY_KEY_ID in script.js");
                 return;
             }
 
-            // 4. RAZORPAY OPTIONS
+            // 1. Create the Order on the Backend
+            // This URL must match where your backend is running
+            const response = await fetch('https://glowtiqa-backend.onrender.com/create-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ cart: cart }),
+            });
+            
+            if (!response.ok) {
+                alert('Failed to create order. Please try again.');
+                return;
+            }
+
+            const order = await response.json();
+
+            // 2. Open Razorpay Checkout
             var options = {
-                "key": RAZORPAY_KEY_ID, 
-                "amount": totalAmount * 100, // Amount in paise
+                "key": RAZORPAY_KEY_ID, // Your PUBLIC Key ID
+                "amount": order.amount,   // Amount from server
                 "currency": "INR",
                 "name": "Glowtiqa Paris",
-                "description": "Skincare Order",
-                "image": "logo_v2.png", 
-                "prefill": {
-                    "name": custName,
-                    "contact": custPhone
-                },
-                "theme": { "color": "#b68d40" },
-                
-                // 5. SUCCESS HANDLER
-                "handler": function (response){
+                "description": "Skincare Purchase",
+                "image": "logo_v2.png",
+                "order_id": order.id,     // This is the new, important part
+                "handler": function (response) {
+                    // This function is called on a successful payment
+                    alert("Payment Successful!\nPayment ID: " + response.razorpay_payment_id);
                     
-                    // Change button text to show processing
-                    checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Order...';
-                    checkoutBtn.disabled = true;
-
-                    // Prepare data for EmailJS Template
-                    // KEYS MUST MATCH EMAILJS TEMPLATE VARIABLES
-                    var templateParams = {
-                        customer_name: custName,
-                        customer_phone: custPhone,
-                        shipping_address: custAddress,
-                        order_items: itemsDescription,
-                        total_amount: totalAmount,
-                        payment_id: response.razorpay_payment_id
-                    };
-
-                    // Send Email
-                    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
-                        .then(function() {
-                            
-                            // Clear Cart
-                            cart = [];
-                            localStorage.setItem('glowtiqaCart', JSON.stringify(cart));
-                            updateCartCount();
-                            updateCartDisplay();
-                            
-                            // Reset UI
-                            checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
-                            checkoutBtn.disabled = false;
-                            if (cartSidebar) cartSidebar.classList.remove('active');
-                            document.body.style.overflow = 'auto';
-                            
-                            // Clear form fields
-                            document.getElementById('custName').value = '';
-                            document.getElementById('custPhone').value = '';
-                            document.getElementById('custAddress').value = '';
-                            
-                            // Reload page
-                            // Redirect to Thank You page
-                            window.location.href = "thank-you.html";
-
-                        }, function(error) {
-                            // FAILED TO SEND EMAIL
-                            console.error('EmailJS Error:', error);
-                            alert("Payment received (ID: " + response.razorpay_payment_id + "), but there was an error sending your order details. Please take a screenshot and contact us on WhatsApp!");
-                            checkoutBtn.disabled = false;
-                        });
+                    // Clear cart and close
+                    cart = [];
+                    saveCart();
+                    if (cartSidebar) cartSidebar.classList.remove('active');
+                },
+                "prefill": {
+                    "name": "Customer Name",
+                    "email": "customer@example.com",
+                    "contact": "9999999999"
+                },
+                "theme": {
+                    "color": "#b68d40"
                 }
             };
             
             var rzp1 = new Razorpay(options);
-            rzp1.on('payment.failed', function (response){
+            rzp1.on('payment.failed', function (response) {
                 alert("Payment Failed. " + response.error.description);
             });
             rzp1.open();
         });
     }
-    
-    // Product quantity controls
-    if (increaseCream) {
-        increaseCream.addEventListener('click', () => {
-            if (creamQuantity) creamQuantity.value = parseInt(creamQuantity.value) + 1;
-        });
-    }
-    
-    if (decreaseCream) {
-        decreaseCream.addEventListener('click', () => {
-            if (creamQuantity && parseInt(creamQuantity.value) > 1) {
-                creamQuantity.value = parseInt(creamQuantity.value) - 1;
-            }
-        });
-    }
-    
-    if (increaseSoap) {
-        increaseSoap.addEventListener('click', () => {
-            if (soapQuantity) soapQuantity.value = parseInt(soapQuantity.value) + 1;
-        });
-    }
-    
-    if (decreaseSoap) {
-        decreaseSoap.addEventListener('click', () => {
-            if (soapQuantity && parseInt(soapQuantity.value) > 1) {
-                soapQuantity.value = parseInt(soapQuantity.value) - 1;
-            }
-        });
-    }
-    
-    // Add to cart buttons
-    if (addCreamToCart) {
-        addCreamToCart.addEventListener('click', () => {
-            const quantity = creamQuantity ? parseInt(creamQuantity.value) : 1;
-            addToCart(products.cream, quantity);
-        });
-    }
-    
-    if (addSoapToCart) {
-        addSoapToCart.addEventListener('click', () => {
-            const quantity = soapQuantity ? parseInt(soapQuantity.value) : 1;
-            addToCart(products.soap, quantity);
-        });
-    }
-    
-    // Smooth scrolling
-    allLinks.forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') {
-                closeMobileMenu();
-                return;
-            }
-            
-            const targetElement = document.querySelector(targetId);
-            if(targetElement) {
-                closeMobileMenu();
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Add animation to elements when they come into view
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('animate');
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-    
-    document.querySelectorAll('.product-section, .description-section, .about-section, .testimonial-card, .soap-container, .review-item').forEach(el => {
-        observer.observe(el);
-    });
-    
-    // Review system with localStorage
+    // --- End of Razorpay Flow ---
+
+    // --- REVIEWS LOGIC ---
     function loadReviews() {
-        const reviews = getStoredReviews();
-        
+        let reviews = JSON.parse(localStorage.getItem('glowtiqaReviews')) || [];
+        // Dummy data if empty
         if (reviews.length === 0) {
-            // Add sample reviews if none exist
-            const sampleReviews = [
-                {
-                    id: 1,
-                    name: "Sarah Johnson",
-                    email: "sarah@example.com",
-                    rating: 5,
-                    text: "I've been using both Glowtiqa products for 3 months and the results are amazing! My dark spots have faded significantly and my skin has never looked brighter. Highly recommend!",
-                    date: "March 15, 2024"
-                },
-                {
-                    id: 2,
-                    name: "Michael Tan",
-                    email: "michael@example.com",
-                    rating: 4,
-                    text: "The cleansing soap is incredible! It leaves my skin feeling fresh without any dryness. Combined with the whitening cream, it's the perfect skincare routine. Only wish the cream came in a larger size.",
-                    date: "February 18, 2025"
-                },
-                {
-                    id: 3,
-                    name: "Priya Sharma",
-                    email: "priya@example.com",
-                    rating: 5,
-                    text: "After just 4 weeks of using Glowtiqa, my friends started asking me what I was doing differently. My skin feels softer and looks years younger! Will definitely purchase again.",
-                    date: "January 10, 2023"
-                }
+            reviews = [
+                { name: "Sarah J.", date: "March 15, 2025", rating: 5, text: "My dark spots faded significantly!" },
+                { name: "Michael T.", date: "Feb 28, 2025", rating: 4, text: "Great soap, leaves skin fresh." }
             ];
-            
-            localStorage.setItem('glowtiqaReviews', JSON.stringify(sampleReviews));
-            displayReviews(sampleReviews);
-        } else {
-            displayReviews(reviews);
+            // Save dummy data so it persists
+            localStorage.setItem('glowtiqaReviews', JSON.stringify(reviews));
         }
-    }
-    
-    function getStoredReviews() {
-        const reviewsJSON = localStorage.getItem('glowtiqaReviews');
-        return reviewsJSON ? JSON.parse(reviewsJSON) : [];
-    }
-    
-    function displayReviews(reviews) {
+        
         if (!reviewsList) return;
-        
-        // Sort reviews by rating (highest first) and then by date (newest first)
-        reviews.sort((a, b) => {
-            if (b.rating !== a.rating) {
-                return b.rating - a.rating;
-            }
-            return new Date(b.date) - new Date(a.date);
-        });
-        
         reviewsList.innerHTML = '';
         
-        if (reviews.length === 0) {
-            reviewsList.innerHTML = '<p class="no-reviews">No reviews yet. Be the first to review our products!</p>';
-            return;
-        }
-        
-        reviews.forEach(review => {
-            const reviewItem = document.createElement('div');
-            reviewItem.className = 'review-item animate';
-            
-            // Create stars HTML
-            let starsHTML = '';
-            for (let i = 0; i < 5; i++) {
-                if (i < review.rating) {
-                    starsHTML += '★';
-                } else {
-                    starsHTML += '☆';
-                }
-            }
-            
-            reviewItem.innerHTML = `
-                <div class="review-header">
-                    <div class="reviewer-info">
-                        <h4>${review.name}</h4>
-                        <div class="review-date">${review.date}</div>
-                    </div>
-                    <div class="review-stars">
-                        ${starsHTML}
-                    </div>
+        reviews.forEach(r => {
+            let stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+            const div = document.createElement('div');
+            div.className = 'review-item';
+            div.innerHTML = `
+                <div class="review-header" style="display:flex; justify-content:space-between;">
+                    <h4>${r.name} <span style="font-size:0.8rem; color:#777; font-weight:normal;">${r.date}</span></h4>
+                    <div class="review-stars">${stars}</div>
                 </div>
-                <div class="review-text">
-                    ${review.text}
-                </div>
+                <p style="color:#555;">${r.text}</p>
             `;
-            
-            reviewsList.appendChild(reviewItem);
-        });
-    }
-    
-    // Review form submission
-    if (reviewForm) {
-        reviewForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('reviewerName').value;
-            const email = document.getElementById('reviewerEmail').value;
-            const rating = document.querySelector('input[name="rating"]:checked');
-            const reviewText = document.getElementById('reviewText').value;
-            
-            if (!rating) {
-                alert('Please select a rating');
-                return;
-            }
-            
-            const reviews = getStoredReviews();
-            
-            const newReview = {
-                id: Date.now(), // Simple ID based on timestamp
-                name: name,
-                email: email,
-                rating: parseInt(rating.value),
-                text: reviewText,
-                date: new Date().toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                })
-            };
-            
-            reviews.unshift(newReview);
-            localStorage.setItem('glowtiqaReviews', JSON.stringify(reviews));
-            displayReviews(reviews);
-            reviewForm.reset();
-            
-            // Use the non-blocking success message
-            if (successMessage) {
-                successMessage.querySelector('span').textContent = 'Review submitted successfully!';
-                showSuccessMessage();
-            } else {
-                alert('Thank you for your review!'); // Fallback
-            }
+            reviewsList.appendChild(div);
         });
     }
 
-    // --- Initial Page Load ---
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('reviewerName').value;
+            const text = document.getElementById('reviewText').value;
+            const ratingEl = document.querySelector('input[name="rating"]:checked');
+            const rating = ratingEl ? parseInt(ratingEl.value) : 5;
+            
+            const newReview = {
+                name: name,
+                rating: rating,
+                text: text,
+                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+            };
+            
+            let reviews = JSON.parse(localStorage.getItem('glowtiqaReviews')) || [];
+            reviews.unshift(newReview); // Add to top
+            localStorage.setItem('glowtiqaReviews', JSON.stringify(reviews));
+            
+            loadReviews();
+            reviewForm.reset();
+            showSuccessMessage("Review Submitted!");
+        });
+    }
+
+    // --- Init ---
     loadReviews();
     updateCartCount();
     updateCartDisplay();
-
 });
