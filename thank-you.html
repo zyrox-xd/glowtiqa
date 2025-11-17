@@ -3,55 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmed | Glowtiqa Paris</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Thank You! | Glowtiqa Paris</title>
+    <link rel="stylesheet" href="style.css"> <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23d4b483%22>G</text></svg>">
     <style>
+        /* Styles for the thank you page */
         body {
-            background-color: #f9f5eb;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
+            background: var(--secondary);
             text-align: center;
+            padding: 2rem;
         }
-        .thank-you-card {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            max-width: 500px;
-            width: 90%;
+        .container {
+            background: #fff;
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-width: 600px;
         }
-        .check-icon {
-            font-size: 60px;
-            color: #28a745;
-            margin-bottom: 20px;
+        .icon {
+            font-size: 4rem;
+            color: #4CAF50; /* Green check */
+            margin-bottom: 1.5rem;
         }
-        h1 { color: #b68d40; margin-bottom: 10px; }
-        p { color: #666; line-height: 1.6; margin-bottom: 20px; }
-        .btn-home {
-            background-color: #b68d40;
+        h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        .details {
+            font-size: 0.9rem;
+            color: var(--dark);
+            background: var(--secondary);
+            padding: 1rem;
+            border-radius: var(--radius);
+        }
+        .cta-btn { /* Re-using your button style */
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
             color: white;
-            padding: 12px 25px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            display: inline-block;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            margin-top: 2rem;
         }
-        .btn-home:hover { background-color: #a07c36; }
+        .cta-btn:hover {
+            background: var(--primary-dark);
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="thank-you-card">
-        <i class="fas fa-check-circle check-icon"></i>
-        <h1>Order Confirmed!</h1>
-        <p>Thank you for choosing Glowtiqa Paris. We have received your order and are preparing it for shipment.</p>
-        <p>You will receive a confirmation call or WhatsApp message from us shortly.</p>
-        <a href="index.html" class="btn-home">Continue Shopping</a>
+    <div class="container">
+        <div class="icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h1>Thank You For Your Order!</h1>
+        <p>Your payment was successful and your order is being processed. We've sent a confirmation to your email.</p>
+        
+        <div class="details">
+            <strong>Your Payment ID:</strong> <span id="paymentId"></span>
+        </div>
+
+        <a href="/" class="cta-btn">
+            <i class="fas fa-arrow-left"></i> Back to Shop
+        </a>
     </div>
+
+    <script>
+        // This script reads the payment ID from the URL and displays it
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const paymentId = params.get('payment_id');
+            
+            if (paymentId) {
+                document.getElementById('paymentId').textContent = paymentId;
+            } else {
+                document.getElementById('paymentId').textContent = 'N/A';
+            }
+        });
+    </script>
 
 </body>
 </html>
