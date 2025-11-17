@@ -1680,3 +1680,13 @@ The modal CSS has been removed.
 .shipping-form textarea {
     resize: vertical;
 }
+/* Floating Buttons */
+.floating-buttons {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 900; /* <-- This is the fix. Changed from 9999. */
+}
