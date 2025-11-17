@@ -407,6 +407,37 @@ nav a:hover::after {
     padding-top: 20px;
 }
 
+/*
+STYLES FOR THE CART SHIPPING FORM (NEW)
+*/
+.cart-footer .shipping-form {
+    padding: 0 5px 15px 5px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+.cart-footer .shipping-form h4 {
+    margin-bottom: 10px;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+.shipping-form input[type="text"],
+.shipping-form input[type="tel"],
+.shipping-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+.shipping-form textarea {
+    resize: vertical;
+}
+/*
+END OF CART SHIPPING FORM STYLES
+*/
+
 .cart-total {
     display: flex;
     justify-content: space-between;
@@ -1118,9 +1149,8 @@ textarea.form-control {
 .rating-input {
     display: flex;
     gap: 0.5rem;
-    /* FIX: Make stars hover correctly */
     flex-direction: row-reverse;
-    justify-content: flex-end; /* Aligns to the right */
+    justify-content: flex-end;
 }
 
 .rating-input input {
@@ -1134,7 +1164,6 @@ textarea.form-control {
     transition: var(--transition);
 }
 
-/* FIX: Make stars hover correctly */
 .rating-input input:checked ~ label,
 .rating-input label:hover,
 .rating-input label:hover ~ label {
@@ -1163,11 +1192,9 @@ textarea.form-control {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    
-    /* --- FIX: Added max-height and overflow to make list scrollable --- */
-    max-height: 600px;  /* Set a max height, e.g., 600px */
-    overflow-y: auto;   /* Add vertical scroll when content overflows */
-    padding-right: 10px; /* Add a little padding to avoid content hiding under scrollbar */
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 .review-item {
@@ -1424,7 +1451,6 @@ footer {
     
     .reviews-list {
         order: 1;
-        /* Use a shorter scroll height on mobile */
         max-height: 450px; 
     }
     
@@ -1444,7 +1470,6 @@ footer {
     }
     
     .hero {
-        /* IMPROVEMENT: Reduced vertical padding for a tighter look on mobile */
         padding: 2.5rem 5%; 
     }
     
@@ -1452,13 +1477,11 @@ footer {
         font-size: 2rem;
     }
     
-    /* IMPROVEMENT: Standardized section padding for mobile */
     .product-section, .description-section, .about-section, .soap-section, .reviews-section, .testimonials {
         padding: 2.5rem 5%;
-        margin: 2rem 0; /* Reduced top/bottom margin */
+        margin: 2rem 0;
     }
 
-    /* IMPROVEMENT: Reduce padding inside cards on mobile */
     .product-details, .description-section, .about-section, .soap-details {
         padding: 1.5rem;
     }
@@ -1467,17 +1490,15 @@ footer {
         display: flex;
     }
     
-    /* --- FIX: Center top bar numbers --- */
     .top-contact-bar {
         justify-content: center;
     }
     
     .contact-numbers {
         justify-content: center;
-        flex-wrap: wrap; /* Allow wrapping if needed */
-        gap: 1.5rem; /* Reduce gap */
+        flex-wrap: wrap;
+        gap: 1.5rem;
     }
-    /* --- END FIX --- */
     
     .section-header h2 {
         font-size: 1.8rem;
@@ -1487,7 +1508,6 @@ footer {
         font-size: 1rem;
     }
 
-    /* IMPROVEMENT: Reduce product heading size */
     .product-details h3, .soap-details h3 {
         font-size: 1.5rem;
     }
@@ -1500,9 +1520,8 @@ footer {
 }
 
 @media (max-width: 480px) {
-    /* IMPROVEMENT: Adjust body font size for better readability on small screens */
     body {
-        font-size: 94%; /* ~15px if base is 16px */
+        font-size: 94%;
     }
 
     .hero h2 {
@@ -1534,11 +1553,9 @@ footer {
         font-size: 1rem;
     }
     
-    /* --- FIX: Adjust gap for small screens --- */
     .contact-numbers {
         gap: 1rem;
     }
-    /* --- END FIX --- */
     
     .benefits-grid {
         grid-template-columns: 1fr;
@@ -1560,7 +1577,6 @@ footer {
         font-size: 1.6rem;
     }
 
-    /* IMPROVEMENT: Reduce padding even more for very small screens */
     .product-details, .description-section, .about-section, .soap-details, .review-form, .testimonial-card {
         padding: 1.2rem;
     }
@@ -1615,106 +1631,52 @@ footer {
 
 /* Colored buttons for WhatsApp and Call */
 .float-btn.whatsapp {
-    background: #25D366; /* WhatsApp green */
+    background: #25D366;
 }
 
 .float-btn.whatsapp:hover {
-    background: #128C7E; /* Darker green on hover */
+    background: #128C7E;
 }
 
 .float-btn.call {
-    background: #E53935; /* Red color */
+    background: #E53935;
 }
 
 .float-btn.call:hover {
-    background: #C62828; /* Darker red on hover */
-}
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 4000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    background: #C62828;
 }
 
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.checkout-modal {
-    background: white;
-    padding: 2.5rem;
-    border-radius: var(--radius);
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transform: translateY(-20px);
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.modal-overlay.active .checkout-modal {
-    transform: translateY(0);
-}
-
-.checkout-modal h3 {
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-}
-
-.checkout-modal p {
-    margin-bottom: 1.5rem;
-    color: var(--gray);
-}
-
-.close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 2rem;
-    color: var(--gray);
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.checkout-modal .form-group {
-    margin-bottom: 1.5rem;
-}
-
-.checkout-modal .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.checkout-modal .form-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: var(--radius);
-}
-
-#confirmPayBtn {
-    width: 100%;
-    padding: 0.8rem;
-}
-
-/* --- Error Message Style --- */
-.success-message {
-    /* ... (existing styles) ... */
-    transition: all 0.4s ease;
-}
-
+/* --- Error Message Style (NEW) --- */
 .success-message.error {
     background: #e74c3c; /* Red color for errors */
+}
+
+/*
+STYLES FOR THE CART SHIPPING FORM (NEW)
+This is the correct CSS for your design.
+The modal CSS has been removed.
+*/
+.cart-footer .shipping-form {
+    padding: 0 5px 15px 5px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+.cart-footer .shipping-form h4 {
+    margin-bottom: 10px;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+.shipping-form input[type="text"],
+.shipping-form input[type="tel"],
+.shipping-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+.shipping-form textarea {
+    resize: vertical;
 }

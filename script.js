@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cartItems = document.getElementById('cartItems');
     const cartTotal = document.getElementById('cartTotal');
     const cartCount = document.querySelector('.cart-count');
-    const messagePopup = document.getElementById('successMessage'); // Renamed
+    const messagePopup = document.getElementById('successMessage');
     
     const mobileMenu = document.querySelector('.mobile-menu');
     const closeMenu = document.getElementById('closeMenu');
@@ -30,14 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const reviewForm = document.getElementById('reviewForm');
     const reviewsList = document.getElementById('reviewsList');
     
-    // --- New Checkout Modal Selectors ---
-    const cartCheckoutBtn = document.getElementById('checkoutBtn'); // Button in cart
-    const checkoutModalOverlay = document.getElementById('checkoutModalOverlay');
-    const checkoutForm = document.getElementById('checkoutForm');
-    const closeCheckoutModal = document.getElementById('closeCheckoutModal');
-    const confirmPayBtn = document.getElementById('confirmPayBtn'); // Button in modal
+    // This is the main "Pay Now" button in the cart
+    const checkoutBtn = document.getElementById('checkoutBtn');
 
-    // --- Cart Logic (Unchanged) ---
+    // --- Cart Logic ---
     function updateCartCount() {
         if (!cartCount) return;
         const count = cart.reduce((total, item) => total + item.quantity, 0);
@@ -110,17 +106,10 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCartDisplay();
     }
     
-    // --- 🔼 Updated showMessage Function 🔼 ---
     function showMessage(msg, type = 'success') {
         if (!messagePopup) return;
         messagePopup.querySelector('span').textContent = msg;
-        
-        if (type === 'error') {
-            messagePopup.classList.add('error');
-        } else {
-            messagePopup.classList.remove('error');
-        }
-        
+        messagePopup.classList.toggle('error', type === 'error');
         messagePopup.classList.add('show');
         setTimeout(() => { messagePopup.classList.remove('show'); }, 3000);
     }
@@ -164,49 +153,33 @@ document.addEventListener('DOMContentLoaded', function() {
         if(dec && input) dec.addEventListener('click', () => { if(parseInt(input.value) > 1) input.value = parseInt(input.value) - 1; });
     });
 
-    // --- 🚀 NEW CHECKOUT & PAYMENT FLOW 🚀 ---
+    // --- 🚀 NEW CHECKOUT & PAYMENT FLOW (NO MODAL) 🚀 ---
 
-    // 1. "Pay Now" button in cart opens the form
-    if (cartCheckoutBtn) {
-        cartCheckoutBtn.addEventListener('click', () => {
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', async () => {
+            // 1. Check if cart is empty
             if (cart.length === 0) {
                 showMessage('Your cart is empty!', 'error');
                 return;
             }
-            checkoutModalOverlay.classList.add('active');
-        });
-    }
 
-    // 2. Close modal button
-    if (closeCheckoutModal) {
-        closeCheckoutModal.addEventListener('click', () => checkoutModalOverlay.classList.remove('active'));
-    }
+            // 2. Get shipping details from the cart form
+            const customerName = document.getElementById('custName').value;
+            const customerPhone = document.getElementById('custPhone').value;
+            const customerAddress = document.getElementById('custAddress').value;
 
-    // 3. "Confirm & Pay" button in modal starts the payment
-    if (checkoutForm) {
-        checkoutForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (cart.length === 0) {
-                showMessage('Your cart is empty!', 'error');
-                return;
-            }
-            
-            // Get customer details from form
-            const customerName = document.getElementById('customerName').value;
-            const customerEmail = document.getElementById('customerEmail').value;
-            const customerContact = document.getElementById('customerContact').value;
-
-            // Simple validation
-            if (!customerName || !customerEmail || !customerContact) {
-                showMessage('Please fill in all details', 'error');
+            // 3. Validate shipping details
+            if (!customerName || !customerPhone || !customerAddress) {
+                showMessage('Please fill in all shipping details.', 'error');
                 return;
             }
 
-            confirmPayBtn.disabled = true;
-            confirmPayBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Order...';
+            // 4. Disable button
+            checkoutBtn.disabled = true;
+            checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Order...';
 
             try {
-                // 1. Create the Order on the Backend
+                // 5. Create Order on Backend
                 const response = await fetch(`${BACKEND_URL}/create-order`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -214,11 +187,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Failed to create order.');
+                    throw new Error('Failed to create order. Please try again.');
                 }
                 const order = await response.json();
 
-                // 2. Open Razorpay Checkout
+                // 6. Configure Razorpay Options
                 var options = {
                     "key": RAZORPAY_KEY_ID,
                     "amount": order.amount,
@@ -227,39 +200,49 @@ document.addEventListener('DOMContentLoaded', function() {
                     "description": "Skincare Purchase",
                     "image": "logo_v2.png",
                     "order_id": order.id,
-                    "handler": function (response) {
-                        // --- 3. PAYMENT SUCCESSFUL: REDIRECT ---
-                        cart = []; // Clear the cart
-                        saveCart();
-                        // Redirect to thanks page with payment details
-                        window.location.href = `/thanks.html?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}`;
-                    },
                     "prefill": {
                         "name": customerName,
-                        "email": customerEmail,
-                        "contact": customerContact
+                        "email": "customer@example.com", // Dummy email, as form doesn't ask
+                        "contact": customerPhone
                     },
-                    "theme": { "color": "#b68d40" }
+                    "notes": {
+                        "address": customerAddress // Pass address to Razorpay notes
+                    },
+                    "theme": { "color": "#b68d40" },
+                    "handler": function (response) {
+                        // --- 7. PAYMENT SUCCESS: Redirect ---
+                        cart = []; // Clear cart
+                        saveCart();
+                        // Redirect to thanks page
+                        window.location.href = `/thanks.html?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}`;
+                    },
+                    "modal": {
+                        "ondismiss": function() {
+                            // --- 8. User closes Razorpay window ---
+                            showMessage('Payment was cancelled.', 'error');
+                            checkoutBtn.disabled = false;
+                            checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
+                        }
+                    }
                 };
                 
                 var rzp1 = new Razorpay(options);
                 
                 rzp1.on('payment.failed', function (response) {
-                    // --- 4. PAYMENT FAILED: SHOW ERROR ---
+                    // --- 9. PAYMENT FAILED: Show error ---
                     showMessage(response.error.description, 'error');
-                    // Re-enable button
-                    confirmPayBtn.disabled = false;
-                    confirmPayBtn.innerHTML = '<i class="fas fa-credit-card"></i> Confirm & Pay';
+                    checkoutBtn.disabled = false;
+                    checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
                 });
-                
-                rzp1.open(); // Open the Razorpay window
-                checkoutModalOverlay.classList.remove('active'); // Hide our form
+
+                // 10. Open Razorpay
+                rzp1.open();
 
             } catch (error) {
+                // --- 11. Backend Error ---
                 showMessage(error.message, 'error');
-                // Re-enable button
-                confirmPayBtn.disabled = false;
-                confirmPayBtn.innerHTML = '<i class="fas fa-credit-card"></i> Confirm & Pay';
+                checkoutBtn.disabled = false;
+                checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
             }
         });
     }
@@ -278,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!reviewsList) return;
         reviewsList.innerHTML = '';
         reviews.forEach(r => {
-            let stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.r.rating);
+            let stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
             const div = document.createElement('div');
             div.className = 'review-item';
             div.innerHTML = `
