@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowtiqa Paris | Product Verification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23d4b483%22>G</text></svg>">
+    <style>
+        :root {
+            --primary: #b68d40;
+            --primary-light: #d4b483;
+            --primary-dark: #8a6c2f;
+            --secondary: #f9f5eb;
+            --light: #fffaf0;
+            --dark: #333;
+            --gray: #777;
+            --accent: #c5a880;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Top Contact Bar */
+        .top-contact-bar {
+            background: var(--primary-dark);
+            color: white;
+            padding: 0.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        
+        .contact-numbers {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .contact-numbers a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .contact-numbers a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--secondary), #f6eecf);
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        nav {
+            display: flex;
+            gap: 1.8rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+            padding: 0.4rem 0;
+            transition: var(--transition);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .verify-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+        
+        .verify-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Fixed Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background: rgba(249, 245, 235, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            flex-direction: column;
+            padding: 80px 25px 40px;
+            transform: translateX(100%);
+            transition: transform 0.4s ease;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.08);
+            overflow-y: auto;
+        }
+        
+        .mobile-nav.active {
+            display: flex;
+            transform: translateX(0);
+        }
+        
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 14px 0;
+            width: 100%;
+            border-bottom: 1px solid rgba(182, 141, 64, 0.15);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .mobile-nav a::before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .mobile-nav a:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-verify-btn {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow);
+            width: 100%;
+        }
+        
+        .mobile-verify-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        #closeMenu {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 1.8rem;
+            color: var(--primary);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: var(--transition);
+            z-index: 2001;
+        }
+        
+        #closeMenu:hover {
+            transform: rotate(90deg);
+        }
+        
+        /* Overlay for background dimming */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+        }
+        
+        .nav-overlay.active {
+            display: block;
+        }
+        
+        /* Hero Section for Verification Page */
+        .verification-hero {
+            background: linear-gradient(rgba(255, 246, 216, 0.9), rgba(255, 246, 216, 0.95)), 
+                        url('https://images.unsplash.com/photo-1526947425960-945c6e72858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 3rem 5% 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .verification-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .verification-hero h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .verification-hero p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+            color: #444;
+        }
+        
+        /* Verification Section */
+        .verification-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 3rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .verification-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        .verification-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .code-input {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .code-input input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 1px solid rgba(136, 136, 136, 0.3);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            letter-spacing: 8px;
+            text-align: center;
+            font-weight: 500;
+            background: rgba(245, 245, 245, 0.5);
+            transition: var(--transition);
+            outline: none;
+            font-family: 'Segoe UI', monospace;
+            color: var(--dark);
+        }
+        
+        .code-input input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(182, 141, 64, 0.2);
+        }
+        
+        .btn-verify {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: block;
+            margin: 20px auto;
+            box-shadow: var(--shadow);
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-verify:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Steps Section */
+        .steps-section {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 3rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        
+        .steps-section h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
+        }
+        
+        .step-card {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(182, 141, 64, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 3rem;
+            color: rgba(182, 141, 64, 0.1);
+            font-weight: 700;
+        }
+        
+        .step-title {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .step-title:before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+        
+        .step-content {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        .step-content strong {
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 20px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        
+        .warning-box strong {
+            color: #856404;
+        }
+        
+        /* Verification Messages */
+        .verification-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px auto;
+            text-align: center;
+            max-width: 500px;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--secondary), #f6eecf);
+            padding: 3rem 5% 2rem;
+            color: #555;
+            font-size: 0.95rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .footer-col h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: #555;
+            transition: var(--transition);
+            display: block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .contact-icon {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary);
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(194, 152, 53, 0.2);
+            max-width: 1200px;
+            margin: 2rem auto 0;
+        }
+        
+        /* Developer credit */
+        .developer-credit {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(182, 141, 64, 0.2);
+        }
+        
+        .developer-credit a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .developer-credit a:hover {
+            text-decoration: underline;
+            color: var(--primary-dark);
+        }
+        
+        .developer-credit .zomaxa-logo {
+            display: inline-block;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Contact item links */
+        .contact-item a {
+            color: #555;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .contact-item a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        
+        /* Return Button */
+        .return-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .return-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .verification-hero {
+                padding: 2rem 5%;
+            }
+            
+            .verification-hero h2 {
+                font-size: 2rem;
+            }
+            
+            .verification-section, .steps-section {
+                padding: 2rem 1.5rem;
+                margin: 2rem 1rem;
+            }
+            
+            .mobile-verify-btn {
+                display: flex;
+            }
+            
+            .top-contact-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .contact-numbers {
+                justify-content: center;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-nav {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .verification-hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-numbers {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        /* Animation for sections */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div class="contact-numbers">
+            <a href="tel:+916361958069">
+                <i class="fas fa-user-tie"></i> Wholesaler: +91 6361958069
+            </a>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo_v2.png" alt="Glowtiqa Logo" style="height:40px;"/>
+            </a>
+        </div>
+
+        <a href="verify.html" class="verify-btn desktop-verify">
+            <i class="fas fa-shield-alt"></i> Verify Product
+        </a>
+        
+        <nav>
+            <a href="index.html#hero">Home</a>
+            <a href="index.html#product">Products</a>
+            <a href="index.html#testimonials">Testimonials</a>
+            <a href="index.html#about">About</a>
+        </nav>
+        
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button id="closeMenu">✖</button>
+
+        <a href="index.html#hero">Home</a>
+        <a href="index.html#product">Products</a>
+        <a href="index.html#about">About Us</a>
+        <a href="index.html#testimonials">Testimonials</a>
+        <a href="verify.html" class="mobile-verify-btn">
+            <i class="fas fa-shield-alt"></i> Verify Product
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="verification-hero">
+        <div class="verification-hero-content">
+            <h2>Verify Your Product</h2>
+            <p>Ensure the authenticity of your Glowtiqa purchase by verifying your unique product code</p>
+            <a href="index.html" class="return-btn">
+                <i class="fas fa-arrow-left"></i> Return to Main Page
+            </a>
+        </div>
+    </section>
+    
+    <!-- Verification Section -->
+    <section class="verification-section">
+        <h2>Enter Your Verification Code</h2>
+        <div class="input-group">
+            <div class="code-input">
+                <input type="text" maxlength="6" id="verificationCode" placeholder="Enter 6-digit code">
+            </div>
+            <button class="btn-verify">Verify Authenticity</button>
+            <div class="verification-message success">✓ Genuine Product! This is an authentic Glowtiqa item.</div>
+            <div class="verification-message error">⚠️ Fake Product! This code does not match our records.</div>
+        </div>
+        <div class="warning-box">
+            <strong>⚠️ Beware of Fake Products</strong><br />
+            To ensure your safety and best results, please verify your product code above.
+            Glowtiqa is not responsible for purchases made through unauthorized sellers.
+        </div>
+    </section>
+    
+    <!-- Steps Section -->
+    <section class="steps-section">
+        <h2>How to Verify Your Product</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Locate Your Verification Code</h3>
+                <p class="step-content">Find the unique <strong>verification code</strong> printed on the label of your Glowtiqa product packaging.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Visit Our Verification Portal</h3>
+                <p class="step-content">Go to our official website <strong>www.glowtiqa.com</strong> and click on the <strong>Verify Your Product</strong> button.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Enter Your Unique Code</h3>
+                <p class="step-content">Carefully enter your <strong>verification code</strong> in the provided field and click the <strong>Verify</strong> button to authenticate.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Confirmation</h3>
+                <p class="step-content">Congratulations! Your product is <strong>genuine</strong> and has been successfully verified. Thank you for choosing Glowtiqa.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Glowtiqa Paris</h3>
+                <p>Glowtiqa offers premium skincare solutions, meticulously formulated to unveil your skin's natural radiance, restore youthful glow, and empower your confidence from the inside out.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html#hero">Home</a></li>
+                    <li><a href="index.html#product">Whitening Cream</a></li>
+                    <li><a href="index.html#soap">Cleansing Soap</a></li>
+                    <li><a href="index.html#bundle">Bundle Offer</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#testimonials">Testimonials</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <span>Paris, France</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt contact-icon"></i>
+                        <a href="tel:+916361958069">+91 6361958069 (Wholesale)</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <a href="mailto:glowtiqa@gmail.com">glowtiqa@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Glowtiqa Paris. All rights reserved.
+            
+            <!-- Developer credit -->
+            <div class="developer-credit">
+                Developed <i class="fas fa-heart" style="color: #c5a880;"></i> by 
+                <a href="https://zomaxa.co" target="_blank">
+                    <span class="zomaxa-logo">zomaxa.co</span>
+                    <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle with overlay
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        // Create overlay element
+        const navOverlay = document.createElement('div');
+        navOverlay.className = 'nav-overlay';
+        document.body.appendChild(navOverlay);
+        
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            navOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeMenu.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+        
+        navOverlay.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+        
+        function closeMobileMenu() {
+            mobileNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close menu when clicking on links
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+        
+        // Verification functionality
+        const validCodes = [
+             "YSJFXU", "dmKvgb", "ASaJRs", "PPCzj3", "rt1RH2", "S06hze", "HHXtnZ", "phhmUD", "ZtNiX2", "fBWR4t", "LK7w8d", "FMmdxu", "bYlVt1", "BCfelc", "MuVASD", "aFvjGv", "gPDiGA", "hhQVbM", "wqr95n", "ZnelWI", "2H9oxS", "cmWCFg", "2VKFY5", "LXkzHA", "5ejUCG", "qa0NwT", "okKHba", "ZTqbXq", "YljFkh", "NyA9QH", "TuEnfR", "WEUNry", "fP45Wq", "8438Fz", "mHOW8O", "POPAbC", "0tjdBO", "m0saVQ", "yAMxu2", "0cK4KA", "83e22b", "Sie7Kg", "xkDEbA", "IrwsHa", "0iQcPI", "To8luv", "kd2gR4", "WjjwhE", "wexwQR", "SY9QrC", "Nyedhs", "ynQH06", "YqzcOw", "w52Wnh", "yBdVMs", "7Feoc7", "6QAtHt", "ML2xAC", "V9HsWS", "oIYZji", "1geSKi", "N5VlfW", "buHGB8", "Kfbz6i", "p3NFGv", "xrzb1Q", "vE0pQh", "WEBhpp", "1KUCQ3", "WFm3Uo", "FLfWIb", "VQlyw5", "3YlUKH", "2gzhow", "VupHQI", "U6nuTi", "t5Jn5v", "1WPfdI", "SfHeGK", "pR7OYf", "TcB9Xe", "6i3zJR", "Ar22Pf", "YcpEbs", "qzpu79", "ZRFk7k", "dnmnVt", "JIwb0f", "oYXzzi", "Wuy2xq", "yWe0dN", "gm6qEX", "TwBxJw", "7hQ06y", "PQLzhX", "rrsQZC", "zLo9JR", "Pw2zI6", "Ujjy5X", "ptFRJd", "v5mjh8", "v9qtD0", "y0MWVp", "4xvvT6", "WcRo5s", "IApTmI", "Xjsra6", "eGgoKv", "pV3Gqx", "HAsWBf", "Ndu8vG", "6Xohur", "2QmMqh", "Pquoo1", "OrdRSS", "5HP2NV", "YpcETb", "a4wwiQ", "9ueyiy", "d1fuFV", "r5ONaU", "34sQhI", "jIxOhD", "swpMHt", "jBYuHv", "HeRb7n", "XtIMNh", "zEGOiY", "0NaKWD", "83LTlZ", "tc3inW", "K0Qo7l", "LCUhUc", "18rpGz", "KitK3H", "gbaCxJ", "sA7JqS", "soxAim", "Au32vp", "KgomZM", "hDhwVb", "RnuoA8", "1oXDzq", "qKDOqN", "SGoy6h", "XMho3k", "wdz5JP", "zILBol", "Nt2Y9B", "ozJQOq", "Iq1BcL", "TFfuz5", "9YoA2Z", "glYqA8", "FQtBZH", "rGZprM", "U1zMYO", "YeSnth", "ki1NLk", "2AeMbB", "wSBZzk", "nYmTkl", "z5oWFV", "gMp8qo", "4uj1yI", "JYdNfl", "XXyRmu", "GfiK47", "fIa3vS", "FOPBdS", "fCYvRa", "tYNUVO", "8ySwGE", "m0YVa1", "DGZMXz", "iwpORR", "ScpBme", "07UafX", "UwmPsV", "Owrhc7", "ywhc83", "GBDhl5", "D1haE0", "M0DurJ", "62bk4n", "hGhfuN", "4HiRsB", "Buejhn", "3kFi0W", "yZhYIn", "rdzxuS", "17FLj9", "IS8xrt", "XpKQVS", "oczrms", "nsPdU3", "20X6vC", "V08aCl", "vdAp9m", "Gx6LL8", "UjK2DS", "4bch18", "2xaRVJ", "GHTMlp", "cMqivy", "QIvMgj", "5cz75M", "cMiWr8", "TuegN6", "6Rh2jD", "WThMj0", "QZwCL3", "Hp0wMv", "PuN2EA", "EPtD7v", "BHV7PO", "D7yzsz", "yWeBVK", "EPYPOL", "Si1ux0", "oQwiJg", "PdqriH", "i4ns0A", "wXPxAx", "tGoAdT", "h1hXLm", "SAdi3D", "HmY8QS", "jiT45s", "y1vyV6", "Xr07Vs", "4ncC5S", "oINuXr", "6W1Y6M", "PwFDZ5", "Rdbfxd", "DEjJVi", "VGzegD", "GQbuKc", "v4lFDf", "AOBoZY", "eoVI3N", "ddYbZn", "iEfUKU", "UvRTHg", "RmMaU3", "dB7keF", "4f8czs", "YhoY4I", "FKRw57", "I3y84Z", "UsfTt3", "ofhPZ4", "YR1EBB", "MXwp5w", "1VI911", "F3xjKB", "OnRl1Z", "urDk6n", "6RbOHz", "bTq9ew", "6uE3na", "ujW0lr", "gAojB2", "Pz2uxT", "yg6hya", "mna2K6", "Eun6tg", "NalEu0", "QQ1M0c", "v5MzWZ", "nk6cu1", "BaNB3t", "PHk0BD", "FCMDc2", "xid1Hn", "XiQqVv", "wnjACX", "CC0Xks", "nYbI9M", "34ZMVa", "tHXiV2", "11gbJK", "nlLlyt", "tZpKCo", "Rk93Hr", "u4aqbO", "bG9sXh", "veSJUv", "fyHG04", "4gBm7a", "2UOZk0", "9tndd8", "fNTSXI", "VsK85g", "ngAbt3", "uXpIz2", "ZrtHaB", "TqNSj9", "xtKXJZ", "z0pwRF", "U0XZu5", "kA7TZc", "b2NRRo", "mHBQLl", "dMphd9", "YOWWHU", "iOQXGs", "bOY7TP", "9WAvtt", "g4rqTj", "uGafeq", "KebJIk", "I7RVuO", "JAJFGR", "iing0E", "4b65iC", "r6fmBP", "w3bpR8", "fnnGR5", "HiZLYs", "w05r17", "CLdjT3", "bhsEFE", "3tVbbn", "J7VWlo", "fEpleS", "5kDpMx", "Rgi7Py", "92lMh8", "SdEfky", "VLXijj", "klV0qa", "n3ZH8A", "AyHk5q", "D0WcHi", "WcWBLD", "usoVH8", "e23Lab", "GtqPI5", "qV2cu5", "nj7shF", "X0L3nu", "h7OTeF", "a1ye38", "32Qg9P", "ua5ETb", "DJFbhM", "bNguDQ", "tp3HKg", "nubHCk", "qWKWwh", "zhYGX2", "ru9yz5", "iT6MXb", "FbOgeO", "epcVUG", "c8Bq6r", "7Ge62Y", "OZDfFa", "LkYez0", "pdqZm9", "WCY61i", "P9kwVM", "UeKco4", "m9vDAb", "KPxygL", "jIzwaN", "PpCuFF", "3dK1nz", "JXSnY3", "i6pT60", "ipucFn", "1WOeGh", "KfkB9v", "sOLsAk", "2OdEJT", "lqZBhC", "kCRFRc", "65PSVt", "V7cjJj", "mnxtdr", "bdUqPB", "4NtIUs", "EH798o", "OmYU2U", "yUG8Kc", "6EJBfM", "fjl6Jl", "9vR0Ix", "l4l4jw", "gMB3OH", "EEISA5", "wXrWxg", "K3EgSQ", "gGLTqH", "OJFRT4", "oSCKCb", "Cr4HIe", "SD618m", "0gU0oq", "kyvtYf", "e4K3Mj", "tlYIKr", "e26HNH", "mBMgvY", "v5q9mh", "zEZv5n", "MsnRw4", "xbk0AK", "czTEDC", "KbA3cX", "mL46ka", "H3byGk", "EzusLk", "PvBqnP", "7qQxMG", "XDDaVU", "kvjLiJ", "KJ677h", "q1MnhT", "gQAXOS", "YZlFDq", "P86hBA", "WEq0wn", "qXljiB", "xJJpR5", "gTAuhR", "EtK6jL", "oXjcp2", "CqOb6c", "aGJR8a", "mAeN25", "lDAkLI", "inCjLn", "Il1l2o", "vVXwlr", "Wjersz", "owZOBK", "dYug9A", "DzrYaG", "cm15Na", "tEPIwR", "eEoBl0", "jdYnKQ", "eMGF4V", "Aqlsqa", "24Pnwk", "OFGwfb", "7xpmgr", "e95VM7", "tqmdxB", "feO43S", "uSQUgL", "c5V8mF", "IHgHvq", "lbIc8F", "w52YOf", "E3e25J", "VEFlHz", "yxxof1", "y3iBfR", "Cunwqo", "G7MJGJ", "lm4MFG", "LfQkjj", "x1qhSd", "cq3wzA", "NH6JyI", "rVeCnX", "sn0Job", "PM1BOn", "Ud9b3O", "eBVoW9", "ygKChn", "mtYIe9", "7JWwOB", "akoN0I", "luFcEZ", "a8gzAf", "iQkjUf", "qSkjoj", "eT8ASF", "BDqlRk", "Pm9g6h", "R2PPiD", "7Ze3cS", "ZLV0Kv", "70rckB", "FZRIZ6", "cg8ziu", "0L1bV4", "78ssKC", "3vTrHD", "XOUz74", "O0p6FL", "KBGfhJ", "21ihDC", "MrKTCM", "oA0mQj", "YWIAsw", "z4BIle", "gHilDh", "EqCI7E", "cb3iZU", "OZJfZO", "S3uxvv", "xldPyj", "SDAT4U", "7ldgSb", "E4no7q", "G19xX2", "Ghn44w", "CzdeV9", "OxjzCu", "kVOh24", "KWgDwD", "tNyHy5", "8VARl7", "TZVXb2", "rs54df", "MGFw7C", "81OQZy", "w3Rope", "CEYVzW", "BJ2KxX", "eMZV0L", "nChTN5", "4d7hmZ", "QtHhz8", "HVBsv2", "iWLBRG", "579WRU", "T7rqTB", "Scsxi2", "spRDb0", "bs8zAm", "vgP9el", "TpHri5", "dn78d3", "djdVFZ", "kcoRWy", "1xn0Ut", "nlvuFQ", "noAbWT", "S0tm3K", "siXkvX", "iwHoH4", "YD0NSb", "mrrkgV", "oVXtOO", "PniNzl", "tPLTcr", "FcVC9C", "YhRr1T", "gHTO3A", "cEUOPA", "LjDAak", "5YvJDN", "1GsUcF", "Jo0uaG", "uOeNxy", "VVUfZ8", "BzULdz", "36vyrg", "EnCw55", "SJ9hkN", "sd72Pn", "sXdH6H", "D7J1JE", "KbldqV", "ZcqPgb", "P9MmsI", "QBZSAs", "XJZEYG", "pLXMyJ", "Mozl6Y", "qF3yYa", "k7IpUo", "woj0Ur", "e9TI7a", "AoociN", "SdHeIL", "uY0AY9", "91dlGD", "V77oUx", "Q1yhOG", "052P9V", "1GGa18", "9Urhvw", "OYJUIe", "ZYkOQ5", "xk7WKV", "5j3qZc", "0W8WM6", "Rhg5aW", "EQJqEl", "2imdKp", "zmnBio", "qybRod", "xrdNXo", "GEWSj0", "faC6N8", "lMpojp", "WJGCYy", "aIIppF", "V9Ra7P", "g8WsvM", "YGhsSi", "s8N05K", "fEMhaI", "BVXCPr", "39m8UB", "ZiHJnf", "Aw3rNG", "gjG9eN", "Vvlf8Z", "20y8Dl", "1FBHBN", "Oy9pOK", "CPiKvT", "0M0GOA", "Ep4tbD", "5Ry8aY", "ciSNJl", "P6yt8U", "NH5hv9", "jkI2Hd", "EjlzQ7", "wX9oOS", "nnRLYc", "uISgQO", "Vo0qUM", "8JMYGp", "oINpJs", "D39xH2", "HpTKrc", "C14RBM", "pHp1lO", "VUv7t9", "9VTYEp", "lpGEG2", "Z7vOQm", "hGmgoR", "Z1XLBi", "hK0hGU", "FoOicV", "9LzSo4", "j2QqPN", "dzo6Vc", "EWqYbA", "Gqfkek", "nG0Cf1", "vynV0U", "TLPF4Y", "rJLs9u", "qONQvn", "CCA6Dg", "JZkuop", "iYoolM", "183tdT", "2Ptz92", "Sver5V", "cZwHUs", "f4gnxp", "aTxJXX", "xmOltR", "NBVKoI", "aqJGGP", "REeEbc", "xF8kZW", "hhJEt9", "4YatCs", "Fhb7Fn", "13Ezzb", "zSthNL", "bGGfPI", "EfIZhR", "GJhIJW", "rfMeZR", "NvYdUj", "9kR4Tz", "GSgnLH", "AbDRoV", "Y02nU6", "w5vg37", "3jRbAE", "sgNeJZ", "Qxz7UK", "oAejzk", "h0HVxo", "aL2YrT", "Du58xh", "VAtGD3", "dpNnWa", "dfcSC7", "8AHaOf", "rId7jY", "qnaNeC", "UMghkc", "GC2YXA", "GGgJnI", "t7qguJ", "cAwD2U", "V7Mkie", "DyAxft", "KvTZUp", "JoIF7g", "AYh2qz", "RnWa23", "TPLGzo", "AWC87b", "PSTSiy", "UJa73o", "o56f6D", "oPU3wv", "U2i249", "LI5e7w", "KenrRt", "aNF2qY", "IxMdXF", "W6UD8y", "nSLKzv", "QUJWlb", "qU7826", "KZIZNj", "sOpm08", "lgoGp2", "pnT09c", "25BIpM", "a080Ki", "EnFtk3", "uFQdjm", "c5ZRJO", "NunwAz", "pLogwC", "Kr1Ugs", "NM8jWN", "PuQPsX", "cO9VOj", "i0qjoA", "S8ceRJ", "uiqazJ", "Cfdm1R", "KA3uJX", "Uj8Gsk", "olTJgv", "sNY9WC", "ioPmNv", "PwyWhX", "Zx1Pn1", "J4Wdo7", "azJfx9", "F9Ue1J", "ht6QuV", "vAHGh6", "5FH4Ll", "5MAypY", "qoOCOI", "hNNLLs", "QEWOcn", "vhkr7m", "43rKhI", "GP9kGQ", "cT3fvZ", "sYOAbT", "Szs0zL", "5bC4SR", "j7UMhy", "f9WciQ", "O9TPYt", "kr1caa", "7n4g2k", "Tfsr7T", "Lnh79K", "QReT2R", "qviuRI", "yklxEv", "uUQB9D", "xrTPTO", "hEFavd", "vknkly", "ILHyjb", "qoUPt2", "xpBeSD", "SP55aA", "9dDDxH", "1VnXNs", "u6Rhr0", "nk1Ja7", "dm0R9b", "rhSGwr", "Hz6OsX", "ZIuy3T", "CpOZBa", "gHHSdn", "K2rdWy", "AAphXB", "5xujOF", "r167Or", "GLEgVF", "o7S9hB", "37RBN2", "E2wrex", "UfuKGY", "t3bm2k", "i0Ei2e", "dYoZqS", "sa9EvQ", "jSM1UV", "PqR8OE", "dp8BKO", "zdgXQw", "SAiSi0", "r0xUqs", "xNV0Lv", "XP5hdz", "XAPqq5", "D47u1j", "3XZ2sX", "ZvUcdz", "8XD2Jo", "DQvN5a", "MlFm77", "RYvpUW", "RDA1sA", "aG37UH", "KIU7iz", "2zKYbP", "MFSGID", "XhAJaS", "BU3QUO", "rNHGu6", "t6G8Eq", "881ucR", "228zW2", "7axnti", "uClLqZ", "IVIhVM", "WrTKfZ", "9EhI40", "igjoxx", "b53HpT", "7pDB1v", "eOXUJZ", "8nRYNW", "76PG0f", "M9ed0I", "IfLMrL", "L7SZSH", "5EsvRK", "w0iJum", "axtKeR", "ubcuE3", "WuK3Fw", "cQmiUG", "Pd2E72", "2zbfzD", "LZa12q", "e38EfY", "oS00yO", "c7RQIQ", "HcnEew", "ePm7Ji", "Tw1aYI", "bsIgWi", "JUXT8m", "LLhDpr", "kSnjQ6", "AzkAEW", "qTFoej", "gJCy3A", "zFg7os", "0Wiba9", "Aj8RFA", "I8ZWzh", "2C9Iqs", "glFk35", "A0aUYD", "vEu4iD", "Kgu6zC", "hIXgtZ", "n8z0Uq", "Tth7Cx", "o834nS", "jCpvho", "bqX3Fe", "zUNabK", "rVhnp8", "mldeQM", "VDIBTH", "VcQFBv", "DCcGTa", "5P0yoA", "xtjVUE", "irYSGF", "DuOWYc", "nDWMJT", "jA7EBY", "2et74L", "WHRmzo", "7MC1Fs", "LMKEew", "Ptx5qX", "sOAKGI", "aGKx3M", "CD4xY0", "ISLbWu", "qCfWpK", "sp1kpL", "fwcqce", "0RYtNt", "LxVRsW", "asJ377", "mKi1JP", "M8DT1Y", "AweaaO", "DbkpBt", "RxHmaS", "bm2fTL", "SLDYGO", "rHyLnU", "Oftc8C", "r2UvvS", "GWyLZz", "8GzgUY", "zctUb5", "yRATZx", "QNNKQZ", "0QYzg4", "cdponJ", "lxOMgW", "9tGuIo", "OPLHkI", "B0vXwo", "LS23ba", "nAKZ34", "gaxgaX", "VXBxjl", "h5wjio", "8QtcJi", "uXxpNi", "2eiL1W", "IH2IJ9", "vi85Zi", "8DoWN9", "ygkFOD", "4r7jZ6", "5dr08p", "XBBjat", "8UsQuD", "Weg38n", "Wx8K1C", "v0PXGW", "oAbV1h", "EDpYsX", "57RUuC", "r6mTzm", "l1dV7F", "VNriVU", "g50eCc", "ZU9H7j", "GRcSYw", "gG60g3", "U6yq5E", "aWOmS4", "zKxOyw", "lqpujo", "mXxRa4", "HyR6mO", "yN1rBz", "LQy1y8", "KaYN2v", "XrisiM", "X0jdB7", "oYrYdh", "9u1S9v", "vQ4WuH", "eGMWa5", "6eseNr", "q375rt", "6k6Ikl", "OVmP2M", "hFCPql", "doqEfT", "IMMkjt", "nuQzB5", "izsxc5", "RpeFhO", "83mmBH", "oUqJTc", "9jqUKb", "CJ7WE9", "YR7VNC", "zLbySo", "nVMl4M", "109Vdq", "Teo5zJ", "TF9g78", "ijA59z", "GXK7Rx", "pmFC5v", "NTaaPz", "DgnV0r", "AIz0si", "TBTTml", "oy7Wur", "F8Zz0B", "Wha5ou", "zqooqW", "iutg5Q", "31M6HY", "glGuIp", "yzIHiN", "kCrnrg", "FmE3cX", "gAsMhC", "wCCIQ0", "EGIyRt", "3FMt75", "QNIDqY", "DCy34e", "1WTxIa", "kedTFw", "07LmDd", "5lpfn8", "MzGOx4", "fkACFJ", "OTPdlM", "1tBPqo", "8N6vvm", "sojUEh", "CMcxf8", "tw8JyP", "huY88T", "Tg4CzT", "6yBbwJ", "2F2YFa", "XkSUBb", "oIUZKx", "JvF3xV", "5MkLtf", "9FrQiq", "u751e6", "Ucv5YZ", "4cqsDO", "E8Wy1U", "7EsFlZ", "iCYUfV", "ZpTMf1", "d2flTS", "D6bm8P", "nXaacc", "1xzp5M", "fpvVXg", "WFwBRA", "pHiBmV", "CDXFpO", "hfeDEC", "nLyaid", "MkoE4M", "8nRHJU", "VtkecU", "sGeyvL", "c8AsIz", "zeSEUi", "xVRCYO", "kvjr0a", "NQa63s", "BfL7da", "NPP57K", "Ldgj7Z", "vgVDLk", "BDsxws", "9r2s3j", "G6FiDp", "P0Wn6q", "79wCU3", "8ARwZa", "6YG02d", "1SX2fl", "IZKqd2", "3J2q9A", "FR26Vi", "23PqOf", "oBRF8i", "HRnk1q", "ybpNsy", "iXK5Md", "vcqBMv", "Exx5De", "Od7CYv", "oQZQ5Z", "lziFrb", "uWO8XD", "PHAaW2", "kkzyvR", "CeItH9", "ZZHkES", "IMYc8D", "6fPR3V", "WfT9wh", "uyeseV", "xCneqQ", "C2YWRB", "xZ5AHy", "n5VJNd", "Jqoy74", "dpWPxn", "liMY2A", "QaE6KD", "fUfsGV", "aC9kuM", "kFVchs", "cZCBUS", "oXFw8D", "aiP5mH", "8ObD0d", "YplQH7", "3eTQWp", "8mCs0u", "0Tym2P", "8cB9C4", "TsLBDX", "BXNOhG", "y9x0eb", "e3ACRY", "EWC53C", "gFeLTy", "noZegF", "ItVNUT", "W9zTxD", "5TJt5T", "WE1OFI", "PXT7vu", "YI9rPB", "9V4VPK", "3ZHt0e", "HSC3NC", "hE4fFp", "aiLRU3", "vqSic8", "vy3dVY", "wFfTF3", "a46zjV", "2vu5jW", "vL48I6", "UuU3k2", "LRsrol", "ybctBR", "4Ghn9e", "qzN7Og", "kaDnzH", "IzTo2F", "AulSxj", "psmU09", "SaBt4g", "cQnRwD", "HDlUT8", "whL8fV", "726TCP", "ZgfMjp", "MGKDOp", "sYDCe5", "fiuBRZ", "pdap0w", "7D9Xzr", "loscLD", "TMcPK0", "cnW1bh", "CHoDMo", "yz9xIF", "suHPuD", "OsQGJw", "JmnHdV", "5lFxxZ", "ZHYgbz", "mDDVb0", "kkhYuk", "AaYboj", "4l3OjC", "sD0efa", "ZO0yVd", "Z0gsg2", "sSasoL", "NHytuN", "ZbNKOG", "Q5q9rd", "d6h1rL", "ch7IVc", "DY9cVz", "QqBHvM", "JMDt7n", "aFc9aF", "hiTlOW", "kbqC3J", "HLQiNe", "bN60Pu", "TaaFwD", "AQl9L5", "q9DjfA", "sWarJy", "lIyjbt", "IOZjtC", "by79Zf", "vj10H2", "4aSL2v", "K4YLor", "MxjBbY", "xxagsv", "qWM2vd", "Xin3Oq", "Rb0oxZ", "qJZLp8", "9lFE7C", "mxA03Y", "qn8JHf", "rSj5VD", "DIHUGZ", "ydrsF7", "Vyewir", "j5EMP1", "j9cksc", "knpcw4", "Lytweq", "YsqA9q", "wPufTf", "MYZfvi", "zefAnq", "RokrZW", "Kz5IUy", "6G5oKA", "e9CM66", "57qkld", "ffxkbF", "O2zzAW", "CwGL8U", "J6nOhI", "RQbzrV", "GdAmro", "Po9YM9", "R63Jf1", "3QcD7c", "nUl5ul", "HblQ4h", "fEPgZt", "SCx8VE", "Obc4wb", "WSjHgE", "hJLfMP", "MFMTW9", "DmBO1u", "pUJ331", "VBMuV3", "tKlFii", "QrNnqP", "7tMMFM", "4L68hw", "BRBgVs", "DjcVJO", "lUpqrO", "dzjGmn", "sOAUOe", "xe0c9V", "EBNnJO", "9zl8I8", "oUFTUb", "cb2Ucn", "pmbfY1", "N51opH", "0jNqqA", "0jgtP7", "F0mOPz", "WRm9SU", "i8ZzNT", "io83Qx", "2L5oWI", "s5HNmC", "dhiFkR", "S6wGIC", "vZmdod", "pqemoH", "HTa7ex", "qyEXfr", "1ILOF3", "a7zUnO", "IZkCdc", "Feoi31", "9OcZGr", "JZZIxJ", "3AdRtu", "YM6LES", "lzYYMl", "fz5Goa", "O650Tz", "FCNEpb", "BrvS0L", "2KPp7o", "vUF8Eo", "if0bBi", "c2gStT", "KwjPhc", "L6IdeE", "hvgxYh", "nMGJEN", "d764MT", "YgH6ZT", "65Hn8S", "UDo4Ob", "TLatBX", "D5FxKm", "QQXdia", "l7A104", "BD0Stq", "lqmFA2", "6NExEY", "eE9SQE", "oN9rPQ", "ypkX4o", "2j3cEr", "AQzwlX", "0F8wyC", "865XNX", "82YzN5", "W1KHzp", "RI8ivL", "IE3fy5", "X1DhrT", "6nvWAI", "J9yGhA", "ufHlzV", "9BZTKF", "w3wGCX", "k4JIBa", "qkZgKg", "PqsYhl", "7DSyn6", "hkyZas", "aEuQ24", "uRFmpW", "gzLD8o", "nJV0oL", "d1FazJ", "UiWhm9", "E730FD", "ZTVAXQ", "50uJnx", "eoNsl8", "PFSMw7", "C2uO5k", "fR12oZ", "OZUK8R", "Y0xleB", "5YDHP5", "avtfOc", "BlKk5Q", "n7TvgF", "sBuAkr", "fzhG3Y", "Bd4roD", "Qz2SUj", "0o3BW8", "KfceQp", "DQO4B0", "Rfzoz8", "nL2WfY", "qg8LPN", "auXd5R", "6XUDFH", "Vl2zf6", "8RaSj3", "3Xgu9v", "upa0GP", "iEJpE7", "Y4JunE", "uFIJSd", "5SkB3u", "NbWMST", "dcgNGH", "YWopvt", "LYliBk", "99wUjk", "plMtKI", "lKikiH", "ybnNJI", "ow7Bvf", "xgUi0W", "mHzS0v", "Tg1U0V", "vskkn8", "sPcFqw", "ndNQ07", "a2B6PL", "pmrp7m", "kcjJGP", "rxYj3H", "7DX70u", "SFr2AL", "xbwoes", "3feDPp", "BBOuIt", "z4LHWl", "i2NoZS", "pocjGl", "pESaow", "Fc7tjb", "BmRZJK", "QSdv6k", "lubu02", "jCbANn", "KB7cJM", "c9Avh3", "DJrwdn", "kUuGqg", "FIADy5", "4DKSl3", "G93peU", "yO4BN4", "kQyLdp", "jpWWDm", "qirM3J", "1stKST", "z9c4eN", "QalHE2", "GiGgd5", "5YcUvx", "tEsN3T", "JZsdVO", "IpcFdj", "KdyhSr", "gFJ8Z0", "WpB4Rq", "LHqaRh", "EY9tG1", "lo3HiP", "ZLTW0D", "ROjnoF", "QpGOWY", "EbxrJv", "auOIwO", "gqlRrS", "caomw9", "PIqbNA", "45IRQ8", "NaX9kV", "Hq3hFs", "JLsVTU", "CKgg23", "P9wyQo", "WXLpRt", "C8VFiW", "XaA9Br", "EK58SJ", "gYA6Gi", "HHDcDH", "D74ACo", "uFhGF7", "QGNT4A", "EC01Mq", "6IOxmZ", "Ff5p45", "fHZCHx", "czbZTU", "8pUH5W", "if7S9E", "5Wzgwd", "wrALsl", "E4f69M", "JBH7y3", "e7y5Ln", "NJHlW9", "JoBp1B", "ZNH3ew", "ZRAQvj", "542kn5", "9vY8XY", "QAO5oR", "A8E68X", "u2zZxF", "aHUnqz", "BdIoat", "wOernu", "cmwt2b", "QcI3fp", "RzxWWu", "ixerch", "RnjRFZ", "fOS78p", "mJHxBK", "VdfKgo", "Nabxhi", "Ua6F8p", "L5FJf6", "Ij46Ku", "eEAbkr", "mbL5aR", "upbOIE", "kvpimV", "g86Pt7", "xErQgu", "g9iLlY", "RGas6W", "OEI76a", "uTkIas", "Lvu8MC", "uyn5Z2", "kD2c5L", "dBtolH", "zkv4ci", "QHj4Sn", "PgGXTv", "WqdvAZ", "5xLA0F", "4VneEe", "EetnDR", "TPwSg8", "AFgJWj", "x0Wt14", "8yAvFb", "mabATo", "ZoOY8E", "uvQSTg", "jKLk9W", "S3WGy4", "q7Wuk3", "UvT22Q", "WykDFQ", "SfAk8R", "Ip992C", "QsT04l", "fqLkvk", "FgEtCD", "KCg2wP", "7D0NRg", "v3fKkY", "1NQGVv", "qg53uk", "qoCx3q", "znI4sw", "QvObwG", "xW8iby", "f8MYpg", "MBJywH", "Dmumth", "nzm4q2", "zhqmNO", "OimIaR", "ifBVGb", "s9O3xJ", "QWa6vL", "OdkLqj", "r0iTyN", "olQ9Cp", "mAo0Kj", "Mo6PpL", "qLeMiZ", "mIrSi1", "ERYPDZ", "SYYe6w", "7vSkJf", "WbHWtn", "ZuavE5", "WwSy9C", "1h0qej", "4QyAI8", "pWGwM3", "FftJBz", "vDRkeE", "ILllI5", "fPMnpI", "PBFFmS", "qzcZ4V", "pqNHPb", "cHNmLO", "P5EaOw", "P3fbPY", "Qy7s2Y", "MGIhPh", "SXC8sj", "lEx5HJ", "fAEvMS", "jEoivj", "ywuRDO", "TXrLou", "o0DxFz", "SJRadW", "RwDmKE", "NLSYAH", "GrLGVm", "a48441", "YrLwmq", "X6tu5z", "iU9Udf", "MbNmrS", "MeLBs8", "LuNt1f", "fllEhx", "azHqH7", "0mPaR2", "wXjjKi", "CzaEsd", "2dpHJT", "4PXGyj", "UmVcGW", "6yrg3y", "HMT1Gm", "0Sr9LG", "ZPlKJ6", "rKqRLY", "b8uHuy", "rl6eq8", "dMD5RN", "MdJHr3", "fBv9ie", "39ujNK", "qDABNP", "hCddkP", "Q0VBg4", "opLqox", "H7E24I", "5Z7iBc", "Twp922", "OBABGK", "eM0lRX", "775v5f", "bxM33w", "qYC5b6", "g4gNRX", "bJv4bu", "tyZOZ9", "u4nLaN", "Gjvb8V", "kL8p9k", "Kkj1mH", "0MAgXH", "8Merk9", "iXTLRc", "AKxaGo", "PiLOlO", "DjjRWH", "Ammlix", "ecwNBH", "k0hzXO", "G9k103", "ovrjnv", "RFKI9m", "bDASiQ", "lS67Gm", "Yqc6BM", "gWUkBm", "BYEXjd", "9kg0PB", "I7kxOR", "hbYVJR", "z2evUb", "2FMXyk", "xeeTKI", "Onh9HF", "9S5mpb", "E837ym", "7eDf3d", "BIvRmZ", "muy9Ff", "e8ui5X", "ut1GZR", "gmsT82", "ogL8Kp", "t2CfGX", "DD22lw", "DOUxkl", "mrw34S", "1mnqCj", "eEBcMS", "M4dSE9", "st1tog", "Y24fCR", "RSjXHJ", "XOcUCH", "1dRNZi", "kIDBbS", "4uKOH0", "mvVmX4", "0RIgsV", "HLrBTT", "Y9CJdh", "830e7j", "yvSYW7", "PgQfwO", "pSlEg9", "r89Pv8", "huYnl0", "frkhdf", "OFqfs5", "pD1Hsi", "zYhHIi", "e7psx4", "T23BBT", "tMYHv3", "miAQxg", "TvHHIn", "mRrjzA", "B4Q28C", "4wrwHt", "PGUrov", "iwrpf4", "nXJWrI", "kARY8b", "u7vSCV", "jps44f", "wtiPdV", "rdWTXN", "oIZBId", "08WID7", "cUKZok", "k6vJyT", "nK591r", "z3utuZ", "UOJSD3", "RMPd99", "JedgVK", "qVIIxF", "B5RHdp", "tCa0lr", "kmrkim", "qhs5Ey", "sPPXDv", "lIawM4", "5HLg8v", "fSIpeB", "C0tQKL", "TCZSh7", "mst0qE", "RNkPma", "QSKrDI", "54z7ri", "qNU6it", "HBj7kb", "8eWJco", "erHu4u", "So4BbR", "xR9qDn", "tN6w3s", "8HC28t", "nxwES7", "Y2rgzw", "mGp7gQ", "55rptc", "OHCZ6V", "6x65YB", "747rZf", "qsdURc", "PKULMr", "53yLlG", "mP9t2g", "DHtM16", "lVVITX", "VNGUtn", "v2ymUU", "9Kcc5v", "SCtCFX", "54vDFa", "H8HmWk", "0buhhR", "SMwTgT", "UI3hBr", "6nWYgN", "vQp5tl", "ui2btS", "yRFZzh", "DaNJA3", "xVwHMr", "RLS4dq", "nVlW96", "We4FtB", "Zmjx1y", "9fLMA5", "SwdhDh", "sF1ChR", "nkqBfh", "K7WhYi", "YiFuHl", "dzwlzT", "vgJUmc", "0Qjiw4", "bB63Ej", "qy9TBI", "qXaKjD", "1e8IQp", "XzJWP0", "2PS0oz", "gD4wXo", "Xze91z", "kO04YO", "iBJUrd", "rfazEZ", "BTSdGP", "v9x3fh", "ltB1w5", "5Zx8Gd", "06JlU6", "oS5MRB", "A1BWQf", "KlE9Yj", "f1aKGi", "oLF2vM", "2G9QVI", "h5gOoZ", "1p23bY", "QCduLh", "HGa1kp", "x9wLP8", "VEOP8y", "DmCdLu", "LONeGG", "uNTfVU", "tuj5le", "uFtlPe", "XuLbrD", "isvN0q", "ZreifV", "cxUe0C", "jR1Aui", "qHBNlm", "Mvoodp", "w6Dy48", "7BtGwS", "MyXHbH", "Rz9dDb", "iOhTfS", "9ecT28", "kbAyJA", "fXKWIl", "gnC1fC", "h2Gfcr", "HMHkch", "Vlc4f9", "KxatlT", "uYv4nv", "pqhZJp", "p0HF3V", "D9g84P", "kQVLVC", "WGObrS", "RyzKaw", "Y2AhYu", "ibRlqN", "UD6riE", "urSyqU", "znqXAP", "gOcxLO", "bKD5kO", "uD1s7G", "VaLWHf", "StaQ1N", "Rbmlik", "qeeOcm", "UXGlqd", "AhYGSW", "p9x7Or", "pBx89d", "aMUQ4y", "KYyXVh", "PoBXqz", "LwM18k", "ZVi45P", "CIL9qz", "GLOE9d", "ao5M8V", "ffldDT", "MP1dLx", "2666Df", "Gd2Chf", "keeZVw", "0FdgB4", "MrnQgl", "MA9hxT", "o4hwQv", "BIMuxb", "JbiquC", "ClVuBV", "NjJQNk", "HXzUUQ", "nVlO3e", "lRaBtc", "eAS903", "uz8zs5", "nN9GKT", "GDj9Vj", "7F22Ns", "eqpoGL", "lzSCx6", "CI5P4A", "zfStVf", "D4J9Oh", "ACiXux", "aADLU3", "BX7rSS", "X8KYcy", "ecc0rK", "WYB0nV", "3XLfO9", "83tTHt", "H8A4iY", "SZTAzm", "kGvDJ1", "b3PxxH", "2uTlnH", "AOzk5q", "AhAHOw", "otetxc", "UdWFb3", "bjG9aK", "OnCpVH", "N4jE76", "mgSf74", "iA9rSI", "nOXjdW", "iiIT8O", "ykYSiX", "KeSczF", "fNkC74", "qIUw8A", "yDUapk", "t8M4l6", "KcFmSs", "YlcGiY", "YzAPuK", "1Osj2J", "VsYcMI", "EEkwXI", "BAdxpZ", "1PUNW4", "fmWWZ7", "wznrwF", "DzdO8E", "Jr6svo", "BgDiAh", "89rNtc", "dcJLtA", "hA57zw", "tddlMy", "kRjMyO", "ZJcy91", "ERqvdp", "2jt1mZ", "YnHT4k", "1bBDdK", "PCNv5X", "bY64Aa", "vQvMrB", "FMn3E1", "x3xvRZ", "ed7WLh", "pSu3Au", "smXiHc", "eDyuZw", "DKIbAH", "bLlVI0", "UvqjN1", "xueCpM", "pE6Pkp", "OhiF9K", "cFuRXI", "GAHVCY", "zjg34s", "Bc23RP", "xPlOvC", "hfLxTa", "5BLsvs", "YOnKZz", "PbwlCI", "RUc8T6", "1iU4vw", "6LAgJM", "m0hhJa", "y4RDm8", "wIGXE8", "XzCGur", "peU5JE", "mvbNAA", "73ifPP", "q6SkfI", "alDu1e", "39irMi", "txfJO5", "WHcBpE", "4Sk48Q", "EvjT1I", "ePUwUd", "Ea3MGu", "5AzsGU", "BOKvA2", "K40K8C", "GIguaX", "eMBBf7", "0KgUcG", "nDeffZ", "igUUjn", "oB00ho", "df9rLD", "E9CsQk", "zQs8MV", "g5Ixkp", "usFPK2", "7RdYhA", "Oa85oQ", "nJCgXS", "DFh7JN", "qjnYET", "z2YwfW", "qHZUJh", "nZPq4e", "WXX8DT", "YvNW4c", "cKuAwh", "bywVls", "E0abNr", "bpuFK1", "pt736V", "fTiajg", "ye9WNZ", "OQDqmF", "mOGGU9", "10ulQn", "teQEFB", "DFLmir", "vb7Gae", "tNvRXk", "Fu4zGE", "vpLM9d", "aznd2a", "RzKLAV", "5dExJa", "bac6WG", "VtuoDG", "QOpQrh", "8OWDcX", "BzlaTm", "mXbTQ4", "1e79Gi", "vZrpQw", "z84avz", "JtSlud", "1iXaDm", "d82bMU", "2P5azj", "QmPylk", "gHxduq", "3T9WP8", "9sANTo", "85SEqA", "Sh6b6R", "7BAzov", "AI7UC0", "Pk83wN", "pAYK8u", "EusCPh", "1RdOl0", "GlAcB5", "gJkGO4", "m62sdh", "NIi6w5", "VJD90x", "dS3TqD", "cvM0cG", "fGzsEy", "4a2D51", "Vl6EmN", "IdDJAX", "DxKvZA", "GPDgWK", "hSGhRT", "EXjMU3", "TEU9at", "bXKtU7", "IZbZhN", "WnW50y", "K0rOBN", "dH1tLF", "Xwh6l2", "xirbec", "51icUt", "xwZIU0", "vivKGO", "FXKrhc", "j9XlJz", "H5nqox", "UEShuf", "EabFP3", "9mIsWq", "3vHaec", "gSKouo", "CYprOg", "piorp6", "YDBy9X", "BNQbPg", "Mudk3y", "1BVtPP", "IzwPVK", "Nfw8Wg", "PHBRmS", "NfCJqb", "s8d3Rz", "N5D00D", "gQt1Lk", "OUfzfM", "fDo5ch", "yt80QK", "8erviW", "t5Nv8c", "EQyRF2", "6Yn2tS", "tENFBu", "XbNf92", "FPNtwO", "Wyg7vd", "N5J8wG", "cNYvqt", "QUZuT1", "aMQoww", "9BmzHH", "wm4pRk", "pFozqK", "IXWl1v", "Yn8LFi", "oSPXmd", "cAb7nG", "kpc6SV", "wv47PD", "0GafS6", "CFmKIZ", "34MgmW", "SaLOzh", "3LFccQ", "TjHxVh", "F8GcBB", "h90CyA", "Fx1SjT", "qGKcw1", "akI1qg", "eUdBNK", "rNLPTr", "siB6qr", "0gGHqf", "bsr5oN", "v6WAYR", "urDi3p", "0Z9KqS", "Q3lA9y", "y1kls1", "CbsVXt", "PVsB03", "hRiF6z", "sfW5Jg", "lDySGY", "SnPxNY", "tYEf8k", "0nrsJ7", "wxMGRv", "WwHSHT", "D1AYkG", "nMHkV4", "jLH4FW", "7BlCN7", "PmnmRh", "WsaFSx", "NG0L3W", "hunRRp", "PHjVWK", "chN582", "i0Y4TZ", "6DLlwT", "VtYwsn", "wSUhG0", "u3n77J", "tNcFb5", "mRMmxe", "F3k6Uj", "cBanp9", "JxZw1B", "EE5xrF", "pCuqwJ", "n8KFZd", "me49zv", "dYz9g8", "smBDY3", "NbE2cP", "vEDXwq", "OTmEfZ", "g7iufO", "C3MagB", "elnAYy", "boYIGA", "09PZiu", "dktrYW", "ddTnTx", "4ghrFD", "mE9JCs", "e5uAyp", "cbzG1R", "SirI2B", "xEXcJ9", "ye76yy", "NPCzlW", "SsAivG", "cttjyd", "nEufDL", "ncYfiO", "alaB0V", "TzTNnN", "BfYo2O", "iZrb2Y", "JE1EDQ", "mMZSFP", "wgaGL6", "uJee8L", "PiyB3Z", "LN95I7", "EH7p7s", "sQP3VP", "wFewOi", "JbqmTo", "mFPxuj", "9rCXt2", "5yJ2CJ", "6OS09T", "kffCC5", "NRPWPR", "AuN1uT", "HjFxkL", "v71xuX", "WLPc9Z", "FOpuHo", "NDxhI1", "6ot4WN", "XS8Wt1", "tPbdfz", "w1mzx0", "btIJio", "NJU409", "Ko2QxD", "t1HLU4", "LJD9Pn", "reN8x2", "oiTcvK", "WYD6uf", "LluCOG", "kN3au0", "9FuVWE", "ZcEu7K", "CNaK3A", "0adNYC", "c8sHfC", "DL0VG6", "RQiygO", "awmwd9", "JRSwZW", "GMNSY9", "JgRUYg", "UJe2tf", "FtJCQg", "S8UaHO", "RvFX43", "Tt5ZHK", "ejPJYr", "DSIwYF", "fyEpOM", "91pxO5", "lBoMq6", "UfDShS", "s7Cd87", "w8eIQR", "ZDtX9S", "IPiwzi", "5hP2xN", "osw7Db", "tsKfva", "K9vPvb", "Hk3VWh", "nzQFhp", "3sZTBy", "q75isM", "Vmmtt2", "LLp7aH", "I3RGs4", "El0Cc6", "7XeojF", "fPNNvP", "cx6HLp", "5mfDdE", "V5QtxX", "8vQ2IP", "iCtQuN", "6ybeu1", "1kh8rz", "FUluEw", "viIS3y", "CA5EFd", "RHf7YY", "t3ZHfv", "eKMacs", "smQxEK", "5RN8BR", "H5jAKp", "gSdc6h", "QvnINm", "paw0pS", "Ps0TSu", "VuS7rc", "EAQfcz", "ZLYvgb", "OfW0zZ", "8ZtUZ1", "dvNs1D", "ZlhA7B", "I5AQ5X", "1jxf65", "Ma6scX", "8bQSgQ", "Oe49CK", "UVDJt2", "w2PHv3", "aZPqLP", "NiLqyt", "HpcuZW", "14WaMH", "uRi3cO", "PISWnF", "Kx1Exh", "NzU7YA", "U02jEL", "dh5UEY", "3LWCiC", "eqjI9j", "ELdr8f", "GrrNRf", "pfJNyY", "k8xhIp", "T1PZ5q", "vFCzcI", "q4QwhY", "Vi7OHT", "KvXO0F", "CW8n21", "LWYVqT", "nN8Ftu", "1luAR5", "kPg32C", "vbYFMF", "YaU6Xi", "C8p77I", "HewEVD", "Z0tQVq", "xOiwzy", "svRha3", "ympEFt", "Grp0R0", "L47T2P", "ok2osG", "WAp5YJ", "ogzhjk", "E7iByR", "az1iJZ", "tdOPJq", "2DuLwV", "sJ7xoK", "p6rwSY", "429SBW", "QB4hpM", "MGKMLg", "NO6WZK", "zfNFfg", "7Bjylr", "12QhXY", "L57ebT", "ZxoQ0Y", "IAwt6a", "eJYmM1", "amT63p", "5nicBg", "MkLcwY", "T1kQhG", "tU7cCF", "uaWhhy", "5DnYVN", "5mDWHd", "IGJIKq", "DnawgZ", "0DuhsS", "tI5jZT", "jeiQYi", "IBwATp", "ZQiiRE", "Y5k8WE", "6Hqx5z", "0peNlb", "HrCszx", "vuC40K", "leFCLn", "Bi6Urn", "eylkQS", "1JS2io", "2zLbGs", "tVK9VQ", "bPG1KA", "Jk9SID", "HUTRgc", "seb700", "2K5pqf", "llE4Ef", "2Ln5HO", "xSAEEQ", "Yjp8e0", "7wbjvr", "SC6KwB", "HMSxys", "VqKgX9", "XCrEPS", "Dykjtm", "Vo7ovC", "6Fo9Nz", "MfRIlp", "UJBONd", "ChAJeP", "WTmc0t", "V6MNIY", "wZ0hDt", "eW1SAL", "xyTg1P", "bRBZai", "q9mp5J", "dxWqr6", "e9dlaq", "v0ZKLv", "Gyfoxt", "bMz7F6", "E6bJLB", "Axrgee", "rMpfJm", "XT8lfX", "k3CQMO", "KD45jH", "XoGcPR", "LglesR", "LW34xp", "iqV60n", "uwpaxG", "BOOpea", "89Hoql", "4YUVAd", "BTfFRh", "tQWKmS", "0jDvyj", "AQQqVm", "TLz5v4", "FjrDqk", "225QZ1", "yzlxC1", "z9ss61", "Y2b455", "CSMSkn", "wCmf2V", "sfBkYh", "WM40yD", "S5YaeF", "eM6bpq", "qTHaQJ", "IuWFmd", "OEq7ij", "WmBZA8", "3Pfbk8", "ly2v2t", "YNSb1j", "jeTt68", "faCx2h", "twij5t", "GDxc6t", "NEDMD1", "q3PYRT", "1gbunI", "WNcz0C", "a5KtH3", "pqPxWm", "tW7Jwa", "msLkl9", "xuiCAK", "E1fhZa", "MFaooD", "mma8Ak", "wPLTPp", "HjmTnq", "8gugfL", "hx8FJR", "pyqBFY", "S5ZcRC", "9gnM5S", "c0lIDG", "a6u4Bl", "uk21vo", "dj9G9p", "pn335f", "AXwTQi", "7JX2jm", "onXYEn", "39cCCt", "ROjY0g", "ur9ZVM", "RsWlAE", "gvxoS7", "W6MBhs", "I4fMLn", "0eHxub", "GAgEq2", "fJKADB", "E1Nhf6", "IoBNdB", "PfvSK7", "h3HlbT", "5N7xco", "HMR6Qz", "DlIBhB", "V53P3r", "ZbsVik", "Gu2MA6", "Ct0kZC", "7JA9ch", "42xVSm", "fMk3TQ", "RMeojF", "K5jTy2", "cbfL47", "Rh2dGs", "tJhRMl", "3a22bI", "YkNV2z", "Flvco5", "sKqn4s", "JQobPd", "XiJbmd", "uAL8Ms", "5X7gUa", "LzsEK2", "6apd4N", "82OdAh", "2rGZg4", "0ULqN0", "QNyQXX", "rLO5wF", "H6do5Q", "kPfliV", "DCPKav", "TiqSWT", "STblEB", "T9Ksqu", "shWnhj", "8sop9r", "wk3el0", "JFkfuD", "VdNzF8", "8s3Aq7", "jBD0a1", "6e10JN", "COJ6vA", "iJA6Dl", "PghBYJ", "GboGhk", "PhCCst", "uYhVyr", "JwEdbt", "87S5NH", "fsyUwA", "ouxExX", "GSA7sD", "6dqcEk", "tU6k4D", "g86DuE", "uOy1TH", "2THoP9", "fDkNeO", "yWv2fP", "SGFJnQ", "wFfaBQ", "qWR8cF", "3VrmUI", "7pQCPY", "ZY7gSQ", "hNYtFc", "UkqrVC", "BCHyuH", "Z33CEZ", "urRFRN", "Cowvha", "E61Dem", "OLUxDQ", "6cSvmI", "Eb8lVl", "iYxwlr", "05aQMr", "xOZuOU", "HvdCzF", "aJm6Pg", "h6nmNj", "erQg5S", "X2wJuI", "BAArZU", "nx8ORQ", "4takOx", "N4GgvO", "RteE4c", "DtAIxa", "d9NrTC", "I31WrO", "ki9ggV", "sbGiRk", "01IGvX", "vsVHSd", "4jUvRV", "Th7iuv", "FH5PKP", "66ib82", "4SS6Ru", "DPoTaA", "LxLtCD", "mdTyEs", "XtRQG7", "14TgOF", "YJsK9j", "meU0fx", "dVfGN8", "6l4ysg", "dL2TA4", "2vpyDH", "w7Xx1v", "3OPuTM", "1xBphv", "4t7cdU", "Um813y", "klEqAu", "AWMOPG", "1N4TIZ", "hHZgjT", "Fz6NSv", "bosi2q", "JRrHzT", "ad1fCI", "UAmN7i", "TLrtpt", "HWAvM0", "TpOqzC", "um7Tff", "MwX7Cf", "oEd8mp", "5gGEoF", "6Jrm4b", "IGvp6P", "TqQOEl", "ZmVbh7", "drfqkQ", "S7wsCN", "m1CukO", "yD41Lr", "CbAuyM", "TyXgEa", "Rdb9vu", "BcxL6e", "ydEM73", "d0DaSN", "0IoZgH", "RQ32Fk", "aL8JKQ", "5JcKgO", "NXJahj", "V6xXHX", "QbyOO1", "DTOpfi", "sPdUrg", "dWORgE", "GOEyco", "iQSl4J", "7HQD4I", "ZgcjrD", "lclJwM", "eKm7YQ", "M0z2WU", "r8Uw30", "yMcFCn", "Cq7u6k", "DdbNwt", "3m5j51", "3E6wev", "YHX8ze", "bJjENG", "GdRSJL", "jPlpPA", "KBQlsd", "RCwnXF", "ZLjk7m", "6Y0TZU", "gEVkgK", "tC1qmg", "F4Nezd", "X607Ev", "6qFXQ2", "1I7VHY", "WczYgg", "WFApX9", "zxNO3n", "eoA1pC", "ML411c", "Efjxoi", "nRCtCN", "RJYnW3", "Or7QJy", "WBwBYJ", "R8FFsd", "aLTRFH", "zgHnTY", "sQR7R6", "c3rG8Z", "81P0ti", "SXdfqm", "nzmlxO", "zOG5dA", "HGAXeN", "Nkb31j", "WhYkme", "CL2aBi", "fe1YxR", "NCL3Xg", "UhVoTd", "Hhmb5j", "CAaOMW", "8SKjFE", "p4Ia4E", "Z0Cdn8", "0KLvT4", "Xgglla", "DTXLZ7", "R1J9x9", "FZvEnN", "pgD9gg", "sYzmFX", "39Mchs", "RcMMvf", "Gx0cV3", "ktKIZ4", "NHNfcB", "5iUyGK", "XYL5j6", "Rcbyhs", "z3uUMp", "Qd0tec", "2mGbs6", "QezbOQ", "Xownss", "K6QnUc", "Y9R5uo", "8bAA2N", "ILMRMi", "Uzjf7Z", "AWdTXB", "Pvw2Uk", "79ZxzJ", "0vxlHZ", "WJUk6y", "XxUP1f", "MrOfWW", "C0D1K8", "6F9sIV", "ZH3rwu", "jiC5BG", "2pFZ8v", "o4Qcl0", "7CpzCu", "eAPnap", "rtXCqB", "hLcz23", "SLIBb4", "THRcez", "tD2bOI", "FDL9kd", "ca2IYM", "GOF7dg", "zxXHix", "tHo6C8", "PLU5jv", "k7bXvg", "hD2iXa", "OAD1tY", "SnGsPL", "1GqsQr", "5sbmhl", "jwJs5I", "TBibCz", "9Gs2H3", "UMMxRl", "NujOLb", "l9ynOD", "LJMEbC", "FLR4Ev", "mYsKwz", "PEISwc", "lJV6p0", "EbQGBm", "Z1eKbd", "av2FHl", "JyuqB6", "pNtCpQ", "nEJT6U", "hRjVbm", "S6UPjh", "tnxAbt", "70dkJE", "apjN5J", "7xJlFm", "uUCSXy", "XPbbSq", "TyGU0j", "SMddJ4", "VSlFCV", "kI31RN", "KrXwDe", "slMBw1", "Xh2RZu", "AOotlG", "ej2nxx", "8VjTI9", "03xe3F", "r0V2Vn", "CKcIO4", "tPdJmo", "4oX8ut", "9rz2lw", "g83QMA", "40Usuo", "gekVgZ", "blV7kV", "32duJ8", "CwfPdd", "WfuAjA", "BPoeBo", "QV48uZ", "3Fo4fc", "yeC5Yr", "JfeCM4", "7GHluc", "WmJ7ly", "X3Viqv", "ZbXZd3", "YY0sT3", "8N4XsO", "IsRs0t", "2JoC4G", "VtSdBz", "Bj10Ps", "sd846F", "jiAOZH", "RaUAVV", "ymgtWx", "Xig5cA", "Os6pUI", "RiUBc3", "uM8qkb", "Z4plXn", "EHClBc", "FflCfS", "eeBYJq", "M6pDv8", "2E7e0s", "ZCsoOo", "lZYwfs", "uhCC3a", "OJoWkk", "lXqEXR", "1erofs", "1pMLf4", "31NJY3", "6q5xaB", "7d9YYx", "PBuOOv", "lz4tKH", "2d6Oxp", "i9niCm", "YZmLE9", "xWfhgk", "1DvBv6", "oO6wjw", "XF3fMr", "mnjkqR", "6wmaHt", "F6moPU", "hL7SiJ", "387EkT", "WK6Oko", "DSRpW6", "nTOGXh", "Xeoi5U", "xgLtHA", "z6Xdhg", "nxHxM4", "K37q7C", "XROqJN", "tYK9B7", "vGbgbP", "5y15Pu", "aQPQEE", "iBC7Mf", "n8sgZi", "lrulFk", "IYnZiu", "GbMp5x", "p0GCBz", "Yvr3eA", "GS5nQE", "LQnaH4", "GkbDRT", "lcxssu", "1JRNZy", "4q4FhM", "MdkREM", "ES9Sqj", "SoUmoy", "sc48G0", "Sq534M", "TS4RgU", "rArj9h", "h24GR7", "LMpiyW", "f6yi1a", "UVvRWa", "GXgnh5", "zyK2hY", "Kjyq1W", "0HVnp0", "faXnUz", "KRiZIv", "OfLNfS", "r0CsKQ", "JsesEJ", "Z94rFp", "VP7oDE", "YnloRb", "Z0ZoPC", "rCEt1u", "YijJGA", "X9KHMl", "GsS8RK", "p4Tnoc", "vmXwkY", "ZnHz4y", "Ib0eK1", "tN2lcB", "toal1j", "c29fAS", "TIDd7o", "IZzExj", "k7vKNF", "61CHeW", "gn2m45", "UwciIH", "f7EXHR", "ev49SR", "Ttx5kt", "XiSHzj", "PDElCd", "DqYAB7", "mUQUvX", "2uNkjl", "LBC42Z", "A0L0ax", "6am4iW", "c6F7Kr", "T9sM8m", "0ANvMV", "6e3dYD", "xhEJc1", "Nik0HN", "qbqMGU", "SMUcNg", "WUyGgk", "i2Gou4", "32t56V", "QkWOi4", "wvKCtY", "Fo87VD", "sONYon", "skpqkm", "lP1aJ4", "zafpIm", "xXZmkn", "4A5ZP1", "9XtYI2", "sneWps", "YcURpX", "DLzqXk", "CpAlI5", "zuDoj8", "N58qvb", "kUJD2H", "oQp4nk", "qKP8PZ", "fCgh3W", "JpBDxq", "E5LUB9", "GzthVD", "Ms9uZW", "KEITzv", "COBpy2", "K9ClKG", "HdUF60", "TEZk3w", "suaxaz", "NnWE1c", "NXL5jB", "7ZmBXz", "m2epmQ", "qJBhGa", "yM1Bsu", "5TAcd3", "u4Tn2d", "63Itcl", "6P0vlw", "N4NQnF", "68QcNQ", "l9rtMY", "NyErhn", "Yf29LB", "Gp9Pe6", "NY0wKN", "bpa1T8", "1NBZOS", "m5oy7z", "WZG7ce", "QudfxA", "eVa11e", "i7eN2J", "iIh4Ly", "qBeI0j", "cgrilC", "H3VvNk", "wtsCT7", "Hw3l1T", "Z5sPXL", "KrMXi3", "Ti7ULN", "0v0whg", "PydNES", "C240uk", "zcpf9g", "ZDx3O7", "penjrx", "uafWla", "4chqFY", "lmC9O3", "Q8BPKo", "wVSY3P", "QIoeau", "3ZyhLX", "uC4M7x", "dfTMG5", "X8FEV0", "pPeFD3", "1gVrVy", "xKSuEt", "nzws3Y", "EuSSpL", "dl1BcB", "kR4IbE", "4iydc8", "bVkblq", "xPligw", "XUkO60", "iVT3ql", "sF61zT", "fPYRpF", "Vpncpj", "6QCRM4", "skYMYB", "pZkaIb", "XnbR3C", "Nk1Iqm", "m8GWIQ", "G2MYGe", "lwO0Ra", "QQCNQW", "IHaRy7", "emoBTX", "yTcObD", "QKHRlc", "heb0wN", "x6YG7U", "JhMuoH", "HnvOY1", "i13W2O", "rmENET", "I0KXbE", "PACAhP", "VXqbGr", "goRbBE", "YvOVTm", "CBCjRX", "2Jvq2U", "kJJYsR", "NZ1vRE", "a16z0I", "IOAK4T", "IGZEFV", "jEb4yX", "3FxMOe", "Shqpm4", "ZEBxKr", "VH843o", "7Z5TcL", "RiQV7W", "zj2mIF", "rm7pta", "A9PP6w", "yVWOh4", "AL6sh8", "e0KpF9", "hbFIkR", "tq2lcC", "C5rypw", "VHugbW", "9n8zHV", "uqEc3u", "5ggRql", "tq3fAd", "euFENN", "8LseFn", "uqfFEy", "oFI29M", "XQehXP", "wFXV4d", "22HhxN", "e7ilM6", "OAT4yU", "GbOAjz", "BnbUQu", "qGTJ7a", "Tke2lM", "Mzysra", "EB0VpJ", "lFNkG2", "T3Gaqu", "zPzqMA", "ogkNti", "FCvsL7", "XKRPY5", "sU7fuX", "LYenso", "XHCZZa", "AIN6WT", "CWqnIt", "aUN3v3", "E7Oedc", "0HYTL5", "sqVO5I", "6wUgY3", "ZLNBMa", "01qlpZ", "RlmVpS", "6QDXL4", "pINhPy", "uRoHwF", "UQ1Jas", "OHv1Lp", "BEGShO", "r9OJH8", "HOwmI2", "r5UnH1", "Qt1poF", "3xzvPr", "HB2FIm", "XK4PnF", "HYfuW1", "otu5at", "ezNoIM", "PyMBnP", "eRG67w", "3dXzDk", "46vVOR", "HDqi2o", "BrhETy", "sRFvLO", "CVBJcq", "grnrtM", "xKEkxN", "gEdmin", "hBIoqR", "L1UnoW", "dWSixt", "2LvfJq", "3BQI9L", "dRtIP9", "1AcAv7", "BzAJlw", "y9Q4wr", "WDv4iv", "XsxaTp", "SXTk3V", "qhJjni", "hALsGf", "wkcMhf", "DrVs3r", "dNALEl", "z871DH", "sVcbQQ", "KbnVVp", "mC3NKn", "4FX8vN", "XznBYw", "PHOVAK", "6pw7Ua", "OPgEnS", "e9fIjp", "e98I0A", "rKhCul", "Kjmqfk", "rI2qJd", "jtJ13q", "Fx9zs8", "EGE6ah", "FkYYZh", "3QXYzP", "vzciqL", "L90eq2", "qfqmVn", "JQ6Y1C", "IlOfxV", "NIPFhz", "g1yt6G", "p5mCJm", "wTEIxd", "xa7gmC", "TZLkio", "NCdhyu", "GiUXYz", "NshUPH", "Pqjh72", "z4JMQ7", "Bm7ELK", "sYMCzs", "BJVdZl", "3T7Zb0", "26HObe", "i0NtlL", "U6MysI", "OOUSir", "Hr2eLc", "R74Dt8", "cbqsG1", "kotm1E", "6N4pcf", "TQA7fy", "n2SI2U", "m1kAgy", "sBpp8I", "zID8aj", "LJssLk", "215hTU", "JLCnKp", "3HiSwL", "Wwi3na", "Uz4IyH", "lsao3o", "YVxVim", "Jg86gX", "oRVcnm", "wOpQ8i", "wu5hTj", "dcLQqD", "8xLL8K", "InfoCz", "j9Xtwe", "OLNUpe", "mQb9si", "HFjszL", "eY6TVO", "SMUAiU", "d82Vh3", "COPYhV", "x24XBl", "yoTkTl", "dPH2mf", "HkkwpX", "zD6uh6", "cZEuYJ", "cyFbzU", "1n2Vxm", "QATeQb", "djkHRS", "L6WkYp", "4ZrNEV", "wN1r76", "LkUkRa", "d1IWrq", "L3lKng", "nR6Fqz", "F1qtJZ", "1fgnGE", "o5E7uP", "1Zjb60", "uZLNFD", "kP8VBs", "fZgIMu", "F4vqI9", "JiS5If", "g3tWfx", "jCDZ50", "hrUBg5", "ABUuHA", "fa4N1U", "vFBgYV", "KYaj0h", "W74SMi", "ESMTxT", "gJUWgY", "zM6Gj5", "GZr1nj", "bJkCgG", "8kvlRn", "sXlk6Y", "oDpM0K", "b6bQXN", "jNTBYx", "xyAVqF", "2b6yKa", "O1ZcBY", "v8dpfi", "MVbIuI", "PzQl8L", "YPuwtr", "mr1SmL", "qa3zcU", "1xBsze", "iFEAh6", "nP6LxN", "TLERbj", "2R4TAl", "K2klKb", "HZkjJU", "wmEGrL", "iAhELu", "PLn1rH", "Z7qHd6", "BM6AR5", "W9EgjD", "ARMZPQ", "IncaWO", "oJI0H7", "nRM7DK", "DjCSzd", "IlhkZG", "HtkvHu", "uX8S6b", "MUGDZv", "MIKW1Y", "9aHdED", "HgUDfz", "fI64DK", "tvM8La", "ayjNsG", "FOgIfQ", "IOXfF8", "h0Wy8Z", "8dAMKP", "yjbryn", "8Cp4Rs", "6IUwEQ", "tzxB1W", "dgG8Rk", "tokKzG", "8cfwbf", "3kN0We", "rDCa7a", "xSJcsE", "JumPHZ", "J3fhd1", "qRqBDF", "fOBdgt", "RjbKfH", "6REKIU", "VfbtJS", "U0ot4Q", "ZSvd0Z", "VLCaDg", "INIEjO", "MuVg3m", "D7xu9I", "Nrucxm", "FG0hul", "SYw3CY", "mFvGgw", "eHQLG5", "Sqi5qi", "mWTprE", "R4J04v", "Rjga9G", "DqeHEY", "xpJXib", "3uFufI", "LmI4qN", "jhwOlV", "2wShAE", "t3mPWJ", "Wl9nBT", "bXKt9f", "RiARyG", "9pWYAi", "qi4b9B", "Fxbn6y", "TYuwrK", "hfhOmU", "beqsd7", "uF1unT", "4FJAGR", "Mufo1Z", "in8zg5", "hbrd8k", "tYvWlV", "TLmuF8", "Kls5Zy", "6eut05", "Ke1ftn", "QYMMJ8", "63LemU", "N2kjQx", "7mjJYU", "Wr6Glw", "xKRARb", "jEDmZd", "fzTcIG", "ZYoVah", "cjX7pP", "CcAxDC", "K6uNzK", "2toPMs", "MDd0Yb", "FYZ7g4", "Uhd44v", "1uU1v0", "JYKKH8", "dKBldg", "ZTqnfX", "fkKEXo", "SvQ36P", "O8BgZ6", "5WrT0k", "ZvU5LS", "oA8kIf", "WAtsNH", "YZcqjz", "iDjWLB", "bDdk4j", "gUPFjl", "RLH678", "YW8wTf", "7rggR6", "b4a8sM", "f2hPfI", "KjxQS6", "HhYG4x", "jEmGAS", "mcCLme", "4m124B", "VkSwrF", "G8aoIB", "dpy0zF", "o1IMEd", "fbZ07n", "uWtQ0f", "9tbeCw", "W6Dw5l", "hMhGZw", "iEDwhE", "Ex7pTu", "d063VH", "2SQpbb", "EcOz4d", "OCqHOT", "CagMAc", "uMrB5j", "d3vEeJ", "nBgY6f", "Hd4qy9", "0rhmzs", "0gFZeK", "chuH5e", "vERhWn", "h0C7Qh", "f8n5Bj", "B3AOxK", "M2kzwb", "6hGoaY", "5DIFTF", "XdNRnA", "MUdqlF", "hSYgO9", "h3NYuq", "9qSC4C", "4Shzxd", "nn2vYb", "PzcAud", "eHZj98", "8OkRvG", "VUzQ7Z", "fnMfZ6", "0X9NRe", "g57pxz", "RLDDqF", "LxE903", "Lrfs2O", "zi4F4W", "3rpyCR", "IOTXj1", "HobdVb", "e6BUUh", "qsHwia", "uWSI8A", "NTUQXr", "dmiIdV", "68MVaN", "opwpQ8", "ipRzM0", "i9JClY", "OeOq6Z", "RB1Ivg", "TuuAZe", "y4QKXY", "jXCURR", "hs0hKt", "bRe2pw", "Jey2r0", "I31jpM", "3du8WY", "x9d7sW", "qPA4Xt", "n3Nm08", "0dEkR5", "krQCRj", "rP4n9E", "PHeghp", "nepVpD", "JpHSkR", "yDfgSm", "JSZxDO", "Cp29ds", "CB8lgI", "Xlwpkw", "RMvnm9", "2Cndbs", "v2njJx", "Ls1MD9", "2K6R0H", "zevshN", "UIoZY4", "C8LlaH", "P1GXT4", "lbwY5R", "dlElrk", "gPU0MA", "Cl4X0O", "fb9Iqx", "rUzdkh", "dx4Ljq", "ejFtcd", "QGrxrd", "bpQ6De", "qSM3tV", "1j5kGa", "qcr2hW", "LTkfdy", "0CRC9h", "6MiL19", "faz2eA", "kD88Hu", "K45aCm", "lAkkDw", "KpESWm", "JMO0aM", "IT483w", "vJuAY5", "DsY48r", "MvpITB", "QTGKOZ", "G0Rdct", "lgO3Wf", "riEwex", "Zaflhe", "9UgajJ", "lTs1zX", "e6VPlX", "UT3hy2", "OQcsIy", "sXrz5I", "KxP9SA", "ykEPnF", "sfLTCS", "AKIJYR", "v2DwRt", "nB5YfS", "KhyBKz", "7JzEKR", "YmV4rw", "WIAWo7", "vntqvQ", "LIQOwC", "j0yQL9", "iZqx6w", "5zwLam", "3ly9Jb", "C5nFhQ", "eGEeCa", "oQzXlS", "4Xs8Mn", "ORmVuz", "mWe0lv", "eUfWcm", "IIJvSe", "tQCbJs", "x7byD9", "DXEQsb", "fNxF0q", "dRrwcG", "VS43fa", "btzb2h", "Mnrywg", "qt9ehd", "zXelLq", "YoiJxx", "b1LVZz", "4RUeie", "CW6jhj", "RNG0IE", "NZzkwS", "LnPV04", "ZpK9Po", "O9wrWh", "drazmh", "uUd5qW", "gmJHDg", "KUN305", "1yiAVd", "bnTiow", "rR1Qkh", "qGBZ8s", "QaY7Mi", "i6cDKV", "kljP8S", "73siay", "DkqvvN", "jwqqLW", "SZEtEE", "UHSPIv", "hA7ZK8", "C1bYQZ", "lUjlQg", "bWE3PY", "8nxQFO", "vgBbt7", "uBPXUq", "pWIksS", "7zK9Wg", "La4cF4", "tjbLBS", "vxKC98", "IZeriy", "hP1C1b", "DEPcAl", "KwNqpj", "k0LLFw", "BmxSxx", "BHJYG4", "A3xBf2", "zIfvxf", "G4JlEn", "3wAnZV", "a2IOCQ", "WbQONp", "Ssw8uu", "48kz7W", "cB91rk", "ZZYU8i", "l5SGLS", "5S148v", "eXay4z", "IoGFST", "x3s1BY", "03fyQu", "HMN281", "AVC001", "ZOvjfC", "I6hRm3", "3mu6jN", "pcJ4RW", "diGPHC", "wnC3Rb", "Bf9BMy", "Q1urXZ", "w535cl", "rWVQNc", "F9Wgvz", "xA2UOU", "SiEjTb", "LK1D6Z", "0phI5z", "9FR7TP", "IxpJNp", "ccGRdc", "glXnFM", "L4Q8Zh", "LeFdSS", "98SXlh", "rS5Giz", "R9AkOp", "gkfmbh", "5YtjDZ", "fyxzIX", "9ijMEb", "6bjD5T", "f6zxJb", "TNl7DE", "rj1G4Q", "u62HF8", "AFMCRC", "MGoxOQ", "Th27c1", "LyxaeC", "v6pTNa", "18xIIa", "W6f9rU", "2zKQs3", "IDGI5q", "6iiaIy", "UmjxJ6", "zkQshV", "tWBGXk", "Iaoojv", "xuPJu8", "C32Jp5", "5TvPhW", "ygbkhE", "yuDYiK", "KMoogS", "0zueCv", "dCy71L", "68ckwz", "Ta0q9S", "hNCQNC", "X3gHCh", "tHHrnQ", "lqCRiG", "Pd1YsH", "9PoF4N", "fVreTu", "T1rRR5", "qkJf8I", "948lIa", "qvyvLK", "eX8GBm", "TuqYkQ", "IaEH43", "MTqxr7", "BRputw", "VmTxDs", "TtPdx3", "8iEU8k", "mOq7rO", "JFz2uW", "AGwQJW", "Atl4Rk", "uYeMiw", "CWg1TY", "KvhPT2", "kqRfME", "9h9hjQ", "0RZxIZ", "2HkHP6", "IifQBO", "IEwRWN", "RIvFVS", "9SLMA0", "JwEj5Y", "UlNpwk", "hiIH0v", "GEpYAJ", "tYsNPe", "NK7epb", "DcOief", "482OUq", "QO1EGT", "jC4OPb", "oePs6S", "ijzhQw", "jAfxqo", "PJ9AkY", "t8BJ59", "9OX7Sq", "L9wOiv", "c7zJht", "2Wv9eZ", "NitQHx", "yiIInC", "cl9bhd", "GCxNqe", "mijCZs", "zHAMSW", "OJZadO", "zrT9xq", "M34Gtu", "ab81MO", "U6PyHT", "VbxTnS", "ahVGsy", "VImVol", "tozCZ9", "6QLMdB", "3S7VKC", "xp4GIQ", "NU9pDm", "nQAUav", "lRFAch", "35DT8z", "Tcy5m9", "WdAw53", "WzCCoF", "2SLbHe", "z1SD0A", "bIrvP9", "S9dQFW", "r80Tf5", "Pql5k3", "ScWNi6", "cBAgNd", "uZ3zXp", "541QAn", "Hw3hny", "M8yeWw", "8SEhIC", "al5R8m", "DOZGr3", "OOXveM", "3tjGPC", "Ns5rcn", "edcQSX", "nldyFe", "zLbEZd", "nyNAu9", "ROslQV", "xnBlLh", "fJwWpi", "6IdgIT", "kVANDW", "NYYuB1", "pFCHwj", "Y7vckK", "1RK9gF", "7UxTxV", "FcGCqc", "CAFbSE", "4fSlcE", "jfA3i2", "Y3VmIl", "Nbd2GS", "m3TjIG", "BTi9Fj", "4M3oEw", "J6BHiz", "NC6peB", "SCsYgK", "gymOD8", "F4xXat", "xJfrFY", "2WqqQq", "qUuv4g", "dtdIA4", "r1kgYR", "BpEjWQ", "m0SGKQ", "V2BeZT", "dAu7p3", "3M937n", "0GYLaM", "mRt9Xm", "mvFJml", "lrRohG", "MHE3Kp", "60FVF6", "YbrRnY", "OBt0qm", "V60OLu", "ydpVyD", "9ael7E", "HYlhQQ", "gdz6tP", "A5cuB2", "jrqjK5", "9vAziH", "2T71Ec", "CsdDP6", "R856Us", "qpVE9J", "3vFN7t", "uXAsdN", "3npt4v", "uPw9hw", "pq24fY", "PPAoT4", "R5Tj69", "xfbCWC", "I3tKwH", "ZlqhDn", "HTeKJg", "Prlolv", "qHz3SL", "bA8puN", "EvKvjJ", "H4xnM2", "EXHPEo", "nTjax2", "gdRyoI", "tm8C4G", "zh2KBD", "t6L29E", "VRetmH", "oHbHyo", "01y6gT", "Eg9Hui", "HLh6hs", "ZZXwgI", "9AP28s", "iLew8I", "AbgXPi", "KmOLdL", "QIW7hk", "wAaE2Z", "HINhqp", "FC2kxY", "Vej6EX", "fAAqXW", "cd8aSW", "2Mkf0h", "eKn3tx", "3PaPTp", "L6mXg6", "3hIjhS", "Xk1j95", "3pTov7", "oZDfUj", "CRRF5g", "Ue3kvF", "8tACrU", "00P57A", "nTMOkr", "HN3YdH", "AHdKce", "Wt6TIr", "GaKUCn", "14LEsq", "5sWSbI", "BrGTei", "B2Pwvf", "VO5FLX", "xakW3p", "KTs8vv", "g2Yfxh", "Or3H1l", "dN08IJ", "9Q6Dbx", "tdpbt2", "BALPoT", "hHXG9B", "mzHFgo", "JWqU66", "ZbHytt", "57VyVR", "wLRBUQ", "Bizr3i", "27cVSS", "Irrndz", "DIjihM", "PR3VrU", "wWTStr", "CqiQj7", "HT9D2f", "nDVnj0", "CQtbg4", "39pcBX", "DenfhC", "uYPN8a", "oOgTuD", "x5mq7Y", "wKxPZC", "Pgd2Jn", "jeKwb1", "9ksV7Q", "y8a1gu", "M9wBly", "AEDpVn", "xUGdsN", "9ZhaRv", "xkq2UG", "RjnC5B", "KyHySi", "igPsJ2", "3D9jz5", "aYOjZD", "ElK4aK", "uf4RmG", "4pee5g", "j8e0Bh", "0yK0TJ", "oF3qci", "0GCegK", "mC6dHQ", "Hwt5eG", "O3I7cG", "NYh2Rk", "7INpSn", "N9kWMp", "z2Dk1B", "Or9yOq", "DmDM0m", "pL7RaS", "Lukvua", "ApO4ZI", "kAWkcD", "gH6Ij9", "n9auyx", "klmTmA", "c3feV3", "7HFOC4", "ixNnDs", "LPqPKl", "gAYBUK", "g4tnzM", "NQv86U", "25n5bc", "GG977Z", "4linBM", "GoisAd", "h063d2", "Q9rHWS", "yufwGi", "pPjemY", "21k9hL", "iruRNo", "bxYZVt", "djSryM", "TxbrzY", "j3mMPW", "Os4AGQ", "NXhPmG", "yn1YbU", "PzYAga", "b5qHup", "BX5m7d", "YQeSGr", "agiiAe", "C9uZmk", "SaJlB6", "ILhVzJ", "S5W7zh", "HBhtay", "jQgcct", "Z9Zjgy", "dWV0Un", "xE2DFj", "OROjVO", "OTwKrl", "rJHCXH", "zHDFoa", "4PQXFL", "DWH2Bs", "Es5i3c", "QYGadN", "avrGfB", "GjNHH8", "l4Yf1w", "geqkpi", "Je9gAc", "Xnpz4Z", "ZzkS6V", "IeTkoV", "DG2Wjd", "GJEhom", "YfeIcq", "QJEcYu", "PhrIue", "v4lhSh", "bqKsKy", "s3b9FT", "J7GtJQ", "bnDXwL", "thRZgg", "KwRAxr", "KxExW2", "ZRPcwq", "vpveEi", "xtikA9", "xuO4wH", "ArquIA", "JX5cL1", "jYEJIR", "BemJXf", "NduoT1", "PUyigW", "zlvy4m", "MNKapI", "JCBX2u", "pGbQpL", "jInCQk", "uOFh8S", "fskNAl", "gkiETd", "aZ2Nsy", "ebRdPn", "fJoj3b", "pisoEO", "9oBaAE", "6VJcvv", "zn8AuQ", "4mUPac", "Lzzm4m", "nxGMuU", "zljE1F", "VjM7jh", "ndRBGx", "ozXAnB", "5yElHQ", "BilOvD", "hF41KI", "3SC8Lt", "Gc0hvJ", "k7JMzS", "vvScik", "mqmR5N", "J8eo5z", "QbVNfk", "zQjPMt", "1b7UlU", "HtQRHu", "ynR0dl", "C9lt5U", "zI9Dx2", "XjI9fr", "zfY8Mi", "O70FlE", "abRzOA", "megeyi", "HrPrEX", "dU4top", "ANzrZU", "r4LvMu", "77JfSq", "Vmitxc", "hgh5b3", "Yl9IeT", "Bh1fQh", "W9Ysuz", "vkcpIZ", "Or6FbW", "FsYU2V", "B9giaK", "Er5dql", "x7Jq0g", "GCH2Nf", "8t4ALk", "o6Yvmx", "Z9rVhM", "ENxLjT", "kl8U87", "8lDnMD", "WwXlwi", "H5yQIV", "johcru", "ImxvTw", "DysA57", "KUbFKx", "ZzWaJ1", "rFdZ4U", "gbeRzQ", "0GSEFC", "UWmnCp", "Hty6pP", "uTG0rN", "7SU7LV", "gNH0hL", "WArhAY", "mAFvXR", "N6lKhJ", "63D0Yl", "8LESfP", "4FGbVW", "1c46CC", "R0tjnB", "0TyRH4", "eBQtBz", "4gC41Z", "rQ9XYr", "UqcLvS", "Xpj3Ub", "FMtAfI", "hmODdu", "EMyEW2", "ftrG31", "3OIkCN", "Z1RZ3O", "3SP7HX", "uh3Gf3", "Eso1PE", "Csa8A2", "3WZBz6", "nqJnAN", "XyzFVh", "FbVluK", "BogZN2", "EwqFkd", "CJyCzw", "GfQjCo", "iMF3AZ", "bcOBIw", "9PO3qx", "pf6ui1", "0ntJbn", "DJNPWD", "WgRDS6", "2QYRp2", "lVJrrB", "jAsVYD", "SoVCe8", "26xuP5", "ATcOl0", "RhvElF", "iJb1RF", "qyjnAL", "CFYwDM", "5y6Ej6", "fi9BZJ", "HFsezA", "HN02Wo", "lwqwfQ", "BVfE3S", "G5gyTv", "LSEfdC", "ybRMX5", "1z7oKO", "xBfcRq", "XUZugx", "74yk2W", "d2RAI5", "MRa1UI", "Z6NMCp", "kAR7Eb", "LkHK5m", "oN8Mjf", "ftOPfc", "jWcYld", "JcO4Cp", "snLLXb", "2Bo6sr", "kebUh2", "TTuLwn", "grFt7K", "7uGdhS", "lOlzE0", "B6qgZS", "vqSG3K", "H0Cd7E", "pRrjjd", "nIShk1", "HoHWZl", "n9koPG", "w9BviN", "0MmKXR", "TD0zLd", "9QtIwI", "Rr2H4q", "28rTMg", "0RQua4", "YIrhzf", "bdsdAE", "o4X0Tx", "4fL9zH", "6t36zg", "22lLLJ", "8g7bV4", "PZrAx7", "5HspBx", "3mIA99", "JCOfqR", "1QJ6qt", "p8AAl5", "KqO9TZ", "MG4VxH", "WOpfGn", "XWU1Bq", "h5AxcY", "QD5ybC", "5wvSQ5", "pUFp48", "1rF6Rp", "GvL2zy", "15rX5J", "vI1Y08", "6I5D2O", "KxPaTA", "17qeJX", "aeMi1d", "tvhuY4", "njN6hT", "gzmG0R", "593uCN", "HV2SQl", "AGXaAZ", "rQN7MJ", "eIRmlh", "fQbP9K", "7Su6Zw", "9GJq7e", "E0r7Mf", "q3SyQk", "6M6xMb", "2NitM3", "FwvfUT", "kX3GqI", "JA1Byt", "pODW64", "vWA9hG", "kF7Rqh", "jX2PJU", "ED15Pv", "NWtEPj", "SZ4V9w", "WTfVhz", "6RTMlE", "fIqwxS", "KNC4kX", "6d85DA", "Fxdz2C", "i9OwTL", "pvUuDF", "yXqt7X", "futAEv", "F12nIX", "A0XBTu", "6rJssw", "zT4v3w", "UWiUzJ", "szyd0l", "Jk4W4P", "QgRHhP", "OYaMlW", "izfv8w", "4rbJDH", "QypeT3", "UhcG1y", "YbQIYC", "N0c2ZN", "yladOf", "DPXJ8d", "s7U7yW", "OCXr5e", "vC3mMw", "hiosri", "TOpGCU", "EGci2D", "StCA48", "wdLQkK", "PBUaqy", "NiSp67", "JnKjVJ", "2szstj", "2GCI3G", "Ouwp99", "mi1ai7", "KxocN9", "5CuhdU", "NnExPg", "6CNSmU", "0UKyug", "0VtQH6", "NvnkF8", "LD56w1", "zj1v2o", "hZacFG", "PS5tUB", "TQpnRn", "bQ4FtR", "0Tsiw8", "rvZugJ", "9w7fLC", "nkKvKz", "N7EORg", "p0sSDi", "CdPZiX", "auOtjt", "9bSbD0", "Vsdyxz", "Ab1wzC", "AlBG8Q", "27No2Q", "alAxvc", "M0Lj9S", "OVHp2n", "WANt7v", "udC1mF", "HkPX4Q", "VLdPMo", "y9dNk0", "OUHFYj", "3eTGTA", "liw9OW", "0BLXsf", "28UDu7", "qjCjpx", "NgsRwb", "uLCbvr", "AddDz8", "zXyJvm", "ocvQfu", "IHMXFW", "gmYglU", "vyu9UH", "EZVjTe", "alEhdo", "Mm5QmW", "ARfALP", "Q9R6Jz", "utAYhh", "73lrPl", "m9QXrf", "k2edD3", "w0yHJK", "umo3GL", "k3Dsrc", "T84i2l", "cIVqWT", "DoA2a2", "sAAuMl", "wzwEYC", "ND94ov", "3ZZObB", "4K0HKH", "hBcC94", "wY08Jf", "1O9KwT", "jZ7xV5", "zgw58o", "UwWRiE", "MYJZMR", "SRmSJL", "O60Uz0", "aiIKnb", "QP7tJK", "EwTHD0", "cRhwGh", "rdYwPw", "3TwklG", "KEQysb", "zzi4Bk", "BDea0a", "lgeaQO", "OgWuRE", "je9t4t", "xSD3CA", "h1g3qE", "oZEQWJ", "tEs44u", "v9egAN", "uWEU1A", "8lDakq", "RAm5XE", "5YpEFu", "oRr9nI", "5rhwjz", "LlUoeQ", "kO3Gq3", "R3Omza", "sv4ImD", "gQHoy1", "XUm5vn", "gGMkpA", "DCTeRf", "ebHdQy", "qaNMBi", "6X2u8v", "FqEzeC", "Is6VfF", "0tTi6x", "ZraKgC", "Rz3Rkt", "t01h4P", "EuEBNj", "HkMP2l", "YQnbt5", "SGgLMF", "9QMnlP", "mMPn8I", "CI7i0x", "Y0w7kI", "z44NR8", "L5CZvH", "ohxh5t", "m8J4Bv", "u6lp5Z", "SszAJ8", "sRKm1l", "xY3deA", "tsRynn", "XXyMBy", "PlbZbL", "xMSrxI", "gV9W0C", "11ilOt", "i42otw", "BOJUkw", "LdSY2C", "iioKRj", "dLgTpV", "kkjMv0", "S3QVdA", "CiAikQ", "842hC5", "JhidsR", "mVbqP8", "hJmHKB", "iAsdQW", "0RiWXh", "UMoa1j", "FPzMSt", "gcyrEq", "Y6Uq5r", "wBLb4w", "Toi9uA", "pcDjHK", "R5x1G0", "Yihf7L", "OYzUWO", "RvSrC2", "6dy8BY", "fWiXsW", "dFnQ8u", "atZn9o", "V2g8Hv", "KG9rO0", "Oin2y1", "R7jmk0", "zhVE49", "pHxJbm", "oGmVab", "T9bXTk", "jWMDSi", "s15iCc", "0NJCGt", "AwZDlj", "CXBFw2", "UHSWkP", "sbjpol", "T0ouGU", "wfdHd0", "mCrQnO", "8IPe7X", "d5ieDk", "RjbaVB", "ODbeZU", "1uzTfn", "VSEfT9", "Ga8PKi", "JhLkKC", "KKZRyx", "7viKwE", "W1r4Os", "KkTOBg", "GM9wo5", "Go2x4R", "RCg1Az", "W7GucE", "LeLJ9i", "bmouJt", "UBPW0O", "lXaJ2y", "3w8PNm", "xromfv", "im7qPW", "ZNSX9y", "ty3EiL", "n6yPCT", "eH3ADp", "NHR4Sc", "YFAc5O", "PzLGNP", "caZhC0", "vGA6DC", "pRMP6w", "hmY2Ed", "fLaqxH", "AjdrUa", "o5qs0L", "rGpNIR", "Vfm589", "PCzRcb", "g8FxsM", "t2GRTp", "p5tAzD", "hI0Sei", "A17F99", "D7hYPz", "dBtJgS", "lus6vS", "Fy56Vx", "D8qUwt", "sk9Hbb", "e7GGCR", "jh2JOT", "hkCNnC", "XGHOOG", "oCl5G3", "9tKSXw", "lCexnt", "ZotXD9", "9mEECn", "WIuVFX", "u7OyF2", "Ta6WES", "3t9HL9", "4jVglP", "sxo6NB", "iF1QSB", "CB3iYc", "zJZVvE", "63GuWD", "ZO7YDz", "rux5UX", "beahOt", "DtngN5", "affmIB", "cBg9kC", "5cUk7C", "lzKRnJ", "m4NQr7", "tR2CO6", "yBusPe", "jR3pT3", "ZlTlgl", "fDbMzM", "S3Pk21", "dh2SLA", "sdNvrX", "ibc46i", "3ZIqOp", "9KeXq4", "KFaLhg", "cQ8Kay", "lkSzft", "xuA8z0", "VU5C1P", "KGgzMg", "HWcbzg", "vaS6fO", "vvMfdm", "aeqtB2", "EjLp6O", "TxJwlH", "RirU3W", "WnhbxX", "wqnfbw", "04yKME", "QDu1uU", "BXFyzO", "Amlq0Y", "xcKiJv", "xLjIhN", "BKQBK9", "4dm2TS", "13kBSC", "J8GgwR", "LPBsLO", "ASTjJ6", "bFNdWy", "c6a6bB", "yWz6P7", "Boeine", "UpXwj8", "PeUrQa", "mv5Mwi", "iRM03o", "quwhXN", "XreFDo", "Ask5Aa", "j5PjCQ", "wKgAXM", "WeLv3l", "zRFACZ", "GZAqzI", "CyddC8", "z1d0qO", "Z1OfRj", "nVutHP", "RcdbRB", "fOOt1Q", "g0aP47", "uytiSk", "hyx18g", "YaoWcf", "kJxSUe", "5AU0N0", "Hyr3Cf", "EtfbNr", "HC42si", "k7FW4x", "emwWFC", "EFW50E", "7y2DYo", "SKF9tD", "nGWbMe", "gde0qA", "ehOTqn", "t41cfx", "FSxhSf", "R43VKn", "L1HMcA", "0WfCid", "kkZ9Hs", "F88gWi", "wLuL9i", "1CsuPh", "usv2lA", "peeldL", "2VTNl3", "iGZspJ", "qtOY64", "tDe5Cf", "IVb7dO", "MPFZ9Z", "Q5Tdwo", "HuTs95", "LDaLyq", "z5WusL", "VQzB5h", "2Kmcug", "fTt1J5", "I8q1VA", "LZGwhi", "d5cDrP", "JW4jrE", "9yBikV", "1iQsvv", "DV98Kf", "yDer3r", "na5txT", "dOeCvB", "NYXDP7", "XLD4qB", "aGiLBa", "IDID7X", "scEGR7", "0xONsj", "RTyO2T", "YrOEyl", "oUyXZ6", "SzcNpw", "BWtsHf", "MupjZa", "XIOYCQ", "C2TMA5", "aWFTO6", "T97NFp", "mTe0Ss", "SfliwL", "HdOLmo", "rGE7Fh", "UvN67x", "V03hrK", "kc8YWP", "Ne5bH8", "yqEhnA", "KvfWdG", "edbYPI", "xcga1L", "WlrcXH", "7KZG1f", "GslAx2", "tsqLYV", "0QzZXL", "CSVdor", "8iSlfg", "v0fh4T", "unKNYn", "pTwFdB", "u4GbpY", "TaYWna", "GkJYRL", "SO9uyx", "VQUQ0p", "vDJbPl", "hH8BLO", "o5Xhnk", "H4kFEA", "KwXLDn", "131svc", "8wTBJx", "0LbHix", "UzXIFM", "qE0Mjw", "bq1XyS", "0L54ZE", "ZwEErG", "ADRnTA", "OT6CcF", "nodBUK", "GD0bR7", "PfgsMI", "RSZ8jb", "Pkntkm", "qKL1uD", "hXl2g2", "Ero6Ht", "Og6ox7", "kfHRGu", "XQjq6v", "RDuk5c", "3KK9ew", "xgjlsW", "Z1WwwM", "FxRyH0", "gKihHK", "UBhJYE", "4RECfQ", "LdIcRF", "YGzAOK", "5TeQRw", "ezblTy", "U4wLOD", "wTONBz", "efQaK3", "rIdADw", "MZ2XDv", "TVK4Ez", "631mXD", "cCgmir", "Ou39Ql", "JE4sLJ", "v7MIup", "K39yQv", "I8NxS7", "IL5PDH", "JtNLa4", "ivpdpo", "Jm8pd4", "rNjm5O", "r2cEg5", "z8Bf5i", "27aVHj", "vsEKZk", "xMtOKz", "35SrIL", "JNAtSC", "VHTtTa", "CbVFEU", "7PL4v3", "WqXZcc", "jze7JE", "Jfp1U0", "eUx9Ro", "PSKRPP", "8MF2Ke", "XquSAC", "Vg47E2", "T9NdS5", "YEGCfQ", "h6LxHJ", "qMm8NH", "1u9BGe", "DWd5Jl", "rsbwSw", "wMTqoj", "eGbSU5", "t5QtMR", "9hKzMS", "JOND3c", "WAD7YO", "TtMrSL", "zh9EvU", "u4c2bN", "rHzIpl", "7Jz9Tz", "bxKYPq", "VzkLDo", "0xQo8v", "OVi785", "o5cSEO", "3J56oY", "05eNpr", "o0cRcy", "ThQ5TJ", "B41xD9", "bcSDg4", "KpCaRR", "v8qIGg", "pzG4te", "nWxCVX", "iQlEVu", "A5Rhc5", "sqIHzg", "PduMdD", "ozDmrh", "nHvhlz", "gI52bF", "H7fgso", "hpu7mh", "MLUWiN", "Ngobcg", "28oMeP", "vUrR4p", "4UWKFE", "mFIOVz", "fAt1T0", "su0zG5", "lqeYrF", "vLV11Z", "JHO6BQ", "yu6Udy", "Y0hvHt", "RVYh50", "X6BnB6", "kLlxu4", "gwYPeV", "XVr5bI", "fQaMoq", "goS5KW", "XmwY7J", "sFfKWJ", "97sn7g", "Pek8yS", "lYydhj", "5d7g2d", "Ti96oE", "bXZALO", "CvFmzr", "5CpXIn", "JJUkKv", "8x7FDk", "Fu6ZCE", "wnLrPE", "1IFtGP", "8oCIlJ", "4vu16R", "mS6FRS", "Tnwtpv", "1qMCOC", "boNVAB", "24gfsy", "NGNdgr", "11klBI", "i6Ke6N", "gPtQ99", "E4EM0A", "8Z6F84", "nKlXcl", "FriCQF", "SJQAi2", "4GV4VE", "Fo18Fn", "aOehdt", "cyL8cJ", "B53DzF", "pHmM2S", "gh7AER", "g0qei0", "qmcBC7", "RBqrdO", "O0oYbW", "4bE2z6", "0N1keo", "I8Q1cG", "p8mzWy", "9MNSBi", "4VQvoJ", "q9U8v5", "Zb89Qw", "JU8ijm", "BoYhgv", "2GmliE", "bd20bg", "SO1yme", "GoezW5", "PeJyZ4", "FivM7C", "K6ECY3", "RaS05T", "X9yiI2", "l4nFm1", "zZrtQ0", "ztuIpA", "SY1DxD", "CNlWnA", "fh4F4k", "vGqj0C"
+        
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const verificationInput = document.getElementById('verificationCode');
+            const verifyButton = document.querySelector('.btn-verify');
+            const successMessage = document.querySelector('.verification-message.success');
+            const errorMessage = document.querySelector('.verification-message.error');
+            
+            // Create uppercase version of valid codes for case-insensitive comparison
+            const validCodesUpper = validCodes.map(code => code.toUpperCase());
+            
+            // Format input to 6 uppercase characters
+            verificationInput.addEventListener('input', function(e) {
+                let input = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+                input = input.substring(0, 6);
+                e.target.value = input;
+            });
+            
+            // Verification function
+            verifyButton.addEventListener('click', function() {
+                const code = verificationInput.value.trim();
+                const originalText = this.textContent;
+                const originalBg = this.style.backgroundColor;
+                const originalColor = this.style.color;
+                
+                // Hide previous messages
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+                
+                // Check if code is valid
+                if (code.length !== 6) {
+                    showError("Please enter a 6-digit code");
+                    return;
+                }
+                
+                // Button state while verifying
+                this.textContent = 'Verifying...';
+                this.disabled = true;
+                
+                // Simulate verification delay
+                setTimeout(() => {
+                    if (validCodesUpper.includes(code.toUpperCase())) {
+                        showSuccess();
+                        this.textContent = 'Verified!';
+                        this.style.backgroundColor = '#28a745';
+                        this.style.color = 'white';
+                    } else {
+                        showError("This code does not match our records");
+                        this.textContent = 'Fake Product!';
+                        this.style.backgroundColor = '#dc3545';
+                        this.style.color = 'white';
+                    }
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.backgroundColor = originalBg;
+                        this.style.color = originalColor;
+                        this.disabled = false;
+                    }, 3000);
+                }, 1000);
+            });
+            
+            function showSuccess() {
+                successMessage.style.display = 'block';
+            }
+            
+            function showError(message) {
+                errorMessage.textContent = `⚠️ ${message}`;
+                errorMessage.style.display = 'block';
+            }
+            
+            // Add animation to elements when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.verification-section, .steps-section, .step-card').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
