@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M6N1HC6MRJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M6N1HC6MRJ');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Premium Skincare | Glowtiqa Paris</title>
+    <meta name="description" content="Shop Glowtiqa's Advance Whitening Cream and Cleansing Soap. Formulated in Paris with TA Stem Cells for dark spot removal and radiant skin.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("OlVciViSI0LWBnEA9"); 
+       })();
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo_v2.png" type="image/png">
+    <link rel="apple-touch-icon" href="logo_v2.png">
+
+    <style>
+        /* Extra styles for the new details sections */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .detail-item h5 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        .detail-item p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        .faq-section {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 20px;
+        }
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .faq-question {
+            font-weight: 600;
+            color: var(--dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            color: #555;
+            margin-top: 10px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            display: none;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-contact-bar">
+        <div class="contact-numbers">
+            <a href="tel:+916361958069">
+                <i class="fas fa-user-tie"></i> Wholesaler Support: +91 6361958069
+            </a>
+        </div>
+    </div>
+    
+    <header>
+       <div class="logo">
+           <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                <i class="fas fa-crown" style="font-size:1.8rem; color:#b68d40; display:none;"></i>
+           </a>
+       </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html" class="active">Shop Products</a>
+            <a href="about.html">About & Reviews</a>
+            <a href="contact.html">Contact</a>
+            <a href="verify.html" class="verify-btn desktop-verify">
+                <i class="fas fa-shield-alt"></i> Verify Authenticity
+            </a>
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </nav>
+        
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+    
+    <div class="mobile-nav" id="mobileNav">
+        <button id="closeMenu">✖</button>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <img src="logo_v2.png" alt="Glowtiqa" style="height: 50px;">
+        </div>
+        <a href="index.html">Home</a>
+        <a href="products.html" class="active">Shop Products</a>
+        <a href="about.html">Customer Reviews</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="verify.html" class="mobile-verify-btn">
+            <i class="fas fa-shield-alt"></i> Verify Product
+        </a>
+    </div>
+    
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>
+        </div>
+        <div class="cart-footer">
+            <div class="shipping-form">
+                <h4>Shipping Details</h4>
+                <input type="text" id="custName" placeholder="Full Name" required>
+                <input type="tel" id="custPhone" placeholder="Phone Number" required>
+                <textarea id="custAddress" placeholder="Full Address (House No, Street, City, Pincode)" rows="3" required></textarea>
+            </div>
+            <div class="cart-total"><span>Total:</span><span id="cartTotal">₹0.00</span></div>
+            <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-lock"></i> Secure Checkout</button>
+        </div>
+    </div>
+    <div class="success-message" id="successMessage"><i class="fas fa-check-circle"></i><span>Action Successful!</span></div>
+
+    <section class="hero" style="min-height: 40vh; padding: 4rem 5% 2rem; background-position: center bottom;">
+        <div class="hero-content">
+            <h2>Premium Collection</h2>
+            <p>Scientifically formulated in Paris to reveal your skin's natural radiance.</p>
+        </div>
+    </section>
+
+    <section class="combo-section" id="combo">
+        <div class="section-header">
+            <h2>Super Saver Combo</h2>
+            <p>The complete 2-step system for maximum results</p>
+        </div>
+
+        <div class="product-card-container">
+            <div class="unified-card" style="border: 2px solid #b68d40;">
+                
+                <div class="card-image-side">
+                    <img src="combo.jpg" alt="Whitening Combo Kit" onerror="this.src='https://placehold.co/600x600/b68d40/ffffff?text=Cream+%2B+Soap+Combo'">
+                </div>
+
+                <div class="card-details-side">
+                    <h3>Ultimate Whitening Kit (Cream + Soap)</h3>
+                    <div class="stars" style="color: #FFC107; margin-bottom: 1rem;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span style="font-size: 0.8rem; color: #777;">(500+ Sold)</span>
+                    </div>
+                    <p style="color: #555; margin-bottom: 1.5rem;">
+                        <strong>Why buy the combo?</strong> The soap prepares your canvas by deep cleaning pores, while the cream penetrates deep to repair and brighten. Using them together accelerates results by up to 2x.
+                    </p>
+                    
+                    <div class="product-info">
+                        <div class="info-row"><div class="info-label">Includes:</div><div class="info-value">1x Advance Cream + 1x Whitening Soap</div></div>
+                        <div class="info-row"><div class="info-label">Result:</div><div class="info-value">Removes spots & brightens tone</div></div>
+                        <div class="info-row"><div class="info-label">Savings:</div><div class="info-value" style="color: #4CAF50; font-weight: bold;">Save ₹1600 Instantly</div></div>
+                    </div>
+                    
+                    <div class="price-section">
+                        <div class="price" style="color: #b68d40;">₹2400 <span class="original-price">₹3998</span> <span class="discount">(40% OFF)</span></div>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" onclick="addComboToCart()">
+                        <i class="fas fa-cart-plus"></i> Add Combo to Cart
+                    </button>
+                    <button class="buy-now-btn" onclick="addComboToCart(); setTimeout(() => {document.getElementById('cartIcon').click()}, 500);">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-section" id="cream">
+        <div class="product-card-container">
+            <div class="unified-card reverse"> 
+                
+                <div class="card-image-side" style="background-color: #fcfcfc;">
+                    <img src="gtiqa.jpg" alt="Glowtiqa Cream" onerror="this.src='https://placehold.co/500x500/f9f5eb/b68d40?text=Glowtiqa+Cream'">
+                </div>
+
+                <div class="card-details-side">
+                    <h3>Advance Whitening Cream</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">
+                        A dermatologist-tested masterpiece. Our non-greasy formula targets hyperpigmentation at the source. Enriched with <strong>TA Stem Cells</strong> and vitamins to nourish the skin while it whitens.
+                    </p>
+                    
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <h5><i class="fas fa-bullseye"></i> Targets</h5>
+                            <p>Dark spots, freckles, acne marks, and uneven skin tone.</p>
+                        </div>
+                        <div class="detail-item">
+                            <h5><i class="fas fa-flask"></i> Science</h5>
+                            <p>Deep-penetrating formula that inhibits excess melanin production.</p>
+                        </div>
+                    </div>
+
+                    <div class="product-info" style="margin-top: 15px;">
+                        <div class="info-row"><div class="info-label">Net Weight:</div><div class="info-value">30 GMS (Concentrated Formula)</div></div>
+                        <div class="info-row"><div class="info-label">Skin Type:</div><div class="info-value">Safe for All Skin Types</div></div>
+                    </div>
+                    
+                    <div class="price-section">
+                        <div class="price">₹2000 <span class="original-price">₹2999</span> <span class="discount">(33% OFF)</span></div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <label for="creamQuantity">Quantity:</label>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" id="decreaseCream">-</button>
+                            <input type="number" id="creamQuantity" class="quantity-input" value="1" min="1" max="10">
+                            <button class="quantity-btn" id="increaseCream">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" id="addCreamToCart">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="soap-section" id="soap">
+        <div class="product-card-container">
+            <div class="unified-card">
+                
+                <div class="card-image-side" style="background-color: #fffbf2;">
+                    <img src="soap.jpg" alt="Glowtiqa Soap" onerror="this.src='https://placehold.co/500x400/f9f5eb/b68d40?text=Glowtiqa+Soap'">
+                </div>
+
+                <div class="card-details-side">
+                    <h3>Skin Whitening Soap</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">
+                        More than just a cleanser. This soap provides <strong>micro-exfoliation</strong> to remove dead skin cells that make your skin look dull. It creates a rich lather that cleans deep pores without stripping natural oils.
+                    </p>
+
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <h5><i class="fas fa-leaf"></i> Gentle</h5>
+                            <p>Mild fragrance and balanced pH formula suitable for daily use.</p>
+                        </div>
+                        <div class="detail-item">
+                            <h5><i class="fas fa-shield-alt"></i> Acne Control</h5>
+                            <p>Helps control oil production and reduce acne breakouts.</p>
+                        </div>
+                    </div>
+
+                    <div class="product-info" style="margin-top: 15px;">
+                        <div class="info-row"><div class="info-label">Net Weight:</div><div class="info-value">135 GMS</div></div>
+                        <div class="info-row"><div class="info-label">Usage:</div><div class="info-value">Morning & Night</div></div>
+                    </div>
+                    
+                    <div class="price-section">
+                        <div class="price">₹599 <span class="original-price">₹999</span> <span class="discount">(40% OFF)</span></div>
+                    </div>
+                    
+                    <div class="quantity-selector">
+                        <label for="soapQuantity">Quantity:</label>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" id="decreaseSoap">-</button>
+                            <input type="number" id="soapQuantity" class="quantity-input" value="1" min="1" max="10">
+                            <button class="quantity-btn" id="increaseSoap">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" id="addSoapToCart">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="description-section" style="background: white; border: none;">
+        <h2>How To Use For Best Results</h2>
+        <div class="description-content">
+            <div class="description-text">
+                <p>Consistency is key. Follow this routine daily to see a visible reduction in dark spots and a brighter complexion within 4 weeks.</p>
+                <div style="background: #e8f5e9; color: #1b5e20; padding: 20px; border-radius: 10px; border: 1px solid #c8e6c9; margin-top: 20px;">
+                    <strong><i class="fas fa-lightbulb"></i> Pro Tip:</strong> Always apply sunscreen during the day when using whitening products to protect your new, glowing skin.
+                </div>
+            </div>
+            <div class="how-to-use">
+                <h3><i class="fas fa-magic"></i> Nightly Ritual</h3>
+                <ol class="steps">
+                    <li><strong>Cleanse:</strong> Wash your face with Glowtiqa Whitening Soap to remove dirt and oil.</li>
+                    <li><strong>Dry:</strong> Pat your skin dry gently with a clean, soft towel.</li>
+                    <li><strong>Apply:</strong> Take a pea-sized amount of Advance Cream.</li>
+                    <li><strong>Massage:</strong> Rub gently into the skin in upward circular motions until absorbed.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Is this product safe for sensitive skin? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">Yes, our products are dermatologist-tested and formulated to be gentle. However, we always recommend doing a patch test on your arm before full application.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">How long does it take to see results? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">Most customers see visible improvement in skin brightness and spot reduction within 2 to 4 weeks of consistent daily use.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Can men use these products? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">Absolutely! Glowtiqa products are unisex and effective for both men’s and women’s skin types.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Does the cream contain harmful chemicals? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-answer">No, Glowtiqa Paris focuses on safe, high-quality ingredients. Our formula uses TA Stem Cells and vitamins rather than harsh bleaches.</div>
+        </div>
+    </section>
+
+    <div class="floating-buttons">
+        <a href="https://wa.me/916361958069" class="float-btn whatsapp">
+            <i class="fab fa-whatsapp icon"></i>
+            <span>Chat on WhatsApp</span>
+        </a>
+        <a href="tel:+916361958069" class="float-btn call">
+            <i class="fas fa-phone-alt icon"></i>
+            <span>Call Us Now</span>
+        </a>
+    </div>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Glowtiqa Paris</h3>
+                <p>Glowtiqa offers premium skincare solutions, meticulously formulated to unveil your skin's natural radiance.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="products.html">Whitening Cream</a></li>
+                    <li><a href="products.html">Cleansing Soap</a></li>
+                    <li><a href="products.html">Combo Kit</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fas fa-map-marker-alt contact-icon"></i><span>Paris, France</span></div>
+                    <div class="contact-item"><i class="fas fa-phone-alt contact-icon"></i><a href="tel:+916361958069">+91 6361958069</a></div>
+                    <div class="contact-item"><i class="fas fa-envelope contact-icon"></i><a href="mailto:glowtiqa@gmail.com">glowtiqa@gmail.com</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Glowtiqa Paris. All rights reserved.
+            <div class="developer-credit">
+                Developed <i class="fas fa-heart" style="color: #c5a880;"></i> by <a href="https://zomaxa.co" target="_blank"><span class="zomaxa-logo">zomaxa.co</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>>

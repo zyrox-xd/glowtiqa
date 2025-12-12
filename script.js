@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ---------------- CONFIGURATION ---------------- //
-    const RAZORPAY_KEY_ID = "rzp_live_Rgl2NCpQcyFajX"; // Your Key ID
-    const BACKEND_URL = "https://glowtiqa-backend.onrender.com"; // Your Render URL
+    const RAZORPAY_KEY_ID = "rzp_live_Rgl2NCpQcyFajX"; 
+    const BACKEND_URL = "https://glowtiqa-backend.onrender.com"; 
 
-    // --- 🔽 ADD YOUR EMAILJS DETAILS HERE 🔽 ---
     const EMAILJS_SERVICE_ID = "service_jjk7wkz";
     const EMAILJS_TEMPLATE_ID = "template_jndkdwl";
     const EMAILJS_PUBLIC_KEY = "OlVciViSI0LWBnEA9";
     // ----------------------------------------------- //
 
-    // Product Data
+    // --- UPDATED PRODUCT LIST (Added Combo as ID 3) ---
     const products = {
         cream: { id: 1, name: "Glowtiqa Advance Whitening Cream", price: 2000, image: "gtiqa.jpg" },
         soap: { id: 2, name: "Glowtiqa Skin Whitening Soap", price: 599, image: "soap.jpg" },
+        combo: { id: 3, name: "Ultimate Whitening Kit (Cream + Soap)", price: 2400, image: "combo.jpg" } 
     };
 
     let cart = JSON.parse(localStorage.getItem('glowtiqaCart')) || [];
     
-    // --- Element Selectors ---
+    // --- Elements ---
     const cartIcon = document.getElementById('cartIcon');
     const cartSidebar = document.getElementById('cartSidebar');
     const closeCart = document.getElementById('closeCart');
@@ -28,54 +28,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const messagePopup = document.getElementById('successMessage');
     const checkoutBtn = document.getElementById('checkoutBtn');
     
-    // ... (other selectors)
     const mobileMenu = document.querySelector('.mobile-menu');
     const closeMenu = document.getElementById('closeMenu');
     const mobileNav = document.getElementById('mobileNav');
     const navOverlay = document.getElementById('navOverlay');
     const reviewForm = document.getElementById('reviewForm');
     const reviewsList = document.getElementById('reviewsList');
-    
 
-    // --- 🚀 CHECKOUT & PAYMENT FLOW (UPDATED) 🚀 ---
+    // --- Global "Add Combo" Helper ---
+    // This is the specific fix you asked for:
+    window.addComboToCart = function() {
+        // Adds the single "combo" product (ID 3) instead of adding cream + soap separately
+        addToCart(products.combo, 1);
+    };
 
+    // --- CHECKOUT FLOW ---
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', async () => {
-            // 1. Check if cart is empty
             if (cart.length === 0) {
                 showMessage('Your cart is empty!', 'error');
                 return;
             }
 
-            // 2. Get shipping details from the cart form
             const customerName = document.getElementById('custName').value;
             const customerPhone = document.getElementById('custPhone').value;
             const customerAddress = document.getElementById('custAddress').value;
 
-            // 3. Validate shipping details
             if (!customerName || !customerPhone || !customerAddress) {
                 showMessage('Please fill in all shipping details.', 'error');
                 return;
             }
 
-            // 4. Disable button
             checkoutBtn.disabled = true;
             checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Order...';
 
             try {
-                // 5. Create Order on Backend
                 const response = await fetch(`${BACKEND_URL}/create-order`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ cart: cart }),
                 });
                 
-                if (!response.ok) {
-                    throw new Error('Failed to create order. Please try again.');
-                }
+                if (!response.ok) throw new Error('Failed to create order.');
                 const order = await response.json();
 
-                // 6. Configure Razorpay Options
                 var options = {
                     "key": RAZORPAY_KEY_ID,
                     "amount": order.amount,
@@ -86,59 +82,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     "order_id": order.id,
                     "prefill": {
                         "name": customerName,
-                        "email": "customer@example.com", // Dummy email
+                        "email": "customer@example.com", 
                         "contact": customerPhone
                     },
-                    "notes": {
-                        "address": customerAddress
-                    },
                     "theme": { "color": "#b68d40" },
-                    
-                    // --- 7. PAYMENT SUCCESS HANDLER (THIS IS THE NEW PART) ---
                     "handler": function (response) {
                         showMessage('Payment successful! Sending confirmation...');
                         
-                        // --- 🔽 EMAILJS LOGIC 🔽 ---
-                        
-                        // A. Format order items for the email
                         let orderItemsText = "";
                         let totalAmount = 0;
                         cart.forEach(item => {
-                            // Using <br> for HTML email format
                             orderItemsText += `${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}<br>`;
                             totalAmount += item.price * item.quantity;
                         });
 
-                        // B. Create the template parameters
                         const templateParams = {
                             payment_id: response.razorpay_payment_id,
                             order_id: response.razorpay_order_id,
                             customer_name: customerName,
                             customer_phone: customerPhone,
-                            shipping_address: customerAddress, // <-- THIS IS THE CHANGED LINE
+                            shipping_address: customerAddress, 
                             order_items: orderItemsText,
                             total_amount: totalAmount.toFixed(2)
                         };
 
-                        // C. Send the email
                         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
-                            .then(function(emailResponse) {
-                                console.log('Email sent successfully:', emailResponse.status, emailResponse.text);
-                            })
-                            .catch(function(error) {
-                                console.error('Failed to send email:', error);
-                            })
                             .finally(function() {
-                                // This "finally" block ensures redirection happens
-                                // even if the email fails to send.
                                 cart = [];
                                 saveCart();
-                                window.location.href = `/thanks.html?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}`;
+                                window.location.href = `/thanks.html?payment_id=${response.razorpay_payment_id}`;
                             });
-                        
-                        // --- 🔼 END OF EMAILJS LOGIC 🔼 ---
                     },
-                    
                     "modal": {
                         "ondismiss": function() {
                             showMessage('Payment was cancelled.', 'error');
@@ -147,15 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 };
-                
                 var rzp1 = new Razorpay(options);
-                
                 rzp1.on('payment.failed', function (response) {
                     showMessage(response.error.description, 'error');
                     checkoutBtn.disabled = false;
-                    checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
                 });
-
                 rzp1.open();
 
             } catch (error) {
@@ -166,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- Cart Logic (Helper Functions) ---
+    // --- Cart Logic ---
     function updateCartCount() {
         if (!cartCount) return;
         const count = cart.reduce((total, item) => total + item.quantity, 0);
@@ -247,10 +217,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => { messagePopup.classList.remove('show'); }, 3000);
     }
     
-    // --- Other Listeners (Menu, Products, Reviews) ---
+    // --- Mobile Menu ---
     if (mobileMenu) { mobileMenu.addEventListener('click', () => {
-        mobileNav.classList.add('active');
-        navOverlay.classList.add('active');
+        if(mobileNav) mobileNav.classList.add('active');
+        if(navOverlay) navOverlay.classList.add('active');
     });}
     
     function closeMobileMenu() {
@@ -262,20 +232,28 @@ document.addEventListener('DOMContentLoaded', function() {
     if (navOverlay) navOverlay.addEventListener('click', closeMobileMenu);
     document.querySelectorAll('.mobile-nav a').forEach(l => l.addEventListener('click', closeMobileMenu));
     
-    if (cartIcon) { cartIcon.addEventListener('click', () => cartSidebar.classList.add('active')); }
-    if (closeCart) { closeCart.addEventListener('click', () => cartSidebar.classList.remove('active')); }
+    // --- Cart Sidebar ---
+    if (cartIcon) { cartIcon.addEventListener('click', () => { if(cartSidebar) cartSidebar.classList.add('active'); }); }
+    if (closeCart) { closeCart.addEventListener('click', () => { if(cartSidebar) cartSidebar.classList.remove('active'); }); }
     
+    // --- Product Actions ---
     const addCreamBtn = document.getElementById('addCreamToCart');
-    if (addCreamBtn) { addCreamBtn.addEventListener('click', () => {
-        const qty = parseInt(document.getElementById('creamQuantity').value) || 1;
-        addToCart(products.cream, qty);
-    });}
+    if (addCreamBtn) { 
+        addCreamBtn.addEventListener('click', () => {
+            const qtyInput = document.getElementById('creamQuantity');
+            const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+            addToCart(products.cream, qty);
+        });
+    }
 
     const addSoapBtn = document.getElementById('addSoapToCart');
-    if (addSoapBtn) { addSoapBtn.addEventListener('click', () => {
-        const qty = parseInt(document.getElementById('soapQuantity').value) || 1;
-        addToCart(products.soap, qty);
-    });}
+    if (addSoapBtn) { 
+        addSoapBtn.addEventListener('click', () => {
+            const qtyInput = document.getElementById('soapQuantity');
+            const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+            addToCart(products.soap, qty);
+        });
+    }
     
     ['Cream', 'Soap'].forEach(type => {
         const inc = document.getElementById(`increase${type}`);
@@ -284,8 +262,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if(inc && input) inc.addEventListener('click', () => input.value = parseInt(input.value) + 1);
         if(dec && input) dec.addEventListener('click', () => { if(parseInt(input.value) > 1) input.value = parseInt(input.value) - 1; });
     });
-    
+
+    // --- Reviews Logic ---
     function loadReviews() {
+        if (!reviewsList) return;
+
         let reviews = JSON.parse(localStorage.getItem('glowtiqaReviews')) || [];
         if (reviews.length === 0) {
             reviews = [
@@ -295,7 +276,6 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('glowtiqaReviews', JSON.stringify(reviews));
         }
         
-        if (!reviewsList) return;
         reviewsList.innerHTML = '';
         reviews.forEach(r => {
             let stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
@@ -318,7 +298,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const text = document.getElementById('reviewText').value;
             const ratingEl = document.querySelector('input[name="rating"]:checked');
             const rating = ratingEl ? parseInt(ratingEl.value) : 5;
-            const newReview = { name: name, rating: rating, text: text, date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) };
+            const newReview = { 
+                name: name, 
+                rating: rating, 
+                text: text, 
+                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) 
+            };
             let reviews = JSON.parse(localStorage.getItem('glowtiqaReviews')) || [];
             reviews.unshift(newReview);
             localStorage.setItem('glowtiqaReviews', JSON.stringify(reviews));
@@ -328,7 +313,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- Init ---
     loadReviews();
     updateCartCount();
     updateCartDisplay();

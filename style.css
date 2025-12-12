@@ -1775,3 +1775,57 @@ The modal CSS has been removed.
         padding: 1.5rem;
     }
 }
+/* --- Multi-page Active Link Style --- */
+nav a.active {
+    color: var(--primary);
+}
+nav a.active::after {
+    width: 100%;
+}
+
+/* Contact Page Specifics */
+.contact-page-container {
+    max-width: 1000px;
+    margin: 4rem auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+.contact-detail-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--secondary);
+    border-radius: 10px;
+    transition: var(--transition);
+}
+.contact-detail-card:hover {
+    transform: translateY(-5px);
+}
+.contact-detail-card i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+/* --- Zig-Zag Layout Helper --- */
+@media (min-width: 901px) {
+    .unified-card.reverse {
+        flex-direction: row-reverse;
+    }
+    /* Fix padding for the reversed text side */
+    .unified-card.reverse .card-details-side {
+        padding-left: 2rem; 
+        padding-right: 2.5rem;
+    }
+}
+
+/* Ensure images fill the container nicely in cards */
+.card-image-side img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 400px; /* Prevents huge images */
+}
