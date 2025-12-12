@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         combo: { id: 3, name: "Ultimate Whitening Kit (Cream + Soap)", price: 2400, image: "combo.jpg" } 
     };
 
+    // Load Cart
     let cart = JSON.parse(localStorage.getItem('glowtiqaCart')) || [];
     
     // --- Elements ---
@@ -36,13 +37,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const reviewForm = document.getElementById('reviewForm');
     const reviewsList = document.getElementById('reviewsList');
 
-    // --- GLOBAL BUY NOW FUNCTION (Fixes the issue) ---
-    // This function can be called from HTML onclick="..."
+    // ==============================================
+    // 1. ADD TO CART FUNCTIONS (The Fix)
+    // ==============================================
+
+    // Function 1: "Add Combo to Cart" (Linked to HTML onclick)
+    window.addComboToCart = function() {
+        addToCart(products.combo, 1);
+    };
+
+    // Function 2: "Buy Now" (Direct Checkout)
     window.buyNow = function(productKey) {
         let product = products[productKey];
         let qty = 1;
 
-        // Try to find a quantity input for this product (only exists on products.html)
+        // Try to find a quantity input if it exists
         const qtyInput = document.getElementById(`${productKey}Quantity`);
         if (qtyInput) {
             qty = parseInt(qtyInput.value) || 1;
@@ -50,16 +59,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
         addToCart(product, qty);
         
-        // Force sidebar open smoothly
-        if (cartSidebar) {
-            cartSidebar.classList.remove('active'); // Reset to ensure animation plays
-            setTimeout(() => {
-                cartSidebar.classList.add('active');
-            }, 10);
-        }
+        // Force sidebar open to show cart immediately
+        setTimeout(() => {
+            if (cartSidebar) cartSidebar.classList.add('active');
+        }, 100);
     };
 
-    // --- CHECKOUT FLOW ---
+    // Function 3: "Add to Cart" for Individual Products (Cream/Soap)
+    const addCreamBtn = document.getElementById('addCreamToCart');
+    if (addCreamBtn) { 
+        addCreamBtn.addEventListener('click', () => {
+            const qtyInput = document.getElementById('creamQuantity');
+            const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+            addToCart(products.cream, qty);
+        });
+    }
+
+    const addSoapBtn = document.getElementById('addSoapToCart');
+    if (addSoapBtn) { 
+        addSoapBtn.addEventListener('click', () => {
+            const qtyInput = document.getElementById('soapQuantity');
+            const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+            addToCart(products.soap, qty);
+        });
+    }
+
+    // ==============================================
+    // 2. CHECKOUT LOGIC (Razorpay + Backend)
+    // ==============================================
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', async () => {
             if (cart.length === 0) {
@@ -80,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Order...';
 
             try {
+                // Create Order on Backend
                 const response = await fetch(`${BACKEND_URL}/create-order`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -89,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!response.ok) throw new Error('Failed to create order.');
                 const order = await response.json();
 
+                // Open Razorpay
                 var options = {
                     "key": RAZORPAY_KEY_ID,
                     "amount": order.amount,
@@ -106,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     "handler": function (response) {
                         showMessage('Payment successful! Sending confirmation...');
                         
+                        // Prepare Email
                         let orderItemsText = "";
                         let totalAmount = 0;
                         cart.forEach(item => {
@@ -123,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             total_amount: totalAmount.toFixed(2)
                         };
 
+                        // Send Email
                         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
                             .finally(function() {
                                 cart = [];
@@ -154,7 +185,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- Cart Logic ---
+    // ==============================================
+    // 3. CART UTILITIES & UI
+    // ==============================================
     function updateCartCount() {
         if (!cartCount) return;
         const count = cart.reduce((total, item) => total + item.quantity, 0);
@@ -205,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
         saveCart();
         showMessage("Added to Cart!", 'success');
         
-        // Open sidebar
+        // Ensure sidebar opens
         if (cartSidebar) cartSidebar.classList.add('active');
     }
     
@@ -237,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => { messagePopup.classList.remove('show'); }, 3000);
     }
     
-    // --- Mobile Menu ---
+    // --- Mobile Menu & Navigation ---
     if (mobileMenu) { mobileMenu.addEventListener('click', () => {
         if(mobileNav) mobileNav.classList.add('active');
         if(navOverlay) navOverlay.classList.add('active');
@@ -252,31 +285,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (navOverlay) navOverlay.addEventListener('click', closeMobileMenu);
     document.querySelectorAll('.mobile-nav a').forEach(l => l.addEventListener('click', closeMobileMenu));
     
-    // --- Cart Sidebar ---
     if (cartIcon) { cartIcon.addEventListener('click', () => { if(cartSidebar) cartSidebar.classList.add('active'); }); }
     if (closeCart) { closeCart.addEventListener('click', () => { if(cartSidebar) cartSidebar.classList.remove('active'); }); }
     
-    // --- Product Actions (Add to Cart Buttons) ---
-    // These listeners handle the normal "Add to Cart" buttons
-    const addCreamBtn = document.getElementById('addCreamToCart');
-    if (addCreamBtn) { 
-        addCreamBtn.addEventListener('click', () => {
-            const qtyInput = document.getElementById('creamQuantity');
-            const qty = qtyInput ? parseInt(qtyInput.value) : 1;
-            addToCart(products.cream, qty);
-        });
-    }
-
-    const addSoapBtn = document.getElementById('addSoapToCart');
-    if (addSoapBtn) { 
-        addSoapBtn.addEventListener('click', () => {
-            const qtyInput = document.getElementById('soapQuantity');
-            const qty = qtyInput ? parseInt(qtyInput.value) : 1;
-            addToCart(products.soap, qty);
-        });
-    }
-    
-    // Quantity Selectors
+    // --- Quantity Buttons (+/-) ---
     ['Cream', 'Soap'].forEach(type => {
         const inc = document.getElementById(`increase${type}`);
         const dec = document.getElementById(`decrease${type}`);
@@ -285,10 +297,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if(dec && input) dec.addEventListener('click', () => { if(parseInt(input.value) > 1) input.value = parseInt(input.value) - 1; });
     });
 
-    // --- Reviews Logic ---
+    // --- Reviews System ---
     function loadReviews() {
         if (!reviewsList) return;
-
         let reviews = JSON.parse(localStorage.getItem('glowtiqaReviews')) || [];
         if (reviews.length === 0) {
             reviews = [
@@ -297,7 +308,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ];
             localStorage.setItem('glowtiqaReviews', JSON.stringify(reviews));
         }
-        
         reviewsList.innerHTML = '';
         reviews.forEach(r => {
             let stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
@@ -320,12 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const text = document.getElementById('reviewText').value;
             const ratingEl = document.querySelector('input[name="rating"]:checked');
             const rating = ratingEl ? parseInt(ratingEl.value) : 5;
-            const newReview = { 
-                name: name, 
-                rating: rating, 
-                text: text, 
-                date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) 
-            };
+            const newReview = { name: name, rating: rating, text: text, date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) };
             let reviews = JSON.parse(localStorage.getItem('glowtiqaReviews')) || [];
             reviews.unshift(newReview);
             localStorage.setItem('glowtiqaReviews', JSON.stringify(reviews));
