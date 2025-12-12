@@ -4,12 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const RAZORPAY_KEY_ID = "rzp_live_Rgl2NCpQcyFajX"; 
     const BACKEND_URL = "https://glowtiqa-backend.onrender.com"; 
 
+    // EmailJS Config
     const EMAILJS_SERVICE_ID = "service_jjk7wkz";
     const EMAILJS_TEMPLATE_ID = "template_jndkdwl";
     const EMAILJS_PUBLIC_KEY = "OlVciViSI0LWBnEA9";
     // ----------------------------------------------- //
 
-    // --- UPDATED PRODUCT LIST (Added Combo as ID 3) ---
+    // --- PRODUCT DATA (ID 3 is the Combo) ---
     const products = {
         cream: { id: 1, name: "Glowtiqa Advance Whitening Cream", price: 2000, image: "gtiqa.jpg" },
         soap: { id: 2, name: "Glowtiqa Skin Whitening Soap", price: 599, image: "soap.jpg" },
@@ -35,11 +36,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const reviewForm = document.getElementById('reviewForm');
     const reviewsList = document.getElementById('reviewsList');
 
-    // --- Global "Add Combo" Helper ---
-    // This is the specific fix you asked for:
-    window.addComboToCart = function() {
-        // Adds the single "combo" product (ID 3) instead of adding cream + soap separately
-        addToCart(products.combo, 1);
+    // --- GLOBAL BUY NOW FUNCTION (Fixes the issue) ---
+    // This function can be called from HTML onclick="..."
+    window.buyNow = function(productKey) {
+        let product = products[productKey];
+        let qty = 1;
+
+        // Try to find a quantity input for this product (only exists on products.html)
+        const qtyInput = document.getElementById(`${productKey}Quantity`);
+        if (qtyInput) {
+            qty = parseInt(qtyInput.value) || 1;
+        }
+
+        addToCart(product, qty);
+        
+        // Force sidebar open smoothly
+        if (cartSidebar) {
+            cartSidebar.classList.remove('active'); // Reset to ensure animation plays
+            setTimeout(() => {
+                cartSidebar.classList.add('active');
+            }, 10);
+        }
     };
 
     // --- CHECKOUT FLOW ---
@@ -125,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 rzp1.on('payment.failed', function (response) {
                     showMessage(response.error.description, 'error');
                     checkoutBtn.disabled = false;
+                    checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
                 });
                 rzp1.open();
 
@@ -186,6 +204,8 @@ document.addEventListener('DOMContentLoaded', function() {
         else { cart.push({ ...product, quantity: quantity }); }
         saveCart();
         showMessage("Added to Cart!", 'success');
+        
+        // Open sidebar
         if (cartSidebar) cartSidebar.classList.add('active');
     }
     
@@ -236,7 +256,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cartIcon) { cartIcon.addEventListener('click', () => { if(cartSidebar) cartSidebar.classList.add('active'); }); }
     if (closeCart) { closeCart.addEventListener('click', () => { if(cartSidebar) cartSidebar.classList.remove('active'); }); }
     
-    // --- Product Actions ---
+    // --- Product Actions (Add to Cart Buttons) ---
+    // These listeners handle the normal "Add to Cart" buttons
     const addCreamBtn = document.getElementById('addCreamToCart');
     if (addCreamBtn) { 
         addCreamBtn.addEventListener('click', () => {
@@ -255,6 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Quantity Selectors
     ['Cream', 'Soap'].forEach(type => {
         const inc = document.getElementById(`increase${type}`);
         const dec = document.getElementById(`decrease${type}`);
@@ -313,6 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Init
     loadReviews();
     updateCartCount();
     updateCartDisplay();
