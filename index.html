@@ -135,6 +135,64 @@
         </div>
     </section>
 
+    <section class="combo-section" id="combo">
+        <div class="section-header">
+            <h2>Super Saver Combo</h2>
+            <p>Get the complete treatment for the best price</p>
+        </div>
+
+        <div class="product-card-container">
+            <div class="unified-card" style="border: 2px solid #b68d40;">
+                
+                <div class="combo-badge best-value"><i class="fas fa-fire"></i> Best Seller</div>
+
+                <div class="card-image-side">
+                    <img src="combo.jpg" alt="Whitening Combo Kit" onerror="this.src='https://placehold.co/500x500/b68d40/ffffff?text=Cream+%2B+Soap+Combo'">
+                </div>
+
+                <div class="card-details-side">
+                    <h3>Ultimate Whitening Kit (Cream + Soap)</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">The perfect duo for radiant skin. Use the soap for deep cleansing and the cream for advanced whitening and repair.</p>
+                    
+                    <div class="product-info">
+                        <div class="info-row"><div class="info-label">Includes:</div><div class="info-value">1x Advance Cream + 1x Whitening Soap</div></div>
+                        <div class="info-row"><div class="info-label">Result:</div><div class="info-value">Faster, Visible Results</div></div>
+                    </div>
+                    
+                    <div class="price-section">
+                        <div class="price" style="color: #b68d40;">₹2400 <span class="original-price">₹3998</span> <span class="discount">(40% OFF)</span></div>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" onclick="addComboToCart()">
+                        <i class="fas fa-shopping-cart"></i> Add Combo to Cart
+                    </button>
+                    <button class="buy-now-btn" onclick="addComboToCart(); setTimeout(() => {document.getElementById('cartIcon').click()}, 500);">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function addComboToCart() {
+            // This simulates clicking 'Add to Cart' for both individual items
+            // Or you can create a specific "Combo" product in your logic.
+            // For now, let's trigger the existing buttons:
+            
+            const creamBtn = document.getElementById('addCreamToCart');
+            const soapBtn = document.getElementById('addSoapToCart');
+            
+            if(creamBtn && soapBtn) {
+                creamBtn.click();
+                setTimeout(() => {
+                    soapBtn.click();
+                    // Optional: Show a specific combo success alert
+                }, 200);
+            }
+        }
+    </script>
+    
     <section class="product-section" id="product">
         <div class="product-image-container">
             <img src="gtiqa.jpg" alt="Glowtiqa Cream" class="product-image" onerror="this.src='https://placehold.co/500x500/f9f5eb/b68d40?text=Glowtiqa+Cream'">
