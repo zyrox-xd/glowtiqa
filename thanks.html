@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M6N1HC6MRJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M6N1HC6MRJ');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed | Glowtiqa Paris</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo_v2.png" type="image/png">
+    <link rel="apple-touch-icon" href="logo_v2.png">
+
+    <style>
+        .thank-you-container {
+            max-width: 600px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            border-top: 5px solid var(--primary);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #28a745; /* Green */
+            margin-bottom: 1.5rem;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .order-details-box {
+            background: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: left;
+            border: 1px solid rgba(182, 141, 64, 0.1);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .detail-row span:last-child {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-contact-bar">
+        <div class="contact-numbers">
+            <a href="tel:+916361958069">
+                <i class="fas fa-user-tie"></i> Wholesaler Support: +91 6361958069
+            </a>
+        </div>
+    </div>
+    
+    <header>
+       <div class="logo">
+           <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40">
+           </a>
+       </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Shop Products</a>
+            <a href="about.html">About & Reviews</a>
+            <a href="contact.html">Contact</a>
+            <a href="verify.html" class="verify-btn desktop-verify">
+                <i class="fas fa-shield-alt"></i> Verify Authenticity
+            </a>
+        </nav>
+        
+        <div class="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+    
+    <div class="mobile-nav" id="mobileNav">
+        <button id="closeMenu">✖</button>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <img src="logo_v2.png" alt="Glowtiqa" style="height: 50px;">
+        </div>
+        <a href="index.html">Home</a>
+        <a href="products.html">Shop Products</a>
+        <a href="about.html">Customer Reviews</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+    
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <div class="thank-you-container">
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <h1>Order Confirmed!</h1>
+        <p>Thank you for choosing Glowtiqa Paris. Your payment was successful and your order is now being processed.</p>
+        
+        <div class="order-details-box">
+            <div class="detail-row">
+                <span>Payment Reference:</span>
+                <span id="paymentId" style="font-family: monospace;">Loading...</span>
+            </div>
+            <div class="detail-row">
+                <span>Order Status:</span>
+                <span style="color: #28a745;">Confirmed</span>
+            </div>
+            <div class="detail-row" style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 10px;">
+                <span>Email Confirmation:</span>
+                <span>Sent <i class="fas fa-envelope"></i></span>
+            </div>
+        </div>
+
+        <p style="font-size: 0.9rem; margin-bottom: 2rem;">
+            You will receive an email shortly with your order details and tracking information.
+        </p>
+
+        <a href="products.html" class="cta-btn" style="text-decoration: none;">
+            Continue Shopping
+        </a>
+    </div>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Glowtiqa Paris</h3>
+                <p>Glowtiqa offers premium skincare solutions, meticulously formulated to unveil your skin's natural radiance.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="products.html">Whitening Cream</a></li>
+                    <li><a href="products.html">Cleansing Soap</a></li>
+                    <li><a href="products.html">Combo Kit</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fas fa-map-marker-alt contact-icon"></i><span>Paris, France</span></div>
+                    <div class="contact-item"><i class="fas fa-phone-alt contact-icon"></i><a href="tel:+916361958069">+91 6361958069</a></div>
+                    <div class="contact-item"><i class="fas fa-envelope contact-icon"></i><a href="mailto:glowtiqa@gmail.com">glowtiqa@gmail.com</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Glowtiqa Paris. All rights reserved.
+            <div class="developer-credit">
+                Developed <i class="fas fa-heart" style="color: #c5a880;"></i> by <a href="https://zomaxa.co" target="_blank"><span class="zomaxa-logo">zomaxa.co</span></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get URL params
+            const params = new URLSearchParams(window.location.search);
+            const paymentId = params.get('payment_id');
+            
+            // Display Payment ID or N/A
+            const displayElement = document.getElementById('paymentId');
+            if (paymentId) {
+                displayElement.textContent = paymentId;
+            } else {
+                displayElement.textContent = 'N/A';
+            }
+
+            // Mobile Menu Logic (Re-used for this page)
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const closeMenu = document.getElementById('closeMenu');
+            const mobileNav = document.getElementById('mobileNav');
+            const navOverlay = document.getElementById('navOverlay');
+
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', () => {
+                    mobileNav.classList.add('active');
+                    navOverlay.classList.add('active');
+                });
+            }
+            
+            const closeMobileMenu = () => {
+                mobileNav.classList.remove('active');
+                navOverlay.classList.remove('active');
+            };
+
+            if (closeMenu) closeMenu.addEventListener('click', closeMobileMenu);
+            if (navOverlay) navOverlay.addEventListener('click', closeMobileMenu);
+        });
+    </script>
+
+</body>
+</html>
