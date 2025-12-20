@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const products = {
         cream: { id: 1, name: "Glowtiqa Advance Whitening Cream", price: 2000, image: "gtiqa.jpg" },
         soap: { id: 2, name: "Glowtiqa Skin Whitening Soap", price: 599, image: "soap.jpg" },
-        combo: { id: 3, name: "Ultimate Whitening Kit (Cream + Soap)", price: 2400, image: "combo.jpg" } 
+        combo: { id: 3, name: "Ultimate Whitening Kit (Cream + Soap)", price: 2200, image: "combo.jpg" } 
     };
 
     // Load Cart
