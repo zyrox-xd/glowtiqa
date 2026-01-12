@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glowtiqa Paris | Premium Whitening & Skincare Solutions</title>
-    <meta name="description" content="Discover Glowtiqa Paris premium skincare. Our Advance Whitening Cream and Soap remove dark spots, freckles, and acne marks for a natural, youthful glow.">
+    <meta name="description" content="Discover Glowtiqa Paris premium skincare. Shop our Advance Whitening Cream, Soap, and Combo Kits for radiant, spotless skin.">
     <meta name="keywords" content="Glowtiqa, whitening cream, dark spot remover, skincare paris, whitening soap, acne removal">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -61,7 +61,7 @@
         <nav>
             <a href="index.html" class="active">Home</a>
             <a href="products.html">Shop Products</a>
-            <a href="about.html">Reviews & Story</a>
+            <a href="about.html">About & Reviews</a>
             <a href="contact.html">Contact</a>
             <a href="verify.html" class="verify-btn desktop-verify">
                 <i class="fas fa-shield-alt"></i> Verify Authenticity
@@ -142,8 +142,8 @@
             <h2>Reveal Your Natural Radiance</h2>
             <p>Experience the power of advanced French formulation. Glowtiqa Paris strengthens, protects, and brightens your skin, removing dark spots and restoring your youthful glow.</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="products.html" class="cta-btn">
-                    Shop Collection <i class="fas fa-arrow-right"></i>
+                <a href="#combo" class="cta-btn">
+                    Shop Best Seller <i class="fas fa-arrow-down"></i>
                 </a>
                 <a href="about.html" class="cta-btn" style="background: white; color: var(--primary); border: 2px solid var(--primary);">
                     Read Reviews
@@ -152,7 +152,7 @@
         </div>
     </section>
 
-    <section class="combo-section">
+    <section class="combo-section" id="combo">
         <div class="section-header">
             <h2>Our Best Seller</h2>
             <p>The complete treatment kit loved by thousands</p>
@@ -162,11 +162,15 @@
             <div class="unified-card" style="border: 2px solid #b68d40;">
                 
                 <div class="card-image-side">
-                    <img src="combo1.jpg" alt="Whitening Combo Kit" onerror="this.src='https://placehold.co/600x600/b68d40/ffffff?text=Ultimate+Combo+Kit'">
+                    <a href="combo.html">
+                        <img src="combo1.jpg" alt="Whitening Combo Kit" onerror="this.src='https://placehold.co/600x600/b68d40/ffffff?text=Ultimate+Combo+Kit'">
+                    </a>
                 </div>
 
                 <div class="card-details-side">
-                    <h3>Ultimate Whitening Kit</h3>
+                    <a href="combo.html" style="text-decoration: none; color: inherit;">
+                        <h3 style="margin-bottom: 0.5rem;">Ultimate Whitening Kit</h3>
+                    </a>
                     <div class="stars" style="margin-bottom: 10px;">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         <span style="color: #777; font-size: 0.9rem;">(500+ Reviews)</span>
@@ -185,16 +189,79 @@
                         <div class="price" style="color: #b68d40;">₹2200 <span class="original-price">₹3998</span> <span class="discount">45% OFF</span></div>
                     </div>
                     
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <button class="add-to-cart-btn" onclick="addComboToCart()">
-                            <i class="fas fa-cart-plus"></i> Add Combo to Cart
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <button class="add-to-cart-btn" onclick="addComboToCart()" style="flex: 1; min-width: 180px;">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
                         </button>
-                        <a href="products.html" style="text-align: center; color: var(--gray); font-size: 0.9rem; text-decoration: underline;">
-                            View Product Details
+                        <a href="combo.html" class="buy-now-btn" style="flex: 1; margin-top: 0; background: var(--dark); min-width: 180px;">
+                            <i class="fas fa-eye"></i> View Details
                         </a>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="product-section" style="background: #fff; padding: 4rem 5%;">
+        <div class="section-header">
+            <h2>Shop The Essentials</h2>
+            <p>Customize your routine with individual favorites</p>
+        </div>
+
+        <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            
+            <div class="unified-card" style="flex-direction: column; text-align: center;">
+                <div class="card-image-side" style="padding: 0; background: #fcfcfc;">
+                    <a href="cream.html">
+                        <img src="gtiqa.jpg" alt="Advance Whitening Cream" style="width: 100%; height: 300px; object-fit: cover;" onerror="this.src='https://placehold.co/400x400/f9f5eb/b68d40?text=Whitening+Cream'">
+                    </a>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <a href="cream.html" style="text-decoration: none; color: inherit;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Advance Whitening Cream</h3>
+                    </a>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+                        Targeted treatment for dark spots and pigmentation.
+                    </p>
+                    <div class="price" style="margin-bottom: 1rem;">₹2000 <span class="original-price" style="font-size: 1rem;">₹2999</span></div>
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button class="add-to-cart-btn" id="addCreamToCart" style="padding: 0.8rem; font-size: 0.9rem;">
+                            Add to Cart
+                        </button>
+                        <a href="cream.html" class="buy-now-btn" style="margin-top: 0; background: #333; padding: 0.8rem; font-size: 0.9rem;">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="unified-card" style="flex-direction: column; text-align: center;">
+                <div class="card-image-side" style="padding: 0; background: #fffbf2;">
+                    <a href="soap.html">
+                        <img src="soap.jpg" alt="Skin Whitening Soap" style="width: 100%; height: 300px; object-fit: cover;" onerror="this.src='https://placehold.co/400x400/fff/b68d40?text=Whitening+Soap'">
+                    </a>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <a href="soap.html" style="text-decoration: none; color: inherit;">
+                        <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem;">Skin Whitening Soap</h3>
+                    </a>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+                        Daily deep cleanser with micro-exfoliation.
+                    </p>
+                    <div class="price" style="margin-bottom: 1rem;">₹599 <span class="original-price" style="font-size: 1rem;">₹999</span></div>
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button class="add-to-cart-btn" id="addSoapToCart" style="padding: 0.8rem; font-size: 0.9rem;">
+                            Add to Cart
+                        </button>
+                        <a href="soap.html" class="buy-now-btn" style="margin-top: 0; background: #333; padding: 0.8rem; font-size: 0.9rem;">
+                            Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -281,9 +348,9 @@
             <div class="footer-col">
                 <h3>Shop</h3>
                 <ul class="footer-links">
-                    <li><a href="products.html">Whitening Cream</a></li>
-                    <li><a href="products.html">Cleansing Soap</a></li>
-                    <li><a href="products.html">Super Saver Combo</a></li>
+                    <li><a href="cream.html">Whitening Cream</a></li>
+                    <li><a href="soap.html">Cleansing Soap</a></li>
+                    <li><a href="combo.html">Super Saver Combo</a></li>
                 </ul>
             </div>
 

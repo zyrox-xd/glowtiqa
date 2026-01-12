@@ -21,37 +21,47 @@
 
     <style>
         .thank-you-container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 4rem auto;
             padding: 3rem 2rem;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
             text-align: center;
             border-top: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
         }
 
         .success-icon {
-            font-size: 4rem;
-            color: #28a745; /* Green */
+            font-size: 5rem;
+            color: #28a745;
             margin-bottom: 1.5rem;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .order-details-box {
-            background: var(--secondary);
+            background: #fcfcfc;
             padding: 1.5rem;
             border-radius: 10px;
             margin: 2rem 0;
             text-align: left;
-            border: 1px solid rgba(182, 141, 64, 0.1);
+            border: 1px solid #eee;
         }
 
         .detail-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 12px;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .detail-row span:last-child {
@@ -61,17 +71,138 @@
 
         h1 {
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 2.2rem;
         }
 
-        p {
+        p.sub-text {
             color: #666;
             line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Timeline Styles */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: #eee;
+            z-index: 1;
+        }
+        
+        .step {
+            position: relative;
+            z-index: 2;
+            width: 33.33%;
+        }
+        
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 3px solid #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: #ccc;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active .step-icon {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 0 5px rgba(182, 141, 64, 0.2);
+        }
+        
+        .step h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .step p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* WhatsApp Tracking Box */
+        .whatsapp-tracking {
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            color: #1b5e20;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wa-btn {
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+
+        .wa-btn:hover {
+            transform: translateY(-2px);
+            background: #128C7E;
         }
 
         @keyframes popIn {
             0% { transform: scale(0); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @media (max-width: 600px) {
+            .timeline {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+                margin-left: 20px;
+            }
+            .timeline::before {
+                top: 20px;
+                left: 24px;
+                width: 3px;
+                height: 80%;
+                right: auto;
+            }
+            .step {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                text-align: left;
+            }
+            .step-icon {
+                margin: 0;
+            }
         }
     </style>
 </head>
@@ -88,7 +219,7 @@
     <header>
        <div class="logo">
            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40">
+                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
            </a>
        </div>
 
@@ -100,6 +231,10 @@
             <a href="verify.html" class="verify-btn desktop-verify">
                 <i class="fas fa-shield-alt"></i> Verify Authenticity
             </a>
+            <div class="cart-icon" style="opacity: 0.5; cursor: default;">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
         </nav>
         
         <div class="mobile-menu">
@@ -126,37 +261,76 @@
         </div>
         
         <h1>Order Confirmed!</h1>
-        <p>Thank you for choosing Glowtiqa Paris. Your payment was successful and your order is now being processed.</p>
+        <p class="sub-text">Thank you for choosing Glowtiqa Paris. Your payment was successful.</p>
         
         <div class="order-details-box">
             <div class="detail-row">
-                <span>Payment Reference:</span>
-                <span id="paymentId" style="font-family: monospace;">Loading...</span>
+                <span><i class="fas fa-receipt"></i> Payment Reference:</span>
+                <span id="paymentId" style="font-family: monospace; color: #555;">Processing...</span>
             </div>
             <div class="detail-row">
-                <span>Order Status:</span>
-                <span style="color: #28a745;">Confirmed</span>
+                <span><i class="fas fa-info-circle"></i> Order Status:</span>
+                <span style="color: #28a745; font-weight: bold;">Paid & Confirmed</span>
             </div>
         </div>
 
+        <h3 style="color: var(--dark); font-size: 1.2rem; margin-top: 2rem;">How to Track Your Order</h3>
+        
+        <div class="timeline">
+            <div class="step active">
+                <div class="step-icon"><i class="fas fa-clipboard-check"></i></div>
+                <h4>Confirmed</h4>
+                <p>Order received</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-box-open"></i></div>
+                <h4>Processing</h4>
+                <p>Packing safely</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fab fa-whatsapp"></i></div>
+                <h4>Updates</h4>
+                <p>Sent to WhatsApp</p>
+            </div>
+        </div>
 
-        <a href="products.html" class="cta-btn" style="text-decoration: none;">
-            Continue Shopping
-        </a>
+        <div class="whatsapp-tracking">
+            <i class="fab fa-whatsapp" style="font-size: 2rem;"></i>
+            <p><strong>We will WhatsApp you the tracking details.</strong><br>
+            Please ensure your phone number is active on WhatsApp.</p>
+            
+            <a href="https://wa.me/916361958069?text=Hi%20Glowtiqa,%20I%20just%20placed%20my%20order.%20Please%20send%20me%20updates%20here." target="_blank" class="wa-btn">
+                <i class="fab fa-whatsapp"></i> Connect for Updates
+            </a>
+        </div>
+
+        <div style="margin-top: 2.5rem;">
+            <a href="index.html" class="cta-btn" style="text-decoration: none; padding: 1rem 3rem;">
+                Back to Home
+            </a>
+        </div>
     </div>
 
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-col">
                 <h3>Glowtiqa Paris</h3>
-                <p>Glowtiqa offers premium skincare solutions, meticulously formulated to unveil your skin's natural radiance.</p>
+                <p>Premium skincare solutions meticulously formulated to unveil your skin's natural radiance.</p>
             </div>
             <div class="footer-col">
                 <h3>Shop</h3>
                 <ul class="footer-links">
-                    <li><a href="products.html">Whitening Cream</a></li>
-                    <li><a href="products.html">Cleansing Soap</a></li>
-                    <li><a href="products.html">Combo Kit</a></li>
+                    <li><a href="cream.html">Whitening Cream</a></li>
+                    <li><a href="soap.html">Cleansing Soap</a></li>
+                    <li><a href="combo.html">Combo Kit</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="policy.html">Shipping & Policies</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -178,19 +352,25 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Get URL params
+            // 1. Get URL params and display Payment ID
             const params = new URLSearchParams(window.location.search);
             const paymentId = params.get('payment_id');
-            
-            // Display Payment ID or N/A
             const displayElement = document.getElementById('paymentId');
+            
             if (paymentId) {
                 displayElement.textContent = paymentId;
             } else {
                 displayElement.textContent = 'N/A';
             }
 
-            // Mobile Menu Logic (Re-used for this page)
+            // 2. CLEAR CART (Since order is successful)
+            localStorage.removeItem('glowtiqaCart');
+            const cartCountElement = document.querySelector('.cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = '0';
+            }
+
+            // 3. Mobile Menu Logic
             const mobileMenu = document.querySelector('.mobile-menu');
             const closeMenu = document.getElementById('closeMenu');
             const mobileNav = document.getElementById('mobileNav');

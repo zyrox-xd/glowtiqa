@@ -11,16 +11,14 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us & Reviews | Glowtiqa Paris</title>
-    <meta name="description" content="Read customer reviews and learn about the science behind Glowtiqa Paris skincare. Committed to safe, effective whitening solutions.">
+    <title>Our Story & Science | Glowtiqa Paris</title>
+    <meta name="description" content="Discover the science behind Glowtiqa Paris. Powered by TA Stem Cells and French formulation for safe, effective skin whitening.">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
-       (function(){
-          emailjs.init("OlVciViSI0LWBnEA9"); 
-       })();
+       (function(){ emailjs.init("OlVciViSI0LWBnEA9"); })();
     </script>
 
     <link rel="stylesheet" href="style.css">
@@ -41,7 +39,6 @@
        <div class="logo">
            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
                 <img src="logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                <i class="fas fa-crown" style="font-size:1.8rem; color:#b68d40; display:none;"></i>
            </a>
        </div>
 
@@ -71,11 +68,8 @@
         </div>
         <a href="index.html">Home</a>
         <a href="products.html">Shop Products</a>
-        <a href="about.html" class="active">Customer Reviews</a>
+        <a href="about.html" class="active">Reviews & Story</a>
         <a href="contact.html">Contact Us</a>
-        <a href="verify.html" class="mobile-verify-btn">
-            <i class="fas fa-shield-alt"></i> Verify Product
-        </a>
     </div>
     
     <div class="nav-overlay" id="navOverlay"></div>
@@ -85,9 +79,7 @@
             <h3>Your Cart</h3>
             <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
         </div>
-        <div class="cart-items" id="cartItems">
-            <div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>
-        </div>
+        <div class="cart-items" id="cartItems"><div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div></div>
         <div class="cart-footer">
             <div class="shipping-form">
                 <h4>Shipping Details</h4>
@@ -101,87 +93,92 @@
     </div>
     <div class="success-message" id="successMessage"><i class="fas fa-check-circle"></i><span>Action Successful!</span></div>
 
-    <section class="hero" style="min-height: 40vh; padding: 4rem 5% 2rem;">
+    <section class="hero" style="min-height: 50vh; display: flex; align-items: center; justify-content: center;">
         <div class="hero-content">
-            <h2>Our Story</h2>
-            <p>From Parisian laboratories to your skincare routine, discover the science of Glowtiqa.</p>
+            <span style="background: rgba(255,255,255,0.9); color: #8a6c2f; padding: 5px 15px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; display: inline-block;">Since 2020</span>
+            <h2>The Science of Radiance</h2>
+            <p>Blending advanced French dermatology with nature's most potent ingredients to reveal your true skin.</p>
         </div>
     </section>
 
-    <section class="about-section" style="margin-top: -3rem; position: relative; z-index: 10;">
-        <div class="about-content">
-            <div class="about-text">
-                <h3>Heritage & Innovation</h3>
-                <p>Glowtiqa Paris was founded with a singular mission: to provide premium skincare solutions that empower individuals to reveal their natural beauty. Our products are not just cosmetic; they are treatments designed to improve skin health over time.</p>
-                <p>With a heritage rooted in advanced dermatological research, we combine powerful ingredients like TA Stem Cells with natural botanicals. This unique blend targets pigmentation, uneven skin tone, and dark spots while nourishing and protecting your skin from environmental damage.</p>
-                <p>We believe that confidence comes from feeling comfortable in your own skin. That’s why our formulations are rigorously tested to ensure they deliver visible results without compromising safety.</p>
-            </div>
-            <div class="mission-values">
-                <h3>Our Core Values</h3>
-                <ul class="values-list">
-                    <li><strong>Innovation:</strong> Skincare solutions based on scientific research.</li>
-                    <li><strong>Integrity:</strong> Commitment to natural, safe ingredients.</li>
-                    <li><strong>Sustainability:</strong> Ethical production practices.</li>
-                    <li><strong>Excellence:</strong> Customer satisfaction is our top priority.</li>
-                    <li><strong>Empowerment:</strong> Building confidence through radiant skin.</li>
-                </ul>
+    <section style="max-width: 1100px; margin: -50px auto 4rem; padding: 0 20px; position: relative; z-index: 10;">
+        <div class="unified-card">
+            <div class="card-details-side">
+                <h2 style="color: var(--primary); margin-bottom: 1rem;">Our Heritage</h2>
+                <p style="margin-bottom: 1rem; color: #555; line-height: 1.8;">
+                    Glowtiqa Paris was founded with a singular mission: to provide premium skincare solutions that empower individuals to reveal their natural beauty without compromising on safety.
+                </p>
+                <p style="color: #555; line-height: 1.8;">
+                    Our journey began in the laboratories of Paris, where we sought to solve a common problem: effective whitening that doesn't damage the skin barrier. The result was our signature formula—a blend that nourishes as it brightens.
+                </p>
             </div>
         </div>
     </section>
 
-    <section class="testimonials">
+    <section class="about-section" style="margin-bottom: 4rem;">
         <div class="section-header">
-            <h2>Customer Success Stories</h2>
-            <p>Don't just take our word for it. Hear from our satisfied customers.</p>
+            <h2>The Science Inside</h2>
+            <p>Why Glowtiqa works where others fail</p>
         </div>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-content">"I've been using both Glowtiqa products for 3 months and the results are amazing! My dark spots have faded significantly and my skin has never looked brighter."</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">S</div>
-                    <div class="author-info">
-                        <h4>Sarah Johnson</h4>
-                        <p>Verified Buyer</p>
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    </div>
-                </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 2rem;">
+            <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <i class="fas fa-dna" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h3 style="margin-bottom: 1rem;">TA Stem Cells</h3>
+                <p style="color: #666;">Our key ingredient. Unlike surface-level bleaches, TA Stem Cells penetrate deep into the dermis to repair damaged cells and inhibit melanin production at the source.</p>
             </div>
-            <div class="testimonial-card">
-                <div class="testimonial-content">"The cleansing soap is incredible! It leaves my skin feeling fresh without any dryness. Combined with the whitening cream, it's the perfect skincare routine."</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">M</div>
-                    <div class="author-info">
-                        <h4>Michael Tan</h4>
-                        <p>Verified Buyer</p>
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                    </div>
-                </div>
+            
+            <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                <i class="fas fa-flask" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h3 style="margin-bottom: 1rem;">French Formulation</h3>
+                <p style="color: #666;">Developed by top dermatologists in Paris, our formula adheres to strict European safety standards. It is free from mercury, hydroquinone, and harsh steroids.</p>
             </div>
-            <div class="testimonial-card">
-                <div class="testimonial-content">"After just 4 weeks of using Glowtiqa, my friends started asking me what I was doing differently. My skin feels softer and looks years younger!"</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">P</div>
-                    <div class="author-info">
-                        <h4>Priya Sharma</h4>
-                        <p>Verified Buyer</p>
-                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    </div>
-                </div>
+        </div>
+    </section>
+
+    <section style="background: var(--secondary); padding: 4rem 5%;">
+        <div class="section-header">
+            <h2>Our Core Values</h2>
+        </div>
+        <div class="benefits-grid" style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem;">
+            <div class="benefit-card" style="background: white;">
+                <i class="fas fa-lightbulb benefit-icon"></i>
+                <h4>Innovation</h4>
+                <p>Always pushing the boundaries of skincare science.</p>
+            </div>
+            <div class="benefit-card" style="background: white;">
+                <i class="fas fa-heart benefit-icon"></i>
+                <h4>Integrity</h4>
+                <p>100% transparent ingredients. No hidden chemicals.</p>
+            </div>
+            <div class="benefit-card" style="background: white;">
+                <i class="fas fa-leaf benefit-icon"></i>
+                <h4>Sustainability</h4>
+                <p>Ethically sourced ingredients and cruelty-free testing.</p>
+            </div>
+            <div class="benefit-card" style="background: white;">
+                <i class="fas fa-users benefit-icon"></i>
+                <h4>Empowerment</h4>
+                <p>Helping you feel confident in your own skin.</p>
             </div>
         </div>
     </section>
 
     <section class="reviews-section" id="reviews">
+        <div class="section-header">
+            <h2>Customer Reviews</h2>
+            <p>Join thousands of satisfied customers</p>
+        </div>
+
         <div class="reviews-container">
-            
             <div class="review-form">
                 <h3>Write a Review</h3>
-                <p style="font-size: 0.9rem; margin-bottom: 1.5rem; color: #666;">Share your experience to help others make the right choice.</p>
+                <p style="font-size: 0.9rem; margin-bottom: 1.5rem; color: #666;">Share your experience to help others.</p>
                 
                 <form id="reviewForm">
                     <div class="form-group">
                         <label for="reviewerName">Your Name</label>
-                        <input type="text" id="reviewerName" class="form-control" placeholder="John Doe" required>
+                        <input type="text" id="reviewerName" class="form-control" placeholder="Jane Doe" required>
                     </div>
                     
                     <div class="form-group">
@@ -197,7 +194,7 @@
                     
                     <div class="form-group">
                         <label for="reviewText">Your Review</label>
-                        <textarea id="reviewText" class="form-control" placeholder="Tell us what you liked..." required></textarea>
+                        <textarea id="reviewText" class="form-control" placeholder="How did the product work for you?" required></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">
@@ -207,16 +204,22 @@
             </div>
             
             <div style="flex: 1;">
-                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Recent Reviews</h3>
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Recent Feedback</h3>
                 <div class="reviews-list" id="reviewsList">
+                    <div class="review-item">
+                        <div class="review-header" style="display:flex; justify-content:space-between;">
+                            <h4>Sarah Johnson <span style="font-size:0.8rem; color:#777; font-weight:normal;">Verified Buyer</span></h4>
+                            <div class="review-stars" style="color:#FFC107"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        </div>
+                        <p style="color:#555;">"I've been using both Glowtiqa products for 3 months and the results are amazing! My dark spots have faded significantly."</p>
                     </div>
+                </div>
             </div>
-            
         </div>
     </section>
 
     <div class="floating-buttons">
-        <a href="https://wa.me/916361958069" class="float-btn whatsapp">
+        <a href="https://wa.me/916361958069" class="float-btn whatsapp" target="_blank">
             <i class="fab fa-whatsapp icon"></i>
             <span>Chat on WhatsApp</span>
         </a>
@@ -230,14 +233,22 @@
         <div class="footer-content">
             <div class="footer-col">
                 <h3>Glowtiqa Paris</h3>
-                <p>Glowtiqa offers premium skincare solutions, meticulously formulated to unveil your skin's natural radiance.</p>
+                <p>Premium skincare solutions meticulously formulated to unveil your skin's natural radiance.</p>
             </div>
             <div class="footer-col">
                 <h3>Shop</h3>
                 <ul class="footer-links">
-                    <li><a href="products.html">Whitening Cream</a></li>
-                    <li><a href="products.html">Cleansing Soap</a></li>
-                    <li><a href="products.html">Combo Kit</a></li>
+                    <li><a href="cream.html">Whitening Cream</a></li>
+                    <li><a href="soap.html">Cleansing Soap</a></li>
+                    <li><a href="combo.html">Combo Kit</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="policy.html">Shipping & Policies</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
                 </ul>
             </div>
             <div class="footer-col">
