@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cream: { id: 1, name: "Glowtiqa Advance Whitening Cream", price: 2000, image: "gtiqa.jpg" },
         soap: { id: 2, name: "Glowtiqa Skin Whitening Soap", price: 599, image: "soap.jpg" },
         combo: { id: 3, name: "Ultimate Whitening Kit (Cream + Soap)", price: 2200, image: "combo.jpg" } ,
-        capsule: { id: 4, name: "Whitening Booster 1200MG", price: 2499, image: "capsule.jpg" } // Add this line!
+        capsule: { id: 4, name: "Whitening Booster 1200MG", price: 3000, image: "capsule.jpg" } // Add this line!
     };
 
     // Load Cart
