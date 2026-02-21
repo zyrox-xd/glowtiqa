@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const products = {
         cream: { id: 1, name: "Glowtiqa Advance Whitening Cream", price: 2000, image: "gtiqa.jpg" },
         soap: { id: 2, name: "Glowtiqa Skin Whitening Soap", price: 599, image: "soap.jpg" },
-        combo: { id: 3, name: "Ultimate Whitening Kit (Cream + Soap)", price: 2200, image: "combo.jpg" } 
+        combo: { id: 3, name: "Ultimate Whitening Kit (Cream + Soap)", price: 2200, image: "combo.jpg" } ,
+        capsule: { id: 4, name: "Whitening Booster 1200MG", price: 2499, image: "capsule.jpg" } // Add this line!
     };
 
     // Load Cart
@@ -83,6 +84,15 @@ document.addEventListener('DOMContentLoaded', function() {
             addToCart(products.soap, qty);
         });
     }
+
+    const addCapsuleBtn = document.getElementById('addCapsuleToCart');
+if (addCapsuleBtn) { 
+    addCapsuleBtn.addEventListener('click', () => {
+        const qtyInput = document.getElementById('capsuleQuantity');
+        const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+        addToCart(products.capsule, qty);
+    });
+}
 
     // ==============================================
     // 2. CHECKOUT LOGIC (Razorpay + Backend)
@@ -289,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (closeCart) { closeCart.addEventListener('click', () => { if(cartSidebar) cartSidebar.classList.remove('active'); }); }
     
     // --- Quantity Buttons (+/-) ---
-    ['Cream', 'Soap'].forEach(type => {
+    ['Cream', 'Soap', 'Capsule'].forEach(type => {
         const inc = document.getElementById(`increase${type}`);
         const dec = document.getElementById(`decrease${type}`);
         const input = document.getElementById(`${type.toLowerCase()}Quantity`);
