@@ -398,6 +398,51 @@ nav a:hover::after {
     transition: var(--transition);
 }
 
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    header { padding: 0.6rem 4%; }
+    nav { display: none; }
+    .mobile-menu { display: block; }
+
+    .hero { padding: 3rem 4% 1.5rem; }
+
+    /* Product grids stack on smaller screens */
+    .product-card-container, .shop-grid, .product-section > div[style*="display: grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .unified-card { flex-direction: column !important; }
+    .card-image-side { width: 100%; }
+    .card-image-side img { width: 100%; height: auto; max-height: 360px; object-fit: cover; }
+
+    /* Make cart sidebar full width on phones */
+    .cart-sidebar { width: 100%; max-width: none; right: -100%; }
+    .cart-sidebar.active { right: 0; }
+
+    /* Mobile nav full-screen width */
+    .mobile-nav { width: 100%; padding: 90px 20px 40px; }
+
+    .footer-content { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 600px) {
+    nav a { font-size: 0.95rem; }
+    .hero h2 { font-size: 1.4rem; }
+    .section-header h2 { font-size: 1.15rem; }
+    .unified-card .card-image-side img { max-height: 240px; }
+    .price { font-size: 1rem; }
+    .verify-btn { padding: 0.5rem 0.9rem; font-size: 0.95rem; }
+    .mobile-verify-btn { padding: 0.9rem 1rem; font-size: 1rem; }
+    .top-contact-bar { padding: 0.4rem 4%; font-size: 0.85rem; }
+    .contact-numbers { gap: 1rem; }
+}
+
+/* Small accessibility/touch-friendly tweaks */
+@media (hover: none) {
+    .quantity-btn, .add-to-cart-btn, .buy-now-btn { touch-action: manipulation; }
+}
+
 .remove-item:hover {
     color: #c0392b;
 }
