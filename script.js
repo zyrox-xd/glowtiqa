@@ -127,15 +127,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const itemEl = document.createElement('div');
                 itemEl.className = 'cart-item';
                 itemEl.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" onerror="this.src='https://placehold.co/100x100?text=Product'">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image" onerror="this.src='https://placehold.co/100x100?text=Product'">
                     <div class="cart-item-details">
-                        <h4>${item.name}</h4>
+                        <h4 class="cart-item-name">${item.name}</h4>
                         <div class="cart-item-price">₹${item.price}</div>
                         <div class="cart-item-actions">
-                            <button onclick="updateQuantity(${item.id}, -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button onclick="updateQuantity(${item.id}, 1)">+</button>
-                            <i class="fas fa-trash trash-btn" onclick="removeFromCart(${item.id})"></i>
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span class="cart-item-quantity">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button class="remove-item trash-btn" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
                 `;
@@ -158,7 +158,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function showMessage(msg, type = 'success') {
         if (!successMessage) return;
         successMessage.querySelector('span').textContent = msg;
-        successMessage.style.background = type === 'success' ? '#28a745' : '#dc3545';
+        successMessage.classList.remove('error');
+        if (type === 'error') {
+            successMessage.classList.add('error');
+        }
         successMessage.classList.add('show');
         setTimeout(() => successMessage.classList.remove('show'), 3000);
     }
