@@ -10,12 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const EMAILJS_PUBLIC_KEY = "OlVciViSI0LWBnEA9";
     // ----------------------------------------------- //
 
-    // --- PRODUCT DATA (ID 3 is the Combo) ---
+    // --- UPDATED PRODUCT DATA ---
     const products = {
-        cream: { id: 1, name: "Glowtiqa Advance Whitening Cream", price: 2000, image: "gtiqa.jpg" },
-        soap: { id: 2, name: "Glowtiqa Skin Whitening Soap", price: 599, image: "soap.jpg" },
-        combo: { id: 3, name: "Ultimate Whitening Kit (Cream + Soap)", price: 2200, image: "combo.jpg" } ,
-        capsule: { id: 4, name: "Whitening Booster 1200MG", price: 3000, image: "capsule.jpg" } // Add this line!
+        cream: { id: 1, name: "Advance Whitening Cream", price: 2000, image: "gtiqa.jpg" },
+        soap: { id: 2, name: "Skin Whitening Soap", price: 600, image: "soap.jpg" },
+        combo: { id: 3, name: "The Signature Glow Duo", price: 2200, image: "combo1.jpg" },
+        capsule: { id: 4, name: "Whitening Booster 1200MG", price: 3000, image: "capsule.jpg" },
+        megaCombo: { id: 5, name: "The Prestige Radiance Collection", price: 5000, image: "mega-combo.jpg" } 
     };
 
     // Load Cart
@@ -25,333 +26,288 @@ document.addEventListener('DOMContentLoaded', function() {
     const cartIcon = document.getElementById('cartIcon');
     const cartSidebar = document.getElementById('cartSidebar');
     const closeCart = document.getElementById('closeCart');
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    const cartCount = document.querySelector('.cart-count');
-    const messagePopup = document.getElementById('successMessage');
-    const checkoutBtn = document.getElementById('checkoutBtn');
-    
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const closeMenu = document.getElementById('closeMenu');
-    const mobileNav = document.getElementById('mobileNav');
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartCountEl = document.querySelector('.cart-count');
     const navOverlay = document.getElementById('navOverlay');
-    const reviewForm = document.getElementById('reviewForm');
-    const reviewsList = document.getElementById('reviewsList');
+    const successMessage = document.getElementById('successMessage');
+    const checkoutBtn = document.getElementById('checkoutBtn');
 
-    // ==============================================
-    // 1. ADD TO CART FUNCTIONS (The Fix)
-    // ==============================================
+    // --- Mobile Menu Elements ---
+    const mobileMenuIcon = document.querySelector('.mobile-menu i');
+    const mobileNav = document.getElementById('mobileNav');
+    const closeMenuBtn = document.getElementById('closeMenu');
 
-    // Function 1: "Add Combo to Cart" (Linked to HTML onclick)
-    window.addComboToCart = function() {
-        addToCart(products.combo, 1);
+    // --- Mobile Menu Logic ---
+    if (mobileMenuIcon) {
+        mobileMenuIcon.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            navOverlay.classList.add('active');
+        });
+    }
+
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+        });
+    }
+
+    // --- Cart Sidebar Logic ---
+    if (cartIcon) {
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('active');
+            navOverlay.classList.add('active');
+            updateCartUI();
+        });
+    }
+
+    if (closeCart) {
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            navOverlay.classList.remove('active');
+        });
+    }
+
+    if (navOverlay) {
+        navOverlay.addEventListener('click', () => {
+            cartSidebar.classList.remove('active');
+            mobileNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+        });
+    }
+
+    // --- Core Cart Functions ---
+    function saveCart() {
+        localStorage.setItem('glowtiqaCart', JSON.stringify(cart));
+        updateCartUI();
+    }
+
+    window.addToCart = function(product, quantity = 1) {
+        const existingItem = cart.find(item => item.id === product.id);
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cart.push({ ...product, quantity: quantity });
+        }
+        saveCart();
+        showMessage("Added to Cart!", "success");
+        cartSidebar.classList.add('active');
+        navOverlay.classList.add('active');
     };
 
-    // Function 2: "Buy Now" (Direct Checkout)
-    window.buyNow = function(productKey) {
-        let product = products[productKey];
-        let qty = 1;
+    window.removeFromCart = function(id) {
+        cart = cart.filter(item => item.id !== id);
+        saveCart();
+    };
 
-        // Try to find a quantity input if it exists
-        const qtyInput = document.getElementById(`${productKey}Quantity`);
-        if (qtyInput) {
-            qty = parseInt(qtyInput.value) || 1;
+    window.updateQuantity = function(id, delta) {
+        const item = cart.find(item => item.id === id);
+        if (item) {
+            item.quantity += delta;
+            if (item.quantity <= 0) removeFromCart(id);
+            else saveCart();
+        }
+    };
+
+    function updateCartUI() {
+        if (!cartItemsContainer || !cartTotalEl || !cartCountEl) return;
+        
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+        let count = 0;
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>';
+        } else {
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                count += item.quantity;
+                
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" onerror="this.src='https://placehold.co/100x100?text=Product'">
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <div class="cart-item-price">₹${item.price}</div>
+                        <div class="cart-item-actions">
+                            <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <i class="fas fa-trash trash-btn" onclick="removeFromCart(${item.id})"></i>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemEl);
+            });
         }
 
-        addToCart(product, qty);
+        cartTotalEl.textContent = `₹${total}`;
+        cartCountEl.textContent = count;
         
-        // Force sidebar open to show cart immediately
-        setTimeout(() => {
-            if (cartSidebar) cartSidebar.classList.add('active');
-        }, 100);
+        if (count > 0) {
+            cartCountEl.style.display = 'flex';
+            cartCountEl.classList.add('pop');
+            setTimeout(() => cartCountEl.classList.remove('pop'), 300);
+        } else {
+            cartCountEl.style.display = 'none';
+        }
+    }
+
+    function showMessage(msg, type = 'success') {
+        if (!successMessage) return;
+        successMessage.querySelector('span').textContent = msg;
+        successMessage.style.background = type === 'success' ? '#28a745' : '#dc3545';
+        successMessage.classList.add('show');
+        setTimeout(() => successMessage.classList.remove('show'), 3000);
+    }
+
+    // --- Add to Cart Event Listeners ---
+    // Cream
+    if (document.getElementById('addCreamToCart')) {
+        document.getElementById('addCreamToCart').addEventListener('click', () => addToCart(products.cream));
+    }
+    // Soap
+    if (document.getElementById('addSoapToCart')) {
+        document.getElementById('addSoapToCart').addEventListener('click', () => addToCart(products.soap));
+    }
+    // Capsule
+    if (document.getElementById('addCapsuleToCart')) {
+        document.getElementById('addCapsuleToCart').addEventListener('click', () => addToCart(products.capsule));
+    }
+
+    // Combo / Duo
+    window.addComboToCart = function() {
+        const qtyInput = document.getElementById('comboQuantity');
+        const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+        addToCart(products.combo, qty);
     };
 
-    // Function 3: "Add to Cart" for Individual Products (Cream/Soap)
-    const addCreamBtn = document.getElementById('addCreamToCart');
-    if (addCreamBtn) { 
-        addCreamBtn.addEventListener('click', () => {
-            const qtyInput = document.getElementById('creamQuantity');
+    // Mega Combo / Prestige
+    if (document.getElementById('addMegaComboToCart')) {
+        document.getElementById('addMegaComboToCart').addEventListener('click', () => {
+            const qtyInput = document.getElementById('megaComboQuantity');
             const qty = qtyInput ? parseInt(qtyInput.value) : 1;
-            addToCart(products.cream, qty);
+            addToCart(products.megaCombo, qty);
         });
     }
 
-    const addSoapBtn = document.getElementById('addSoapToCart');
-    if (addSoapBtn) { 
-        addSoapBtn.addEventListener('click', () => {
-            const qtyInput = document.getElementById('soapQuantity');
-            const qty = qtyInput ? parseInt(qtyInput.value) : 1;
-            addToCart(products.soap, qty);
-        });
-    }
+    // --- Direct Buy Now Function ---
+    window.buyNow = function(productKey) {
+        cart = []; // Clear cart
+        let qty = 1;
+        
+        // Check if there's a quantity input for this specific product
+        if (productKey === 'combo') {
+            const qtyInput = document.getElementById('comboQuantity');
+            if (qtyInput) qty = parseInt(qtyInput.value);
+        } else if (productKey === 'megaCombo') {
+            const qtyInput = document.getElementById('megaComboQuantity');
+            if (qtyInput) qty = parseInt(qtyInput.value);
+        } else if (productKey === 'capsule') {
+            const qtyInput = document.getElementById('capsuleQuantity');
+            if (qtyInput) qty = parseInt(qtyInput.value);
+        }
 
-    const addCapsuleBtn = document.getElementById('addCapsuleToCart');
-if (addCapsuleBtn) { 
-    addCapsuleBtn.addEventListener('click', () => {
-        const qtyInput = document.getElementById('capsuleQuantity');
-        const qty = qtyInput ? parseInt(qtyInput.value) : 1;
-        addToCart(products.capsule, qty);
-    });
-}
+        addToCart(products[productKey], qty);
+        
+        // Auto open cart
+        if(cartSidebar) cartSidebar.classList.add('active');
+        if(navOverlay) navOverlay.classList.add('active');
+    };
 
-    // ==============================================
-    // 2. CHECKOUT LOGIC (Razorpay + Backend)
-    // ==============================================
+    // --- Razorpay & EmailJS Checkout Logic ---
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', async () => {
-            if (cart.length === 0) {
-                showMessage('Your cart is empty!', 'error');
-                return;
+            if (cart.length === 0) return showMessage('Your cart is empty', 'error');
+
+            const custName = document.getElementById('custName').value.trim();
+            const custPhone = document.getElementById('custPhone').value.trim();
+            const custAddress = document.getElementById('custAddress').value.trim();
+
+            if (!custName || !custPhone || !custAddress) {
+                return showMessage('Please fill all shipping details', 'error');
             }
 
-            const customerName = document.getElementById('custName').value;
-            const customerPhone = document.getElementById('custPhone').value;
-            const customerAddress = document.getElementById('custAddress').value;
-
-            if (!customerName || !customerPhone || !customerAddress) {
-                showMessage('Please fill in all shipping details.', 'error');
-                return;
-            }
-
+            checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             checkoutBtn.disabled = true;
-            checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Order...';
 
             try {
-                // Create Order on Backend
+                // 1. Create order on backend
                 const response = await fetch(`${BACKEND_URL}/create-order`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ cart: cart }),
+                    body: JSON.stringify({ cart })
                 });
-                
-                if (!response.ok) throw new Error('Failed to create order.');
-                const order = await response.json();
 
-                // Open Razorpay
-                var options = {
-                    "key": RAZORPAY_KEY_ID,
-                    "amount": order.amount,
-                    "currency": "INR",
-                    "name": "Glowtiqa Paris",
-                    "description": "Skincare Purchase",
-                    "image": "logo_v2.png",
-                    "order_id": order.id,
-                    "prefill": {
-                        "name": customerName,
-                        "email": "customer@example.com", 
-                        "contact": customerPhone
-                    },
-                    "theme": { "color": "#b68d40" },
-                    "handler": function (response) {
-                        showMessage('Payment successful! Sending confirmation...');
+                if (!response.ok) throw new Error('Failed to create order on server');
+                const orderData = await response.json();
+
+                // 2. Format order details for Email
+                let orderDetailsHTML = cart.map(item => `${item.name} (x${item.quantity}) - ₹${item.price * item.quantity}`).join('<br>');
+                let totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+                // 3. Open Razorpay
+                const options = {
+                    key: RAZORPAY_KEY_ID,
+                    amount: orderData.amount,
+                    currency: "INR",
+                    name: "Glowtiqa Paris",
+                    description: "Premium Skincare Purchase",
+                    image: "logo_v2.png", 
+                    order_id: orderData.id,
+                    handler: function (response) {
                         
-                        // Prepare Email
-                        let orderItemsText = "";
-                        let totalAmount = 0;
-                        cart.forEach(item => {
-                            orderItemsText += `${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toFixed(2)}<br>`;
-                            totalAmount += item.price * item.quantity;
-                        });
-
+                        // Payment Success - Send Emails
                         const templateParams = {
-                            payment_id: response.razorpay_payment_id,
-                            order_id: response.razorpay_order_id,
-                            customer_name: customerName,
-                            customer_phone: customerPhone,
-                            shipping_address: customerAddress, 
-                            order_items: orderItemsText,
-                            total_amount: totalAmount.toFixed(2)
+                            to_name: "Glowtiqa Admin",
+                            customer_name: custName,
+                            customer_phone: custPhone,
+                            customer_address: custAddress,
+                            order_details: orderDetailsHTML,
+                            total_amount: `₹${totalAmount}`,
+                            payment_id: response.razorpay_payment_id
                         };
 
-                        // Send Email
-                        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
-                            .finally(function() {
+                        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                            .then(() => {
                                 cart = [];
                                 saveCart();
-                                window.location.href = `/thanks.html?payment_id=${response.razorpay_payment_id}`;
+                                cartSidebar.classList.remove('active');
+                                navOverlay.classList.remove('active');
+                                alert("Payment Successful! Your order has been placed. We will contact you shortly.");
+                            }, (error) => {
+                                console.error("EmailJS Error:", error);
+                                alert("Payment successful, but there was an issue notifying the store. Please contact support on WhatsApp.");
                             });
                     },
-                    "modal": {
-                        "ondismiss": function() {
-                            showMessage('Payment was cancelled.', 'error');
+                    prefill: {
+                        name: custName,
+                        contact: custPhone
+                    },
+                    theme: { color: "#b68d40" },
+                    modal: {
+                        ondismiss: function() {
+                            checkoutBtn.innerHTML = '<i class="fas fa-lock"></i> Secure Checkout';
                             checkoutBtn.disabled = false;
-                            checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
+                            showMessage("Payment cancelled", "error");
                         }
                     }
                 };
-                var rzp1 = new Razorpay(options);
-                rzp1.on('payment.failed', function (response) {
-                    showMessage(response.error.description, 'error');
-                    checkoutBtn.disabled = false;
-                    checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
-                });
-                rzp1.open();
+
+                const rzp = new Razorpay(options);
+                rzp.open();
 
             } catch (error) {
-                showMessage(error.message, 'error');
+                console.error(error);
+                showMessage("Checkout failed. Try again.", "error");
+                checkoutBtn.innerHTML = '<i class="fas fa-lock"></i> Secure Checkout';
                 checkoutBtn.disabled = false;
-                checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Pay Now';
             }
         });
     }
 
-    // ==============================================
-    // 3. CART UTILITIES & UI
-    // ==============================================
-    function updateCartCount() {
-        if (!cartCount) return;
-        const count = cart.reduce((total, item) => total + item.quantity, 0);
-        cartCount.textContent = count;
-    }
-    
-    function updateCartDisplay() {
-        if (!cartItems || !cartTotal) return;
-        if (cart.length === 0) {
-            cartItems.innerHTML = '<div class="empty-cart" style="text-align:center; padding:20px; color:#777;"><i class="fas fa-shopping-cart" style="font-size:2rem; margin-bottom:10px;"></i><p>Your cart is empty</p></div>';
-            cartTotal.textContent = '₹0.00';
-            return;
-        }
-        let total = 0;
-        let itemsHTML = '';
-        cart.forEach(item => {
-            total += item.price * item.quantity;
-            itemsHTML += `
-                <div class="cart-item" data-id="${item.id}">
-                    <img src="${item.image}" alt="${item.name}" class="cart-item-image" onerror="this.src='https://placehold.co/80x80/f9f5eb/b68d40?text=Glowtiqa'">
-                    <div class="cart-item-details">
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">₹${item.price}</div>
-                        <div class="cart-item-actions">
-                            <button class="quantity-btn decrease-quantity">-</button>
-                            <span class="cart-item-quantity">${item.quantity}</span>
-                            <button class="quantity-btn increase-quantity">+</button>
-                            <button class="remove-item"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>`;
-        });
-        cartItems.innerHTML = itemsHTML;
-        cartTotal.textContent = `₹${total.toFixed(2)}`;
-        attachCartItemListeners();
-    }
-
-    function attachCartItemListeners() {
-        document.querySelectorAll('.decrease-quantity').forEach(btn => btn.addEventListener('click', function() { modifyQuantity(parseInt(this.closest('.cart-item').dataset.id), -1); }));
-        document.querySelectorAll('.increase-quantity').forEach(btn => btn.addEventListener('click', function() { modifyQuantity(parseInt(this.closest('.cart-item').dataset.id), 1); }));
-        document.querySelectorAll('.remove-item').forEach(btn => btn.addEventListener('click', function() { removeFromCart(parseInt(this.closest('.cart-item').dataset.id)); }));
-    }
-
-    function addToCart(product, quantity = 1) {
-        const existingItem = cart.find(item => item.id === product.id);
-        if (existingItem) { existingItem.quantity += quantity; } 
-        else { cart.push({ ...product, quantity: quantity }); }
-        saveCart();
-        showMessage("Added to Cart!", 'success');
-        
-        // Ensure sidebar opens
-        if (cartSidebar) cartSidebar.classList.add('active');
-    }
-    
-    function removeFromCart(productId) {
-        cart = cart.filter(item => item.id !== productId);
-        saveCart();
-    }
-    
-    function modifyQuantity(productId, change) {
-        const item = cart.find(item => item.id === productId);
-        if (item) {
-            item.quantity += change;
-            if (item.quantity < 1) { removeFromCart(productId); } 
-            else { saveCart(); }
-        }
-    }
-    
-    function saveCart() {
-        localStorage.setItem('glowtiqaCart', JSON.stringify(cart));
-        updateCartCount();
-        updateCartDisplay();
-    }
-    
-    function showMessage(msg, type = 'success') {
-        if (!messagePopup) return;
-        messagePopup.querySelector('span').textContent = msg;
-        messagePopup.classList.toggle('error', type === 'error');
-        messagePopup.classList.add('show');
-        setTimeout(() => { messagePopup.classList.remove('show'); }, 3000);
-    }
-    
-    // --- Mobile Menu & Navigation ---
-    if (mobileMenu) { mobileMenu.addEventListener('click', () => {
-        if(mobileNav) mobileNav.classList.add('active');
-        if(navOverlay) navOverlay.classList.add('active');
-    });}
-    
-    function closeMobileMenu() {
-        if (mobileNav) mobileNav.classList.remove('active');
-        if (navOverlay) navOverlay.classList.remove('active');
-    }
-    
-    if (closeMenu) closeMenu.addEventListener('click', closeMobileMenu);
-    if (navOverlay) navOverlay.addEventListener('click', closeMobileMenu);
-    document.querySelectorAll('.mobile-nav a').forEach(l => l.addEventListener('click', closeMobileMenu));
-    
-    if (cartIcon) { cartIcon.addEventListener('click', () => { if(cartSidebar) cartSidebar.classList.add('active'); }); }
-    if (closeCart) { closeCart.addEventListener('click', () => { if(cartSidebar) cartSidebar.classList.remove('active'); }); }
-    
-    // --- Quantity Buttons (+/-) ---
-    ['Cream', 'Soap', 'Capsule'].forEach(type => {
-        const inc = document.getElementById(`increase${type}`);
-        const dec = document.getElementById(`decrease${type}`);
-        const input = document.getElementById(`${type.toLowerCase()}Quantity`);
-        if(inc && input) inc.addEventListener('click', () => input.value = parseInt(input.value) + 1);
-        if(dec && input) dec.addEventListener('click', () => { if(parseInt(input.value) > 1) input.value = parseInt(input.value) - 1; });
-    });
-
-    // --- Reviews System ---
-    function loadReviews() {
-        if (!reviewsList) return;
-        let reviews = JSON.parse(localStorage.getItem('glowtiqaReviews')) || [];
-        if (reviews.length === 0) {
-            reviews = [
-                { name: "Sarah J.", date: "March 15, 2025", rating: 5, text: "My dark spots faded significantly!" },
-                { name: "Michael T.", date: "Feb 28, 2025", rating: 4, text: "Great soap, leaves skin fresh." }
-            ];
-            localStorage.setItem('glowtiqaReviews', JSON.stringify(reviews));
-        }
-        reviewsList.innerHTML = '';
-        reviews.forEach(r => {
-            let stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-            const div = document.createElement('div');
-            div.className = 'review-item';
-            div.innerHTML = `
-                <div class="review-header" style="display:flex; justify-content:space-between;">
-                    <h4>${r.name} <span style="font-size:0.8rem; color:#777; font-weight:normal;">${r.date}</span></h4>
-                    <div class="review-stars">${stars}</div>
-                </div>
-                <p style="color:#555;">${r.text}</p>`;
-            reviewsList.appendChild(div);
-        });
-    }
-
-    if (reviewForm) {
-        reviewForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('reviewerName').value;
-            const text = document.getElementById('reviewText').value;
-            const ratingEl = document.querySelector('input[name="rating"]:checked');
-            const rating = ratingEl ? parseInt(ratingEl.value) : 5;
-            const newReview = { name: name, rating: rating, text: text, date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) };
-            let reviews = JSON.parse(localStorage.getItem('glowtiqaReviews')) || [];
-            reviews.unshift(newReview);
-            localStorage.setItem('glowtiqaReviews', JSON.stringify(reviews));
-            loadReviews();
-            reviewForm.reset();
-            showMessage("Review Submitted!", 'success');
-        });
-    }
-
-    // Init
-    loadReviews();
-    updateCartCount();
-    updateCartDisplay();
+    // Initialize UI on load
+    updateCartUI();
 });

@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glowtiqa Paris | Premium Whitening & Skincare Solutions</title>
-    <meta name="description" content="Discover Glowtiqa Paris premium skincare. Shop our Advance Whitening Cream, Soap, Whitening Booster Capsules, and Combo Kits for radiant, spotless skin.">
+    <meta name="description" content="Discover Glowtiqa Paris premium skincare. Shop our Advance Whitening Cream, Soap, Whitening Booster Capsules, and our Prestige Radiance Collections for spotless skin.">
     <meta name="keywords" content="Glowtiqa, whitening cream, dark spot remover, skincare paris, whitening soap, acne removal, whitening capsules">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -45,60 +45,26 @@
         .product-card-container, 
         .shop-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; /* Reduced from 300px for better mobile fit */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; 
             gap: 20px !important;
         }
 
         /* Mobile specific adjustments */
         @media (max-width: 768px) {
-            /* Adjust Hero Text */
-            .hero h2 {
-                font-size: 2rem !important;
-            }
-            .hero p {
-                font-size: 1rem !important;
-            }
-            .hero {
-                padding: 3rem 5% !important;
-                background-position: center !important;
-            }
-
-            /* Adjust Section Padding */
-            section {
-                padding: 2.5rem 1rem !important;
-            }
-
-            /* Make Cart Full Width on Mobile */
-            .cart-sidebar {
-                width: 100% !important;
-                right: -100% !important;
-            }
-            .cart-sidebar.active {
-                right: 0 !important;
-            }
-
-            /* Stack Unified Cards properly */
-            .unified-card {
-                flex-direction: column !important;
-            }
-            .card-image-side, .card-details-side {
-                width: 100% !important;
-                flex: none !important;
-            }
-            .card-image-side img {
-                height: 250px !important; /* Smaller height for mobile images */
-            }
+            .hero h2 { font-size: 2rem !important; }
+            .hero p { font-size: 1rem !important; }
+            .hero { padding: 3rem 5% !important; background-position: center !important; }
+            section { padding: 2.5rem 1rem !important; }
+            .cart-sidebar { width: 100% !important; right: -100% !important; }
+            .cart-sidebar.active { right: 0 !important; }
+            .unified-card { flex-direction: column !important; }
+            .card-image-side, .card-details-side { width: 100% !important; flex: none !important; }
+            .card-image-side img { height: 250px !important; }
         }
 
-        /* Very Small Screens (iPhone SE etc) */
         @media (max-width: 380px) {
-            .product-card-container, .shop-grid {
-                grid-template-columns: 1fr !important; /* Single column force */
-            }
-            .cta-btn {
-                width: 100%;
-                justify-content: center;
-            }
+            .product-card-container, .shop-grid { grid-template-columns: 1fr !important; }
+            .cta-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -204,8 +170,8 @@
             <h2>Reveal Your Natural Radiance</h2>
             <p>Experience the power of advanced French formulation. Glowtiqa Paris strengthens, protects, and brightens your skin, removing dark spots and restoring your youthful glow.</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                <a href="#combo" class="cta-btn">
-                    Shop Best Seller <i class="fas fa-arrow-down"></i>
+                <a href="#collections" class="cta-btn">
+                    Shop Collections <i class="fas fa-arrow-down"></i>
                 </a>
                 <a href="about.html" class="cta-btn" style="background: white; color: var(--primary); border: 2px solid var(--primary);">
                     Read Reviews
@@ -214,37 +180,84 @@
         </div>
     </section>
 
-    <section class="combo-section" id="combo">
+    <section class="combo-section" id="collections">
         <div class="section-header">
-            <h2>Our Best Seller</h2>
-            <p>The complete treatment kit loved by thousands</p>
+            <h2>Our Signature Collections</h2>
+            <p>Curated treatment kits loved by thousands</p>
         </div>
 
-        <div class="product-card-container">
-            <div class="unified-card" style="border: 2px solid #b68d40;">
+        <div class="product-card-container" style="margin-bottom: 3rem;">
+            <div class="unified-card reverse" style="border: 2px solid #b68d40; box-shadow: 0 10px 30px rgba(182, 141, 64, 0.15);">
                 
-                <div class="card-image-side">
-                    <a href="combo.html">
-                        <img src="combo1.jpg" alt="Whitening Combo Kit" onerror="this.src='https://placehold.co/600x600/b68d40/ffffff?text=Ultimate+Combo+Kit'">
+                <div class="card-image-side" style="position: relative;">
+                    <div style="position: absolute; top: 15px; left: 15px; background: #dc3545; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; z-index: 5;">
+                        SAVE ₹3497
+                    </div>
+                    <a href="mega-combo.html">
+                        <img src="mega-combo.jpg" alt="The Prestige Radiance Collection" onerror="this.src='https://placehold.co/600x600/f9f5eb/b68d40?text=Prestige+Collection'">
                     </a>
                 </div>
 
                 <div class="card-details-side">
+                    <span style="color: #b68d40; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">The Ultimate Transformation</span>
+                    <a href="mega-combo.html" style="text-decoration: none; color: inherit;">
+                        <h3 style="margin-bottom: 0.5rem; margin-top: 5px; font-size: 1.8rem;">The Prestige Radiance Collection</h3>
+                    </a>
+                    <div class="stars" style="margin-bottom: 10px;">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span style="color: #777; font-size: 0.9rem;">(120+ Reviews)</span>
+                    </div>
+                    <p style="color: #555; margin-bottom: 1.5rem;">
+                        A complete 360-degree approach to flawless skin. This powerhouse trio treats your skin from the inside out, featuring our <strong>Whitening Booster Capsules</strong>, <strong>Advance Whitening Cream</strong>, and <strong>Deep Cleansing Soap</strong>.
+                    </p>
+                    
+                    <ul style="list-style: none; margin-bottom: 1.5rem; color: #555;">
+                        <li><i class="fas fa-check" style="color: var(--primary); margin-right: 8px;"></i> Total cellular regeneration</li>
+                        <li><i class="fas fa-check" style="color: var(--primary); margin-right: 8px;"></i> Full-body skin brightening</li>
+                        <li><i class="fas fa-check" style="color: var(--primary); margin-right: 8px;"></i> Includes all 3 premium products</li>
+                    </ul>
+                    
+                    <div class="price-section">
+                        <div class="price" style="color: #b68d40;">₹5000 <span class="original-price">₹8497</span> <span class="discount">41% OFF</span></div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <button class="add-to-cart-btn" id="addMegaComboToCart" style="flex: 1; min-width: 180px;">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                        <a href="mega-combo.html" class="buy-now-btn" style="flex: 1; margin-top: 0; background: var(--dark); min-width: 180px;">
+                            <i class="fas fa-eye"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card-container">
+            <div class="unified-card" style="border: 1px solid #eee;">
+                
+                <div class="card-image-side">
+                    <a href="combo.html">
+                        <img src="combo1.jpg" alt="The Signature Glow Duo" onerror="this.src='https://placehold.co/600x600/f9f5eb/b68d40?text=Signature+Duo'">
+                    </a>
+                </div>
+
+                <div class="card-details-side">
+                    <span style="color: #b68d40; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Top Rated Routine</span>
                     <a href="combo.html" style="text-decoration: none; color: inherit;">
-                        <h3 style="margin-bottom: 0.5rem;">Ultimate Whitening Kit</h3>
+                        <h3 style="margin-bottom: 0.5rem; margin-top: 5px; font-size: 1.6rem;">The Signature Glow Duo</h3>
                     </a>
                     <div class="stars" style="margin-bottom: 10px;">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         <span style="color: #777; font-size: 0.9rem;">(500+ Reviews)</span>
                     </div>
                     <p style="color: #555; margin-bottom: 1.5rem;">
-                        Double the power, double the glow. This kit combines our <strong>Deep Cleansing Soap</strong> to prep your skin and our <strong>Advance Whitening Cream</strong> to repair and brighten.
+                        Double the power, double the glow. This essential kit combines our <strong>Deep Cleansing Soap</strong> to prep your skin and our <strong>Advance Whitening Cream</strong> to repair and brighten.
                     </p>
                     
                     <ul style="list-style: none; margin-bottom: 1.5rem; color: #555;">
                         <li><i class="fas fa-check" style="color: var(--primary); margin-right: 8px;"></i> Removes dark spots & acne marks</li>
                         <li><i class="fas fa-check" style="color: var(--primary); margin-right: 8px;"></i> Visible results in 4 weeks</li>
-                        <li><i class="fas fa-check" style="color: var(--primary); margin-right: 8px;"></i> Save ₹1798 on this bundle</li>
                     </ul>
                     
                     <div class="price-section">
@@ -273,11 +286,9 @@
         <div class="shop-grid" style="max-width: 1100px; margin: 0 auto; display: grid; gap: 30px;">
             
             <div class="unified-card" style="flex-direction: column; text-align: center; position: relative;">
-                
                 <div style="position: absolute; top: 15px; left: 15px; background: #28a745; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; z-index: 5; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
                     NEW ARRIVAL
                 </div>
-
                 <div class="card-image-side" style="padding: 0; background: #fcfcfc;">
                     <a href="capsule.html">
                         <img src="capsule.jpg" alt="Whitening Booster 1200MG" style="width: 100%; height: 300px; object-fit: cover;" onerror="this.src='https://placehold.co/400x400/fff/b68d40?text=Whitening+Booster'">
@@ -439,12 +450,13 @@
             </div>
             
             <div class="footer-col">
-                <h3>Shop</h3>
+                <h3>Shop Categories</h3>
                 <ul class="footer-links">
-                    <li><a href="cream.html">Whitening Cream</a></li>
-                    <li><a href="soap.html">Cleansing Soap</a></li>
-                    <li><a href="capsule.html">Whitening Booster</a></li>
-                    <li><a href="combo.html">Super Saver Combo</a></li>
+                    <li><a href="mega-combo.html">The Prestige Collection</a></li>
+                    <li><a href="combo.html">The Signature Glow Duo</a></li>
+                    <li><a href="cream.html">Advance Whitening Cream</a></li>
+                    <li><a href="soap.html">Skin Whitening Soap</a></li>
+                    <li><a href="capsule.html">Whitening Booster 1200MG</a></li>
                 </ul>
             </div>
 
