@@ -12,8 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glowtiqa Paris | Premium Whitening & Skincare Solutions</title>
-    <meta name="description" content="Discover Glowtiqa Paris premium skincare. Shop our Advance Whitening Cream, Soap, Whitening Booster Capsules, and our Prestige Radiance Collections for spotless skin.">
-    <meta name="keywords" content="Glowtiqa, whitening cream, dark spot remover, skincare paris, whitening soap, acne removal, whitening capsules">
+    <meta name="description" content="Discover Glowtiqa Paris premium skincare. Shop our Advance Whitening Cream, Soap, and Combo Kits for radiant, spotless skin.">
+    <meta name="keywords" content="Glowtiqa, whitening cream, dark spot remover, skincare paris, whitening soap, acne removal">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
@@ -45,7 +45,7 @@
         .product-card-container, 
         .shop-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
             gap: 20px !important;
         }
 
@@ -55,8 +55,6 @@
             .hero p { font-size: 1rem !important; }
             .hero { padding: 3rem 5% !important; background-position: center !important; }
             section { padding: 2.5rem 1rem !important; }
-            .cart-sidebar { width: 100% !important; right: -100% !important; }
-            .cart-sidebar.active { right: 0 !important; }
             .unified-card { flex-direction: column !important; }
             .card-image-side, .card-details-side { width: 100% !important; flex: none !important; }
             .card-image-side img { height: 250px !important; }
@@ -121,42 +119,6 @@
     
     <div class="nav-overlay" id="navOverlay"></div>
     
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Your Shopping Cart</h3>
-            <button class="close-cart" id="closeCart">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <div class="cart-items" id="cartItems">
-            <div class="empty-cart">
-                <i class="fas fa-shopping-cart"></i>
-                <p>Your cart is empty</p>
-            </div>
-        </div>
-                
-        <div class="cart-footer">
-            <div class="shipping-form">
-                <h4><i class="fas fa-map-marker-alt"></i> Shipping Details</h4>
-                <input type="text" id="custName" placeholder="Full Name" required>
-                <input type="tel" id="custPhone" placeholder="Phone Number" required>
-                <textarea id="custAddress" placeholder="Full Address (House No, Street, City, Pincode)" rows="3" required></textarea>
-            </div>
-
-            <div class="cart-total">
-                <span>Total Amount:</span>
-                <span id="cartTotal">₹0.00</span>
-            </div>
-            <button class="checkout-btn" id="checkoutBtn">
-                <i class="fas fa-lock"></i> Secure Checkout
-            </button>
-            <p style="text-align: center; font-size: 0.8rem; margin-top: 10px; color: #777;">
-                <i class="fas fa-shield-alt"></i> Payments secured by Razorpay
-            </p>
-        </div>
-    </div>
-    
     <div class="success-message" id="successMessage">
         <i class="fas fa-check-circle"></i>
         <span>Action Successful!</span>
@@ -171,7 +133,7 @@
             <p>Experience the power of advanced French formulation. Glowtiqa Paris strengthens, protects, and brightens your skin, removing dark spots and restoring your youthful glow.</p>
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <a href="#collections" class="cta-btn">
-                    Shop Collections <i class="fas fa-arrow-down"></i>
+                    Shop Best Seller <i class="fas fa-arrow-down"></i>
                 </a>
                 <a href="about.html" class="cta-btn" style="background: white; color: var(--primary); border: 2px solid var(--primary);">
                     Read Reviews
@@ -180,6 +142,11 @@
         </div>
     </section>
 
+    <section class="promo-banner" style="max-width: 1200px; margin: 2rem auto; padding: 0 5%;">
+        <a href="mega-combo.html" style="display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="banner.jpeg" alt="Glowtiqa Special Offer - Your Journey To Radiance Begins Here" style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: block;">
+        </a>
+    </section>
     <section class="combo-section" id="collections">
         <div class="section-header">
             <h2>Our Signature Collections</h2>
@@ -194,7 +161,7 @@
                         SAVE ₹3497
                     </div>
                     <a href="mega-combo.html">
-                        <img src="mega-combo.png" alt="The Prestige Radiance Collection" onerror="this.src='https://placehold.co/600x600/f9f5eb/b68d40?text=Prestige+Collection'">
+                        <img src="mega-combo.jpg" alt="The Prestige Radiance Collection" onerror="this.src='https://placehold.co/600x600/f9f5eb/b68d40?text=Prestige+Collection'">
                     </a>
                 </div>
 
@@ -353,7 +320,7 @@
                     <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
                         Daily deep cleanser with micro-exfoliation.
                     </p>
-                    <div class="price" style="margin-bottom: 1rem;">₹600 <span class="original-price" style="font-size: 1rem;">₹999</span></div>
+                    <div class="price" style="margin-bottom: 1rem;">₹599 <span class="original-price" style="font-size: 1rem;">₹999</span></div>
                     
                     <div style="display: flex; gap: 10px;">
                         <button class="add-to-cart-btn" id="addSoapToCart" style="padding: 0.8rem; font-size: 0.9rem;">
@@ -450,13 +417,11 @@
             </div>
             
             <div class="footer-col">
-                <h3>Shop Categories</h3>
+                <h3>Shop</h3>
                 <ul class="footer-links">
-                    <li><a href="mega-combo.html">The Prestige Collection</a></li>
-                    <li><a href="combo.html">The Signature Glow Duo</a></li>
-                    <li><a href="cream.html">Advance Whitening Cream</a></li>
-                    <li><a href="soap.html">Skin Whitening Soap</a></li>
-                    <li><a href="capsule.html">Whitening Booster 1200MG</a></li>
+                    <li><a href="cream.html">Whitening Cream</a></li>
+                    <li><a href="soap.html">Cleansing Soap</a></li>
+                    <li><a href="combo.html">Super Saver Combo</a></li>
                 </ul>
             </div>
 
@@ -464,8 +429,7 @@
                 <h3>Support</h3>
                 <ul class="footer-links">
                     <li><a href="about.html">About Us</a></li>
-                    <li><a href="policy.html">Shipping & Policies</a></li> 
-                    <li><a href="verify.html">Verify Product</a></li>
+                    <li><a href="policy.html">Shipping & Policies</a></li> <li><a href="verify.html">Verify Product</a></li>
                     <li><a href="contact.html">Contact Support</a></li>
                 </ul>
             </div>

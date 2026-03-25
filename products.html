@@ -69,7 +69,6 @@
             line-height: 1.6;
         }
 
-        /* Active State */
         .faq-item.active .faq-question {
             color: var(--primary);
         }
@@ -141,25 +140,6 @@
     
     <div class="nav-overlay" id="navOverlay"></div>
 
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Your Cart</h3>
-            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>
-        </div>
-        <div class="cart-footer">
-            <div class="shipping-form">
-                <h4>Shipping Details</h4>
-                <input type="text" id="custName" placeholder="Full Name" required>
-                <input type="tel" id="custPhone" placeholder="Phone Number" required>
-                <textarea id="custAddress" placeholder="Full Address (House No, Street, City, Pincode)" rows="3" required></textarea>
-            </div>
-            <div class="cart-total"><span>Total:</span><span id="cartTotal">₹0.00</span></div>
-            <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-lock"></i> Secure Checkout</button>
-        </div>
-    </div>
     <div class="success-message" id="successMessage"><i class="fas fa-check-circle"></i><span>Action Successful!</span></div>
 
     <section class="hero" style="min-height: 40vh; padding: 4rem 5% 2rem; background-position: center bottom;">
