@@ -24,7 +24,7 @@
     </script>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logo_v2.png" type="image/png">
+    <link rel="icon" href="image/logo_v2.png" type="image/png">
     
     <style>
         .routine-step {
@@ -106,7 +106,7 @@
     <header>
        <div class="logo">
            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none';">
+                <img src="image/logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
            </a>
        </div>
 
@@ -118,22 +118,23 @@
             <a href="verify.html" class="verify-btn desktop-verify">
                 <i class="fas fa-shield-alt"></i> Verify Authenticity
             </a>
-            <div class="cart-icon" id="cartIcon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">0</span>
-            </div>
         </nav>
         
-        <div class="mobile-menu">
-            <i class="fas fa-bars"></i>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" style="display: none;">0</span>
+            </div>
+            
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </header>
     
     <div class="mobile-nav" id="mobileNav">
         <button id="closeMenu">✖</button>
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <img src="logo_v2.png" alt="Glowtiqa" style="height: 50px;">
-        </div>
+        <div style="text-align: center; margin-bottom: 2rem; font-weight: bold; color: var(--primary);">Glowtiqa</div>
         <a href="index.html">Home</a>
         <a href="products.html" class="active">Shop Products</a>
         <a href="about.html">Customer Reviews</a>
@@ -141,7 +142,11 @@
         <a href="verify.html" class="mobile-verify-btn">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
-    </div>
+            <div class="cart-icon" id="cartIconMobile">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+        </div>
+</div>
     
     <div class="nav-overlay" id="navOverlay"></div>
 
@@ -180,7 +185,7 @@
                     <div style="position: absolute; top: 15px; left: 15px; background: #dc3545; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; z-index: 5;">
                         SAVE ₹3497
                     </div>
-                    <img src="mega-combo.png" alt="The Prestige Radiance Collection" onerror="this.src='https://placehold.co/600x600/f9f5eb/b68d40?text=Prestige+Collection'">
+                    <img src="image/mega-combo.png" alt="The Prestige Radiance Collection" onerror="this.src='https://placehold.co/600x600/f9f5eb/b68d40?text=Prestige+Collection'">
                 </div>
 
                 <div class="card-details-side">
@@ -289,7 +294,7 @@
                 </div>
             </div>
             <div style="flex: 1; min-width: 300px; text-align: center;">
-                <img src="logo_v2.png" alt="Glowtiqa Paris Seal" style="max-width: 250px; opacity: 0.8;">
+                <img src="image/logo_v2.png" alt="Glowtiqa Paris Seal" style="max-width: 250px; opacity: 0.8;">
             </div>
         </div>
     </section>
@@ -418,3 +423,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+

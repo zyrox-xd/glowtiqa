@@ -21,7 +21,7 @@
     </script>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logo_v2.png" type="image/png">
+    <link rel="icon" href="image/logo_v2.png" type="image/png">
     
     <style>
         /* Specific Styles for the Full Page Cart */
@@ -132,7 +132,7 @@
     <header>
        <div class="logo">
            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none';">
+                <img src="image/logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
            </a>
        </div>
 
@@ -142,20 +142,25 @@
             <a href="about.html">About & Reviews</a>
             <a href="contact.html">Contact</a>
             <a href="verify.html" class="verify-btn desktop-verify">
-                <i class="fas fa-shield-alt"></i> Verify
+                <i class="fas fa-shield-alt"></i> Verify Authenticity
             </a>
         </nav>
         
-        <div class="mobile-menu">
-            <i class="fas fa-bars"></i>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" style="display: none;">0</span>
+            </div>
+            
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
     </header>
 
     <div class="mobile-nav" id="mobileNav">
         <button id="closeMenu">✖</button>
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <img src="logo_v2.png" alt="Glowtiqa" style="height: 50px;">
-        </div>
+        <div style="text-align: center; margin-bottom: 2rem; font-weight: bold; color: var(--primary);">Glowtiqa</div>
         <a href="index.html">Home</a>
         <a href="products.html">Shop Products</a>
         <a href="about.html">Customer Reviews</a>
@@ -234,3 +239,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+
