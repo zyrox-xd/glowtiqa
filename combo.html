@@ -24,7 +24,7 @@
     </script>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="image/logo_v2.png" type="image/png">
+    <link rel="icon" href="logo_v2.png" type="image/png">
     
     <style>
         .routine-step {
@@ -106,7 +106,7 @@
     <header>
        <div class="logo">
            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                <img src="image/logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none';">
            </a>
        </div>
 
@@ -121,7 +121,7 @@
         </nav>
         
         <div style="display: flex; align-items: center; gap: 20px;">
-            <div class="cart-icon" id="cartIcon">
+            <div class="cart-icon" id="cartIcon" style="cursor: pointer;">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count" style="display: none;">0</span>
             </div>
@@ -134,7 +134,9 @@
     
     <div class="mobile-nav" id="mobileNav">
         <button id="closeMenu">✖</button>
-        <div style="text-align: center; margin-bottom: 2rem; font-weight: bold; color: var(--primary);">Glowtiqa</div>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <img src="logo_v2.png" alt="Glowtiqa" style="height: 50px;">
+        </div>
         <a href="index.html">Home</a>
         <a href="products.html" class="active">Shop Products</a>
         <a href="about.html">Customer Reviews</a>
@@ -142,33 +144,9 @@
         <a href="verify.html" class="mobile-verify-btn">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
-            <div class="cart-icon" id="cartIconMobile">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">0</span>
-        </div>
-</div>
+    </div>
     
     <div class="nav-overlay" id="navOverlay"></div>
-
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Your Cart</h3>
-            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>
-        </div>
-        <div class="cart-footer">
-            <div class="shipping-form">
-                <h4>Shipping Details</h4>
-                <input type="text" id="custName" placeholder="Full Name" required>
-                <input type="tel" id="custPhone" placeholder="Phone Number" required>
-                <textarea id="custAddress" placeholder="Full Address" rows="3" required></textarea>
-            </div>
-            <div class="cart-total"><span>Total:</span><span id="cartTotal">₹0.00</span></div>
-            <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-lock"></i> Secure Checkout</button>
-        </div>
-    </div>
     <div class="success-message" id="successMessage"><i class="fas fa-check-circle"></i><span>Action Successful!</span></div>
 
     <div style="max-width: 1100px; margin: 2rem auto 0; padding: 0 20px; font-size: 0.9rem; color: #777;">
@@ -185,7 +163,7 @@
                     <div style="position: absolute; top: 15px; left: 15px; background: #28a745; color: white; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.8rem; z-index: 5;">
                         BEST SELLER
                     </div>
-                    <img src="image/combo1.jpg" alt="The Signature Glow Duo" onerror="this.src='https://placehold.co/600x600/f9f5eb/b68d40?text=Signature+Duo'">
+                    <img src="combo1.jpg" alt="The Signature Glow Duo" onerror="this.src='https://placehold.co/600x600/f9f5eb/b68d40?text=Signature+Duo'">
                 </div>
 
                 <div class="card-details-side">
@@ -270,7 +248,7 @@
     <section class="about-section" style="background: var(--secondary); padding: 4rem 5%;">
         <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 3rem;">
             <div style="flex: 1; min-width: 300px; text-align: center;">
-                <img src="image/logo_v2.png" alt="Glowtiqa Paris Seal" style="max-width: 250px; opacity: 0.8;">
+                <img src="logo_v2.png" alt="Glowtiqa Paris Seal" style="max-width: 250px; opacity: 0.8;">
             </div>
             <div style="flex: 1; min-width: 300px;">
                 <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--dark);">The Science of Pairing</h2>
@@ -328,91 +306,24 @@
         </a>
     </div>
 
-   <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-col">
-                <h3>Glowtiqa Paris</h3>
-                <p>Glowtiqa offers premium skincare solutions, meticulously formulated to unveil your skin's natural radiance, restore youthful glow, and empower your confidence.</p>
-                <div class="footer-social">
-                    <a href="https://www.instagram.com/glowtiqa/" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/glowtiqa" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Shop Categories</h3>
-                <ul class="footer-links">
-                    <li><a href="mega-combo.html">The Prestige Collection</a></li>
-                    <li><a href="combo.html">The Signature Glow Duo</a></li>
-                    <li><a href="cream.html">Advance Whitening Cream</a></li>
-                    <li><a href="soap.html">Skin Whitening Soap</a></li>
-                    <li><a href="capsule.html">Whitening Booster 1200MG</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h3>Support</h3>
-                <ul class="footer-links">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="policy.html">Shipping & Policies</a></li> 
-                    <li><a href="verify.html">Verify Product</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Contact Us</h3>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                        <span>Paris, France</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone-alt contact-icon"></i>
-                        <a href="tel:+916361958069">+91 6361958069</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope contact-icon"></i>
-                        <a href="mailto:glowtiqa@gmail.com">glowtiqa@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+    <footer id="contact">
         <div class="copyright">
             &copy; 2025 Glowtiqa Paris. All rights reserved.
             <div class="developer-credit">
                 Developed <i class="fas fa-heart" style="color: #c5a880;"></i> by 
                 <a href="https://zomaxa.co" target="_blank">
                     <span class="zomaxa-logo">zomaxa.co</span>
-                    <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i>
                 </a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Quantity Controls Logic
-        const comboQty = document.getElementById('comboQuantity');
-        if (document.getElementById('increaseCombo')) {
-            document.getElementById('increaseCombo').addEventListener('click', () => {
-                let val = parseInt(comboQty.value);
-                if (val < 5) comboQty.value = val + 1;
-            });
-        }
-        if (document.getElementById('decreaseCombo')) {
-            document.getElementById('decreaseCombo').addEventListener('click', () => {
-                let val = parseInt(comboQty.value);
-                if (val > 1) comboQty.value = val - 1;
-            });
-        }
-
         // FAQ Toggle Logic
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
                 const parent = item.parentElement;
                 parent.classList.toggle('active');
-                
                 const answer = parent.querySelector('.faq-answer');
                 if (parent.classList.contains('active')) {
                     answer.style.maxHeight = answer.scrollHeight + "px";
@@ -422,9 +333,6 @@
             });
         });
     </script>
-    
     <script src="script.js"></script>
 </body>
 </html>
-
-

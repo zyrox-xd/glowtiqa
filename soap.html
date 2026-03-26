@@ -24,7 +24,7 @@
     </script>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="image/logo_v2.png" type="image/png">
+    <link rel="icon" href="logo_v2.png" type="image/png">
 </head>
 <body>
 
@@ -39,7 +39,7 @@
     <header>
        <div class="logo">
            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                <img src="image/logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none';">
            </a>
        </div>
 
@@ -54,7 +54,7 @@
         </nav>
         
         <div style="display: flex; align-items: center; gap: 20px;">
-            <div class="cart-icon" id="cartIcon">
+            <div class="cart-icon" id="cartIcon" style="cursor: pointer;">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count" style="display: none;">0</span>
             </div>
@@ -64,19 +64,12 @@
             </div>
         </div>
     </header>
-
-        <div class="cart-icon mobile-header-cart" id="cartIconMobileHeader">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">0</span>
-        </div>
-        <div class="mobile-menu">
-            <i class="fas fa-bars"></i>
-        </div>
-    </header>
     
     <div class="mobile-nav" id="mobileNav">
         <button id="closeMenu">✖</button>
-        <div style="text-align: center; margin-bottom: 2rem; font-weight: bold; color: var(--primary);">Glowtiqa</div>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <img src="logo_v2.png" alt="Glowtiqa" style="height: 50px;">
+        </div>
         <a href="index.html">Home</a>
         <a href="products.html" class="active">Shop Products</a>
         <a href="about.html">Customer Reviews</a>
@@ -84,47 +77,23 @@
         <a href="verify.html" class="mobile-verify-btn">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
-            <div class="cart-icon" id="cartIconMobile">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">0</span>
-        </div>
-</div>
+    </div>
     
     <div class="nav-overlay" id="navOverlay"></div>
-
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Your Cart</h3>
-            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>
-        </div>
-        <div class="cart-footer">
-            <div class="shipping-form">
-                <h4>Shipping Details</h4>
-                <input type="text" id="custName" placeholder="Full Name" required>
-                <input type="tel" id="custPhone" placeholder="Phone Number" required>
-                <textarea id="custAddress" placeholder="Full Address" rows="3" required></textarea>
-            </div>
-            <div class="cart-total"><span>Total:</span><span id="cartTotal">₹0.00</span></div>
-            <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-lock"></i> Secure Checkout</button>
-        </div>
-    </div>
     <div class="success-message" id="successMessage"><i class="fas fa-check-circle"></i><span>Action Successful!</span></div>
 
     <div style="max-width: 1100px; margin: 2rem auto 0; padding: 0 20px; font-size: 0.9rem; color: #777;">
         <a href="index.html" style="color: #777; text-decoration: none;">Home</a> / 
         <a href="products.html" style="color: #777; text-decoration: none;">Shop</a> / 
-        <span>Skin Whitening Soap</span>
+        <span>Whitening Soap</span>
     </div>
 
     <section class="product-section" style="margin-top: 1rem;">
         <div class="product-card-container">
-            <div class="unified-card">
+            <div class="unified-card reverse"> 
                 
                 <div class="card-image-side" style="background-color: #fffbf2;">
-                    <img src="image/soap.jpg" alt="Glowtiqa Soap" onerror="this.src='https://placehold.co/500x500/f9f5eb/b68d40?text=Glowtiqa+Soap'">
+                    <img src="soap.jpg" alt="Glowtiqa Skin Whitening Soap" onerror="this.src='https://placehold.co/500x500/fff/b68d40?text=Whitening+Soap'">
                 </div>
 
                 <div class="card-details-side">
@@ -135,22 +104,22 @@
                     </div>
 
                     <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.7;">
-                        More than just a cleanser. This soap provides <strong>micro-exfoliation</strong> to remove dead skin cells that make your skin look dull. It creates a rich lather that cleans deep pores without stripping natural oils.
+                        Reveal a brighter, cleaner complexion with every wash. Our premium skin whitening soap provides gentle micro-exfoliation to remove dead skin cells, clear congested pores, and visibly lighten dark spots.
                     </p>
-
+                    
                     <ul style="margin-bottom: 1.5rem; padding-left: 20px; color: #555;">
-                        <li style="margin-bottom: 8px;">Controls oil production and reduces acne.</li>
-                        <li style="margin-bottom: 8px;">Mild fragrance, suitable for daily use.</li>
-                        <li style="margin-bottom: 8px;">Prepares skin for better cream absorption.</li>
+                        <li style="margin-bottom: 8px;">Deeply cleanses and purifies pores.</li>
+                        <li style="margin-bottom: 8px;">Gently exfoliates dull, dead skin.</li>
+                        <li style="margin-bottom: 8px;">Controls acne-causing bacteria.</li>
                     </ul>
 
                     <div class="product-info" style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
-                        <div class="info-row"><div class="info-label">Net Weight:</div><div class="info-value">135 GMS</div></div>
-                        <div class="info-row"><div class="info-label">Usage:</div><div class="info-value">Morning & Night</div></div>
+                        <div class="info-row"><div class="info-label">Weight:</div><div class="info-value">135 Grams</div></div>
+                        <div class="info-row"><div class="info-label">Availability:</div><div class="info-value" style="color: #28a745;">In Stock</div></div>
                     </div>
                     
                     <div class="price-section">
-                        <div class="price">₹600<span class="original-price">₹999</span> <span class="discount">(40% OFF)</span></div>
+                        <div class="price">₹600 <span class="original-price">₹999</span> <span class="discount">(40% OFF)</span></div>
                     </div>
                     
                     <div class="quantity-selector">
@@ -175,24 +144,26 @@
         </div>
     </section>
 
-    <section class="soap-benefits" style="max-width: 1100px; margin: 0 auto 4rem; padding: 0 20px;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-            <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
-                <i class="fas fa-leaf" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                <h4>Gentle Cleansing</h4>
-                <p style="color: #666;">Balanced pH formula that cleanses deeply while maintaining your skin's natural moisture barrier.</p>
+    <section class="description-section" style="background: white; border: none; max-width: 1100px; margin: 0 auto 4rem;">
+        <div class="description-content">
+            <div class="how-to-use" style="background: var(--secondary); padding: 2.5rem; border-radius: 15px;">
+                <h3><i class="fas fa-shower"></i> How to Use</h3>
+                <p style="margin-bottom: 20px;">Perfect for daily use on both face and body.</p>
+                <ol class="steps">
+                    <li><strong>Lather:</strong> Wet the soap and rub it between your hands to create a rich lather.</li>
+                    <li><strong>Apply:</strong> Gently massage the lather onto your face and body.</li>
+                    <li><strong>Wait:</strong> Leave it on for 1-2 minutes to allow the active ingredients to penetrate.</li>
+                    <li><strong>Rinse:</strong> Rinse thoroughly with lukewarm water and pat dry.</li>
+                </ol>
             </div>
             
-            <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
-                <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                <h4>Acne Defence</h4>
-                <p style="color: #666;">Specifically formulated to help control excessive oil production and reduce acne breakouts over time.</p>
-            </div>
-            
-            <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center;">
-                <i class="fas fa-sun" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                <h4>Brightening Effect</h4>
-                <p style="color: #666;">Provides instant brightness by removing the layer of dead skin cells and environmental pollutants.</p>
+            <div class="description-text" style="padding: 1rem;">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">The Perfect Primer</h3>
+                <p>Did you know that standard body washes can leave a film on your skin that blocks expensive creams from working? The Glowtiqa Skin Whitening Soap is specifically formulated as the ultimate primer.</p>
+                <p>Its micro-exfoliating action clears away barriers, balancing the skin's pH so that our <strong>Advance Whitening Cream</strong> can penetrate deeper and work up to 3x faster.</p>
+                <div style="background: #fff3cd; color: #856404; padding: 15px; border-radius: 10px; border: 1px solid #ffeeba; margin-top: 20px;">
+                    <strong><i class="fas fa-lightbulb"></i> Pro Tip:</strong> For maximum whitening results, always follow up with our Advance Whitening Cream immediately after washing.
+                </div>
             </div>
         </div>
     </section>
@@ -208,62 +179,13 @@
         </a>
     </div>
 
-     <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-col">
-                <h3>Glowtiqa Paris</h3>
-                <p>Glowtiqa offers premium skincare solutions, meticulously formulated to unveil your skin's natural radiance, restore youthful glow, and empower your confidence.</p>
-                <div class="footer-social">
-                    <a href="https://www.instagram.com/glowtiqa/" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/glowtiqa" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Shop</h3>
-                <ul class="footer-links">
-                    <li><a href="cream.html">Whitening Cream</a></li>
-                    <li><a href="soap.html">Cleansing Soap</a></li>
-                    <li><a href="capsule.html">Whitening Booster</a></li>
-                    <li><a href="combo.html">Super Saver Combo</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h3>Support</h3>
-                <ul class="footer-links">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="policy.html">Shipping & Policies</a></li> <li><a href="verify.html">Verify Product</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Contact Us</h3>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                        <span>Paris, France</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone-alt contact-icon"></i>
-                        <a href="tel:+916361958069">+91 6361958069</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope contact-icon"></i>
-                        <a href="mailto:glowtiqa@gmail.com">glowtiqa@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+    <footer id="contact">
         <div class="copyright">
             &copy; 2025 Glowtiqa Paris. All rights reserved.
             <div class="developer-credit">
                 Developed <i class="fas fa-heart" style="color: #c5a880;"></i> by 
                 <a href="https://zomaxa.co" target="_blank">
                     <span class="zomaxa-logo">zomaxa.co</span>
-                    <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i>
                 </a>
             </div>
         </div>
@@ -272,5 +194,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const EMAILJS_PUBLIC_KEY = "OlVciViSI0LWBnEA9";
     // ----------------------------------------------- //
 
-    // --- PRODUCT DATA WITH COD ADVANCES ---
+    // --- COMPLETE PRODUCT DATA ---
     const products = {
         cream: { id: 1, name: "Advance Whitening Cream", price: 2000, advance: 400, image: "gtiqa.jpg" },
         soap: { id: 2, name: "Skin Whitening Soap", price: 600, advance: 200, image: "soap.jpg" },
@@ -43,15 +43,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- UI Listeners ---
     if (mobileMenuIcon) {
         mobileMenuIcon.addEventListener('click', () => {
-            mobileNav.classList.add('active');
-            navOverlay.classList.add('active');
+            if(mobileNav) mobileNav.classList.add('active');
+            if(navOverlay) navOverlay.classList.add('active');
         });
     }
 
     if (closeMenuBtn) {
         closeMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-            navOverlay.classList.remove('active');
+            if(mobileNav) mobileNav.classList.remove('active');
+            if(navOverlay) navOverlay.classList.remove('active');
         });
     }
 
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // NEW: Cart Icon Redirects to cart.html
+    // Cart Icon Redirects to cart.html
     if (cartIcon) {
         cartIcon.addEventListener('click', () => {
             window.location.href = 'cart.html';
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.removeFromCart = function(id) {
         cart = cart.filter(item => item.id !== id);
         saveCart();
-    };
+    }
 
     window.updateQuantity = function(id, delta) {
         const item = cart.find(item => item.id === id);
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <a href="products.html" class="cta-btn" style="padding: 10px 20px; font-size: 1rem;">Continue Shopping</a>
                 </div>`;
             if (cartTotalEl) cartTotalEl.textContent = `₹0.00`;
-            if (checkoutBtn) checkoutBtn.style.display = 'none'; // Hide checkout if empty
+            if (checkoutBtn) checkoutBtn.style.display = 'none'; 
             return;
         } 
         
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (cartTotalEl) cartTotalEl.textContent = `₹${total}`;
 
-        // COD Advance Logic
+        // COD Advance Logic Update
         const paymentMethodEl = document.querySelector('input[name="paymentMethod"]:checked');
         const paymentMethod = paymentMethodEl ? paymentMethodEl.value : 'full';
         const advanceRow = document.getElementById('cartAdvanceRow');
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => successMessage.classList.remove('show'), 3000);
     }
 
-    // --- Product Page Listeners ---
+    // --- Product Page Add-to-Cart Listeners ---
     if (document.getElementById('addCreamToCart')) document.getElementById('addCreamToCart').addEventListener('click', () => {
         addToCart(products.cream, parseInt(document.getElementById('creamQuantity')?.value || 1));
     });
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // NEW: "Buy Now" redirects to cart.html
+    // "Buy Now" redirects to cart.html
     window.buyNow = function(productKey) {
         cart = []; // Clear cart so they only buy this one item
         let qty = parseInt(document.getElementById(`${productKey}Quantity`)?.value || 1);
@@ -277,8 +277,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             .then(() => {
                                 cart = [];
                                 saveCart();
-                                alert(`Payment Successful! ${paymentMethod === 'cod' ? 'Your advance is paid.' : 'Your order is confirmed.'} We will contact you shortly.`);
-                                window.location.href = 'index.html'; // Send home after success
+                                // Send to thank you page after success
+                                window.location.href = `thanks.html?payment_id=${response.razorpay_payment_id}`;
                             }, (error) => {
                                 console.error("EmailJS Error:", error);
                                 alert("Payment successful, but issue notifying store. Contact support on WhatsApp.");
@@ -306,6 +306,26 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // --- FIX: ALL Product Page Quantity Buttons (+/-) ---
+    ['Cream', 'Soap', 'Capsule', 'Combo', 'MegaCombo'].forEach(type => {
+        const inc = document.getElementById(`increase${type}`);
+        const dec = document.getElementById(`decrease${type}`);
+        const input = document.getElementById(`${type.toLowerCase()}Quantity`);
+        
+        if(inc && input) {
+            inc.addEventListener('click', () => {
+                let val = parseInt(input.value);
+                if (val < 10) input.value = val + 1; // max 10 per order
+            });
+        }
+        if(dec && input) {
+            dec.addEventListener('click', () => { 
+                let val = parseInt(input.value);
+                if (val > 1) input.value = val - 1; 
+            });
+        }
+    });
 
     // Load initial cart UI
     updateCartUI();

@@ -24,7 +24,7 @@
     </script>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="image/logo_v2.png" type="image/png">
+    <link rel="icon" href="logo_v2.png" type="image/png">
 </head>
 <body>
 
@@ -39,7 +39,7 @@
     <header>
        <div class="logo">
            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                <img src="image/logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                <img src="logo_v2.png" alt="Glowtiqa Logo" height="40" onerror="this.style.display='none';">
            </a>
        </div>
 
@@ -54,7 +54,7 @@
         </nav>
         
         <div style="display: flex; align-items: center; gap: 20px;">
-            <div class="cart-icon" id="cartIcon">
+            <div class="cart-icon" id="cartIcon" style="cursor: pointer;">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="cart-count" style="display: none;">0</span>
             </div>
@@ -67,7 +67,9 @@
     
     <div class="mobile-nav" id="mobileNav">
         <button id="closeMenu">✖</button>
-        <div style="text-align: center; margin-bottom: 2rem; font-weight: bold; color: var(--primary);">Glowtiqa</div>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <img src="logo_v2.png" alt="Glowtiqa" style="height: 50px;">
+        </div>
         <a href="index.html">Home</a>
         <a href="products.html" class="active">Shop Products</a>
         <a href="about.html">Customer Reviews</a>
@@ -75,39 +77,15 @@
         <a href="verify.html" class="mobile-verify-btn">
             <i class="fas fa-shield-alt"></i> Verify Product
         </a>
-            <div class="cart-icon" id="cartIconMobile">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count">0</span>
-        </div>
-</div>
+    </div>
     
     <div class="nav-overlay" id="navOverlay"></div>
-
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>Your Cart</h3>
-            <button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>
-        </div>
-        <div class="cart-footer">
-            <div class="shipping-form">
-                <h4>Shipping Details</h4>
-                <input type="text" id="custName" placeholder="Full Name" required>
-                <input type="tel" id="custPhone" placeholder="Phone Number" required>
-                <textarea id="custAddress" placeholder="Full Address" rows="3" required></textarea>
-            </div>
-            <div class="cart-total"><span>Total:</span><span id="cartTotal">₹0.00</span></div>
-            <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-lock"></i> Secure Checkout</button>
-        </div>
-    </div>
     <div class="success-message" id="successMessage"><i class="fas fa-check-circle"></i><span>Action Successful!</span></div>
 
     <div style="max-width: 1100px; margin: 2rem auto 0; padding: 0 20px; font-size: 0.9rem; color: #777;">
         <a href="index.html" style="color: #777; text-decoration: none;">Home</a> / 
         <a href="products.html" style="color: #777; text-decoration: none;">Shop</a> / 
-        <span>Advance Whitening Cream</span>
+        <span>Whitening Cream</span>
     </div>
 
     <section class="product-section" style="margin-top: 1rem;">
@@ -115,7 +93,7 @@
             <div class="unified-card reverse"> 
                 
                 <div class="card-image-side" style="background-color: #fcfcfc;">
-                    <img src="image/gtiqa.jpg" alt="Glowtiqa Cream" onerror="this.src='https://placehold.co/500x500/f9f5eb/b68d40?text=Glowtiqa+Cream'">
+                    <img src="gtiqa.jpg" alt="Glowtiqa Advance Whitening Cream" onerror="this.src='https://placehold.co/500x500/f9f5eb/b68d40?text=Whitening+Cream'">
                 </div>
 
                 <div class="card-details-side">
@@ -126,17 +104,17 @@
                     </div>
 
                     <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.7;">
-                        A dermatologist-tested masterpiece formulated in Paris. Our non-greasy formula targets hyperpigmentation at the source using <strong>TA Stem Cells</strong> and vitamins. It nourishes while it whitens, revealing a flawless complexion.
+                        Experience the power of advanced French formulation. Our signature whitening cream is specifically designed to target dark spots, hyperpigmentation, and uneven skin tone while nourishing your skin deep within.
                     </p>
                     
                     <ul style="margin-bottom: 1.5rem; padding-left: 20px; color: #555;">
-                        <li style="margin-bottom: 8px;">Targets dark spots, freckles, and acne marks.</li>
-                        <li style="margin-bottom: 8px;">Inhibits excess melanin production.</li>
-                        <li style="margin-bottom: 8px;">Safe for all skin types (Men & Women).</li>
+                        <li style="margin-bottom: 8px;">Enriched with powerful TA Stem Cells.</li>
+                        <li style="margin-bottom: 8px;">Visibly reduces acne marks and dark circles.</li>
+                        <li style="margin-bottom: 8px;">Restores natural glow and skin elasticity.</li>
                     </ul>
 
                     <div class="product-info" style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
-                        <div class="info-row"><div class="info-label">Net Weight:</div><div class="info-value">30 GMS (Concentrated)</div></div>
+                        <div class="info-row"><div class="info-label">Weight:</div><div class="info-value">30 Grams</div></div>
                         <div class="info-row"><div class="info-label">Availability:</div><div class="info-value" style="color: #28a745;">In Stock</div></div>
                     </div>
                     
@@ -169,22 +147,22 @@
     <section class="description-section" style="background: white; border: none; max-width: 1100px; margin: 0 auto 4rem;">
         <div class="description-content">
             <div class="how-to-use" style="background: var(--secondary); padding: 2.5rem; border-radius: 15px;">
-                <h3><i class="fas fa-magic"></i> Nightly Ritual</h3>
-                <p style="margin-bottom: 20px;">For best results, apply this cream at night to allow the active ingredients to work while you sleep.</p>
+                <h3><i class="fas fa-leaf"></i> How to Use</h3>
+                <p style="margin-bottom: 20px;">For optimal results, incorporate into your daily nighttime routine.</p>
                 <ol class="steps">
-                    <li><strong>Cleanse:</strong> Wash face thoroughly to remove dirt and oil.</li>
-                    <li><strong>Dry:</strong> Pat skin dry gently with a clean towel.</li>
-                    <li><strong>Apply:</strong> Take a pea-sized amount of Advance Cream.</li>
-                    <li><strong>Massage:</strong> Rub gently into the skin in upward circular motions until fully absorbed.</li>
+                    <li><strong>Cleanse:</strong> Wash your face thoroughly (preferably with our Whitening Soap) and pat dry.</li>
+                    <li><strong>Apply:</strong> Take a small amount of the Advance Whitening Cream.</li>
+                    <li><strong>Massage:</strong> Gently massage into the skin using upward circular motions until fully absorbed.</li>
+                    <li><strong>Rest:</strong> Leave it on overnight to allow the active ingredients to repair your skin.</li>
                 </ol>
             </div>
             
             <div class="description-text" style="padding: 1rem;">
-                <h3 style="color: var(--primary); margin-bottom: 1rem;">Science Inside</h3>
-                <p>The core of Glowtiqa's effectiveness lies in <strong>TA Stem Cells</strong>. Unlike harsh chemical bleaches that damage the skin barrier, our stem cell technology works to rejuvenate skin cells from within.</p>
-                <p>Combined with essential vitamins, it helps break down existing melanin clusters (dark spots) and prevents new ones from forming.</p>
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">The Science Behind the Glow</h3>
+                <p>Unlike traditional bleaching creams that can harm the skin barrier, Glowtiqa Paris utilizes advanced <strong>TA Stem Cell technology</strong>. This formulation penetrates the dermis to inhibit excess melanin production at the source.</p>
+                <p>By promoting cellular turnover, it effectively lifts away pigmented cells and replaces them with fresh, healthy skin. The result is a natural, luminous complexion without the use of harsh, stripping chemicals.</p>
                 <div style="background: #e8f5e9; color: #1b5e20; padding: 15px; border-radius: 10px; border: 1px solid #c8e6c9; margin-top: 20px;">
-                    <strong><i class="fas fa-shield-alt"></i> Pro Tip:</strong> Always use sunscreen during the day to protect your glowing skin from UV rays.
+                    <strong><i class="fas fa-check-circle"></i> Dermatologist Tested:</strong> Safe for all skin types, including sensitive skin. Paraben and cruelty-free.
                 </div>
             </div>
         </div>
@@ -201,62 +179,13 @@
         </a>
     </div>
 
-     <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-col">
-                <h3>Glowtiqa Paris</h3>
-                <p>Glowtiqa offers premium skincare solutions, meticulously formulated to unveil your skin's natural radiance, restore youthful glow, and empower your confidence.</p>
-                <div class="footer-social">
-                    <a href="https://www.instagram.com/glowtiqa/" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/glowtiqa" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Shop</h3>
-                <ul class="footer-links">
-                    <li><a href="cream.html">Whitening Cream</a></li>
-                    <li><a href="soap.html">Cleansing Soap</a></li>
-                    <li><a href="capsule.html">Whitening Booster</a></li>
-                    <li><a href="combo.html">Super Saver Combo</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h3>Support</h3>
-                <ul class="footer-links">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="policy.html">Shipping & Policies</a></li> <li><a href="verify.html">Verify Product</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Contact Us</h3>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                        <span>Paris, France</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone-alt contact-icon"></i>
-                        <a href="tel:+916361958069">+91 6361958069</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope contact-icon"></i>
-                        <a href="mailto:glowtiqa@gmail.com">glowtiqa@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+    <footer id="contact">
         <div class="copyright">
             &copy; 2025 Glowtiqa Paris. All rights reserved.
             <div class="developer-credit">
                 Developed <i class="fas fa-heart" style="color: #c5a880;"></i> by 
                 <a href="https://zomaxa.co" target="_blank">
                     <span class="zomaxa-logo">zomaxa.co</span>
-                    <i class="fas fa-external-link-alt" style="font-size: 0.7rem;"></i>
                 </a>
             </div>
         </div>
@@ -265,5 +194,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
