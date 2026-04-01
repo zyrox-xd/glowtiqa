@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Elements ---
     const cartIcon = document.getElementById('cartIcon');
     const cartItemsContainer = document.getElementById('cartItems');
+    const cartSubtotalEl = document.getElementById('cartSubtotal'); // Added
     const cartTotalEl = document.getElementById('cartTotal');
     const cartCountEl = document.querySelector('.cart-count');
     const navOverlay = document.getElementById('navOverlay');
@@ -62,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Cart Icon Redirects to cart.html
     if (cartIcon) {
         cartIcon.addEventListener('click', () => {
             window.location.href = 'cart.html';
@@ -101,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function updateCartUI() {
-        // Update bubble counter globally
         let count = 0;
         cart.forEach(item => count += item.quantity);
         if (cartCountEl) {
@@ -109,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
             cartCountEl.style.display = count > 0 ? 'flex' : 'none';
         }
 
-        // If we are NOT on the cart page, stop here.
         if (!cartItemsContainer) return; 
         
         cartItemsContainer.innerHTML = '';
@@ -123,8 +121,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p style="color:#777; font-size:1.2rem; margin-bottom: 20px;">Your cart is empty</p>
                     <a href="products.html" class="cta-btn" style="padding: 10px 20px; font-size: 1rem;">Continue Shopping</a>
                 </div>`;
+            if (cartSubtotalEl) cartSubtotalEl.textContent = `₹0.00`;
             if (cartTotalEl) cartTotalEl.textContent = `₹0.00`;
             if (checkoutBtn) checkoutBtn.style.display = 'none'; 
+            
+            // Hide fees if empty
+            const advanceRow = document.getElementById('cartAdvanceRow');
+            const deliveryFeeRow = document.getElementById('deliveryFeeRow');
+            if(advanceRow) advanceRow.style.display = 'none';
+            if(deliveryFeeRow) deliveryFeeRow.style.display = 'none';
             return;
         } 
         
@@ -152,22 +157,31 @@ document.addEventListener('DOMContentLoaded', function() {
             cartItemsContainer.appendChild(itemEl);
         });
 
-        if (cartTotalEl) cartTotalEl.textContent = `₹${total}`;
-
-        // COD Advance Logic Update
+        // COD Advance & Delivery Fee Logic
         const paymentMethodEl = document.querySelector('input[name="paymentMethod"]:checked');
         const paymentMethod = paymentMethodEl ? paymentMethodEl.value : 'full';
+        
         const advanceRow = document.getElementById('cartAdvanceRow');
         const advanceAmountEl = document.getElementById('cartAdvance');
+        const deliveryFeeRow = document.getElementById('deliveryFeeRow');
+        
+        let finalTotalValue = total; // Default is just the items
 
-        if (paymentMethod === 'cod' && cart.length > 0) {
+        if (paymentMethod === 'cod') {
+            finalTotalValue = total + 200; // Add ₹200 for COD
+            
+            if(deliveryFeeRow) deliveryFeeRow.style.display = 'flex';
             if(advanceRow) advanceRow.style.display = 'flex';
             if(advanceAmountEl) advanceAmountEl.textContent = `₹${advanceTotal}`;
             if(checkoutBtn) checkoutBtn.innerHTML = `<i class="fas fa-lock"></i> Pay ₹${advanceTotal} Advance`;
         } else {
+            if(deliveryFeeRow) deliveryFeeRow.style.display = 'none';
             if(advanceRow) advanceRow.style.display = 'none';
             if(checkoutBtn) checkoutBtn.innerHTML = `<i class="fas fa-lock"></i> Pay ₹${total} Now`;
         }
+
+        if (cartSubtotalEl) cartSubtotalEl.textContent = `₹${total}`;
+        if (cartTotalEl) cartTotalEl.textContent = `₹${finalTotalValue}`;
     }
 
     function showMessage(msg, type = 'success') {
@@ -238,16 +252,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 const orderData = await response.json();
 
                 // Calculate totals for email
-                let totalAmount = 0;
+                let subTotal = 0;
                 let advanceTotal = 0;
                 let orderDetailsHTML = cart.map(item => {
-                    totalAmount += item.price * item.quantity;
+                    subTotal += item.price * item.quantity;
                     advanceTotal += (item.advance || 0) * item.quantity;
                     return `${item.name} (x${item.quantity}) - ₹${item.price * item.quantity}`;
                 }).join('<br>');
 
-                const amountPaid = paymentMethod === 'cod' ? advanceTotal : totalAmount;
-                const balanceDue = paymentMethod === 'cod' ? totalAmount - advanceTotal : 0;
+                // Apply COD rules to the email totals
+                let finalTotalValue = subTotal;
+                if (paymentMethod === 'cod') {
+                    finalTotalValue += 200;
+                    orderDetailsHTML += `<br><br><strong>+ COD Delivery Fee: ₹200</strong>`;
+                }
+
+                const amountPaid = paymentMethod === 'cod' ? advanceTotal : finalTotalValue;
+                const balanceDue = paymentMethod === 'cod' ? finalTotalValue - advanceTotal : 0;
                 const orderTypeString = paymentMethod === 'cod' ? `COD Order (Collect ₹${balanceDue} Cash)` : 'Prepaid Order (Paid in Full)';
 
                 const options = {
@@ -266,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             customer_phone: custPhone,
                             customer_address: custAddress,
                             order_details: orderDetailsHTML,
-                            total_amount: `₹${totalAmount}`,
+                            total_amount: `₹${finalTotalValue}`,
                             amount_paid: `₹${amountPaid}`,
                             balance_due: `₹${balanceDue} (CASH ON DELIVERY)`,
                             order_type: orderTypeString,
