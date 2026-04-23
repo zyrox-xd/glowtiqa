@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- COMPLETE PRODUCT DATA ---
     const products = {
-        cream: { id: 1, name: "Advance Whitening Cream", price: 2000, advance: 400, image: "gtiqa.jpg" },
-        soap: { id: 2, name: "Skin Whitening Soap", price: 600, advance: 200, image: "soap.jpg" },
-        combo: { id: 3, name: "The Signature Glow Duo", price: 2200, advance: 600, image: "combo1.jpg" },
-        capsule: { id: 4, name: "Whitening Booster 1200MG", price: 3000, advance: 800, image: "capsule.jpg" },
-        megaCombo: { id: 5, name: "The Prestige Radiance Collection", price: 5000, advance: 1400, image: "mega-combo.jpg" } 
+        cream: { id: 1, name: "Advance Whitening Cream", price: 2000, advance: 400, image: "image/gtiqa.jpg" },
+        soap: { id: 2, name: "Skin Whitening Soap", price: 600, advance: 200, image: "image/soap.jpg" },
+        combo: { id: 3, name: "The Signature Glow Duo", price: 2200, advance: 600, image: "image/combo1.jpg" },
+        capsule: { id: 4, name: "Whitening Booster 1200MG", price: 3000, advance: 800, image: "image/capsule.jpg" },
+        megaCombo: { id: 5, name: "The Prestige Radiance Collection", price: 5000, advance: 1400, image: "image/mega-combo.jpg" } 
     };
 
     let cart = JSON.parse(localStorage.getItem('glowtiqaCart')) || [];
